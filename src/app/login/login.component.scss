@@ -1,0 +1,46 @@
+.fundo {
+  display: flex;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 700px;
+  height: 800px;
+  
+  img {
+    height: 100%;
+  }
+}
+.logoPrincipal{
+  display: flex;
+  position: absolute;
+  left: 750px;
+  top: 100px;
+}
+
+.boxExternaLogin {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 200px;
+  top: 342px;
+  border: 1px solid #153a84;
+  border-radius: 4px;
+  width: 450px;
+  height: 350px;
+}
+
+.caixaInternaLogin {
+  background-color: #153a84;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.mat-form-field-flex .mat-form-field-outline,
+.mat-form-field-flex:hover .mat-form-field-outline {
+  background-color: white;
+  border-radius: 5px;
+}
