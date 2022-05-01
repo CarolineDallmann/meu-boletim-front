@@ -5,16 +5,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
-import { PaginaPrincipalComponent } from './pagina-principal/pagina-principal.component';
-import {MatTabsModule} from '@angular/material/tabs';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
-
+import { LayoutModule } from './layout/layout.module';
+import { PrincipalComponent } from './principal/principal.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, PaginaPrincipalComponent],
-  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, MatTabsModule, MatFormFieldModule, MatInputModule, MatButtonModule],
+  declarations: [AppComponent, LoginComponent, PrincipalComponent],
+  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, MatFormFieldModule, MatInputModule, MatButtonModule, 
+    LayoutModule],
   providers: [],
   bootstrap: [AppComponent],
 })

@@ -1,0 +1,10 @@
+
+<mat-selection-list #menu [multiple]="false">
+    <mat-list-option *ngFor="let item of itensMenu" [value]="item">
+        {{item}}
+    </mat-list-option>
+</mat-selection-list>
+
+
+<!-- para pegar o valor que foi selecionado -->
+<!-- Option selected: {{menu.selectedOptions.selected[0]?.value}} -->

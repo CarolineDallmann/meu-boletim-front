@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PaginaPrincipalComponent } from './pagina-principal.component';
+import { CardConteudoComponent } from './card-conteudo.component';
 
-describe('PaginaPrincipalComponent', () => {
-  let component: PaginaPrincipalComponent;
-  let fixture: ComponentFixture<PaginaPrincipalComponent>;
+describe('CardConteudoComponent', () => {
+  let component: CardConteudoComponent;
+  let fixture: ComponentFixture<CardConteudoComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PaginaPrincipalComponent ]
+      declarations: [ CardConteudoComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PaginaPrincipalComponent);
+    fixture = TestBed.createComponent(CardConteudoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
