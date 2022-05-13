@@ -19,12 +19,14 @@ import { MateriaService } from './services/materia.service';
 import { NotaService } from './services/nota.service';
 import {MatTableModule} from '@angular/material/table';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { TurmasComponent } from './turmas/turmas.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, PrincipalComponent, NotasComponent],
+  declarations: [AppComponent, LoginComponent, PrincipalComponent, NotasComponent, TurmasComponent],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, MatFormFieldModule, MatInputModule, MatButtonModule, 
-    LayoutModule, MatSelectModule, MatGridListModule, HttpClientModule, MatTableModule, MatSnackBarModule],
+    LayoutModule, MatSelectModule, MatGridListModule, HttpClientModule, MatTableModule, MatSnackBarModule, FormsModule],
   providers: [TurmaService, MateriaService, NotaService],
   bootstrap: [AppComponent],
 })

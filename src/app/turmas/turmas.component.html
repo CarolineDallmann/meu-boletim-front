@@ -1,0 +1,50 @@
+<app-layout-principal>
+    <app-card-filtro>
+        <mat-grid-list cols="4" rowHeight="60px">
+            <mat-grid-tile colspan="1">
+                <mat-form-field appearance="legacy">
+                    <mat-label>Nome da turma</mat-label>
+                    <input type="search" matInput placeholder="Ex. A"  #nomeTurma>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile colspan="1">
+                <app-button (click)="getOneTurma(nomeTurma.value)"><i class="material-icons">search</i></app-button>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </app-card-filtro>
+
+    <app-card-conteudo>
+
+        <table mat-table [dataSource]="turmas">
+            <ng-container matColumnDef="nome">
+                <th mat-header-cell *matHeaderCellDef> Nome </th>
+                <td mat-cell *matCellDef="let turmas">{{turmas.nome | titlecase}} </td>
+
+            </ng-container>
+
+            <ng-container matColumnDef="anoLetivo">
+                <th mat-header-cell *matHeaderCellDef> Ano Letivo </th>
+                <td mat-cell *matCellDef="let turmas"> {{turmas.anoLetivo}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="turno">
+                <th mat-header-cell *matHeaderCellDef> Turno </th>
+                <td mat-cell *matCellDef="let turmas"> {{turmas.turno}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="serie">
+                <th mat-header-cell *matHeaderCellDef> Serie </th>
+                <td mat-cell *matCellDef="let turmas"> {{turmas.serie}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <app-pgempty *ngIf="msg">
+            {{ msg }}
+        </app-pgempty>
+
+    </app-card-conteudo>
+</app-layout-principal>

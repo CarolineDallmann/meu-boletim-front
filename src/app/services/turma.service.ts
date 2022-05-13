@@ -11,4 +11,8 @@ export class TurmaService {
   getAllTurmas(){
      return this.http.get<Turma[]>(`${environment.api}turmas`)
   }
+
+  getOneTurma(nomeTurma: string) {
+    return this.http.post<Turma[]>(`${environment.api}turmas`, { params: { nomeTurma } })
+  }
 }
