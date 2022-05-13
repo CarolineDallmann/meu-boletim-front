@@ -1,0 +1,76 @@
+<app-layout-principal>
+    <app-card-filtro>
+
+        <mat-grid-list cols="4" rowHeight="60px">
+            <mat-grid-tile colspan="1">
+                <mat-form-field appearance="legacy">
+                    <mat-label>Turma</mat-label>
+                    <mat-select (selectionChange)="onTurmaChange($event.value)">
+                        <mat-option *ngFor="let turma of turmas" [value]="turma.id">
+                            {{turma.nome | titlecase}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile colspan="1">
+                <mat-form-field appearance="legacy">
+                    <mat-label>Matéria</mat-label>
+                    <mat-select (selectionChange)="onMateriaChange($event.value)">
+                        <mat-option *ngFor="let materia of materias" [value]="materia.id">
+                            {{materia.nome | titlecase}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile colspan="1">
+            </mat-grid-tile>
+
+            <mat-grid-tile colspan="1">
+                <app-button (click)="teste()">Adicionar nova atividade</app-button>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </app-card-filtro>
+
+    <app-card-conteudo>
+
+        <table *ngIf="turmaSelecionada && materiaSelecionada" mat-table [dataSource]="atividades">
+            <ng-container matColumnDef="atividade">
+                <th mat-header-cell *matHeaderCellDef> Atividades </th>
+                <td mat-cell *matCellDef="let atividade">{{atividade.tipo | titlecase}} </td>
+
+            </ng-container>
+
+            <ng-container matColumnDef="data">
+                <th mat-header-cell *matHeaderCellDef> Data </th>
+                <td mat-cell *matCellDef="let atividade"> {{atividade.data | date: "dd/MM/yyyy"}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="acoes">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let atividade" style="text-align: right;">
+                    <app-button (click)="editar(atividade)">
+                        <span class="material-icons">
+                            edit
+                        </span>
+                    </app-button>
+                    <app-button type="danger" [leftSpace]="true" (click)="excluir(atividade)">
+                        <span class="material-icons">
+                            delete_outline
+                        </span>
+                    </app-button>
+                </td>
+            </ng-container>
+
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <app-pgempty *ngIf="!turmaSelecionada || !materiaSelecionada">
+            Escolha Turma e Matéria para ver a lista
+        </app-pgempty>
+
+    </app-card-conteudo>
+</app-layout-principal>
