@@ -1,0 +1,43 @@
+<app-layout-principal>
+    <app-card-filtro>
+
+        <mat-grid-list cols="4" rowHeight="60px">
+            <mat-grid-tile colspan="1">
+                <mat-form-field appearance="legacy">
+                    <mat-label>Turma</mat-label>
+                    <mat-select (selectionChange)="onTurmaChange($event.value)">
+                        <mat-option *ngFor="let turma of turmas" [value]="turma.id">
+                            {{turma.nome}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                
+            </mat-grid-tile>
+            <mat-grid-tile colspan="1">
+                <mat-form-field appearance="legacy">
+                    <mat-label>Matéria</mat-label>
+                    <mat-select (selectionChange)="onMateriaChange($event.value)">
+                        <mat-option *ngFor="let materia of materias" [value]="materia.id">
+                            {{materia.nome}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+               
+            </mat-grid-tile>
+            <mat-grid-tile colspan="1">
+               
+            </mat-grid-tile>
+            <mat-grid-tile colspan="1">
+                <app-button (click)="teste()">Adicionar nova atividade</app-button>
+            </mat-grid-tile>
+        </mat-grid-list>
+
+
+
+    </app-card-filtro>
+
+
+    <app-card-conteudo>
+        Conteúdo
+    </app-card-conteudo>
+</app-layout-principal>
