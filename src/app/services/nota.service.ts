@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Atividade, AtividadeResponse } from '../entities/atividade.entity';
+import { MsgResponse } from '../entities/msg-response.entity';
 import { TipoAtividade } from '../enums/tipo-atividade.enum';
 
 @Injectable()
@@ -17,9 +18,13 @@ export class NotaService {
     return atividades.map((ativ) => {
       return {
         id: ativ.id,
-        tipoAtividade: TipoAtividade[ativ.tipoAtividade as keyof typeof TipoAtividade],
-        dataAtividade: new Date(ativ.dataAtividade)
+        tipo: TipoAtividade[ativ.tipo as keyof typeof TipoAtividade],
+        data: new Date(ativ.data)
       }
     })
+  }
+
+  deleteAtividade(atividadeId: string) {
+    return this.http.delete<MsgResponse>(`${environment.api}atividade`, { params: { atividadeId } })
   }
 }

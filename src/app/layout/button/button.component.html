@@ -1,3 +1,3 @@
-<button mat-raised-button [class]="type" (click)="onclick">
+<button mat-raised-button [class]="type + ' ' + (leftSpace? 'left' : '')" (click)="onclick">
     <ng-content></ng-content>
 </button>

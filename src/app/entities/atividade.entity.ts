@@ -2,12 +2,12 @@ import { TipoAtividade } from "../enums/tipo-atividade.enum"
 
 export type Atividade = {
     id: string,
-    tipoAtividade: TipoAtividade,
-    dataAtividade: Date
+    tipo: TipoAtividade,
+    data: Date
 }
 
 export type AtividadeResponse = {
     id: string,
-    tipoAtividade: string,
-    dataAtividade: string
+    tipo: string,
+    data: string
 }

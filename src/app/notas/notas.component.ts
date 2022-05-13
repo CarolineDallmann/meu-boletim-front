@@ -5,6 +5,7 @@ import { Turma } from '../entities/turma.entity';
 import { MateriaService } from '../services/materia.service';
 import { NotaService } from '../services/nota.service';
 import { TurmaService } from '../services/turma.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-notas',
@@ -19,9 +20,10 @@ export class NotasComponent implements OnInit {
   turmas: Turma[] = []
   materias: Materia[] = []
   atividades: Atividade[] = []
+  displayedColumns: string[] = ['atividade', 'data', 'acoes'];
 
   constructor(private turmaService: TurmaService, private materiaService: MateriaService,
-    private notaService: NotaService) { }
+    private notaService: NotaService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.turmaService.getAllTurmas().subscribe((turmas) => { this.turmas = turmas })
@@ -47,5 +49,16 @@ export class NotasComponent implements OnInit {
       this.notaService.getListarAtividades(this.turmaSelecionada, this.materiaSelecionada)
         .subscribe((ativ) => { this.atividades = this.notaService.atividadeResponseToAtividade(ativ) })
     }
+  }
+
+  editar(atividade: Atividade) {
+    console.log(atividade);
+  }
+
+  excluir(atividade: Atividade) {
+    this.notaService.deleteAtividade(atividade.id).subscribe((res) => {
+      this.snackBar.open(res.msg, undefined, { duration: 5000 })
+      this.search()
+    })
   }
 }

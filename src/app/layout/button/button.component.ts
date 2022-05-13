@@ -10,10 +10,13 @@ export class ButtonComponent implements OnInit {
   @Input()
   type: "primary" | "danger" = "primary"
 
+  @Input()
+  leftSpace = false
+
   @Output()
   click = new EventEmitter()
 
-  onclick(){
+  onclick() {
     this.click.emit()
   }
 
