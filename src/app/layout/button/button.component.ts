@@ -13,6 +13,9 @@ export class ButtonComponent implements OnInit {
   @Input()
   leftSpace = false
 
+  @Input()
+  disabled = false
+
   @Output()
   click = new EventEmitter()
 
@@ -24,5 +27,4 @@ export class ButtonComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

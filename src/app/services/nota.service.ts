@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { Atividade, AtividadeResponse } from '../entities/atividade.entity';
+import { Atividade, AtividadeResponse, BuscaNota, BuscaNotaResponse, SalvarAtividadePayload, } from '../entities/atividade.entity';
 import { MsgResponse } from '../entities/msg-response.entity';
 import { TipoAtividade } from '../enums/tipo-atividade.enum';
 
@@ -26,5 +26,21 @@ export class NotaService {
 
   deleteAtividade(atividadeId: string) {
     return this.http.delete<MsgResponse>(`${environment.api}atividade`, { params: { atividadeId } })
+  }
+
+  getBuscarNota(params: { atividadeId?: string, turmaId?: string }) {
+    return this.http.get<BuscaNotaResponse>(`${environment.api}buscar-nota`, { params })
+  }
+
+  buscaNotaResponseToBuscaNota(buscaNotaResponse: BuscaNotaResponse): BuscaNota {
+    return {
+      ...buscaNotaResponse,
+      dataAtividade: new Date(buscaNotaResponse.dataAtividade || ''),
+      tipoAtividade: TipoAtividade[buscaNotaResponse.tipoAtividade as keyof typeof TipoAtividade]
+    }
+  }
+
+  salvarAtividade(body: SalvarAtividadePayload) {
+    return this.http.post<MsgResponse>(`${environment.api}salvar-atividade`, body)
   }
 }
