@@ -3,13 +3,12 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-layout-principal',
   templateUrl: './layout-principal.component.html',
-  styleUrls: ['./layout-principal.component.scss']
+  styleUrls: ['./layout-principal.component.scss'],
 })
-export class LayoutPrincipalComponent implements OnInit {
+export class LayoutPrincipalComponent {
+  title = '';
 
-  constructor() { }
-
-  ngOnInit(): void {
+  setTitle(e: string) {
+    this.title = e;
   }
-
 }

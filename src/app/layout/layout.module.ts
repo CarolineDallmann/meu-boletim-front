@@ -10,11 +10,12 @@ import { CardConteudoComponent } from './card-conteudo/card-conteudo.component';
 import {MatButtonModule} from '@angular/material/button';
 import { ButtonComponent } from './button/button.component';
 import { PgemptyComponent } from './pgempty/pgempty.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
   declarations: [LayoutPrincipalComponent, MenuComponent, CardFiltroComponent, CardConteudoComponent, ButtonComponent, PgemptyComponent],
-  imports: [CommonModule, MatToolbarModule, MatListModule, MatCardModule, MatButtonModule],
+  imports: [CommonModule, MatToolbarModule, MatListModule, MatCardModule, MatButtonModule, RouterModule],
   exports: [LayoutPrincipalComponent, CardFiltroComponent, CardConteudoComponent, ButtonComponent, PgemptyComponent],
 })
 export class LayoutModule {}
