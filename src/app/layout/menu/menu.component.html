@@ -1,10 +1,11 @@
-
-<mat-selection-list #menu [multiple]="false">
-    <mat-list-option
-      *ngFor="let item of itensMenu"
-      [selected]="currentRoute === item.path"
-      [value]="item.title"
-      (selectedChange)="navegate(item)">
-      {{ item.title }}
-    </mat-list-option>
-  </mat-selection-list>
+<mat-selection-list [multiple]="false">
+  <mat-list-option
+    *ngFor="let item of itensMenu"
+    [value]="item.path"
+    [class]="
+      currentRoute === item.path ? 'mat-list-single-selected-option' : ''
+    "
+    (selectedChange)="navegate(item)">
+    {{ item.title }}
+  </mat-list-option>
+</mat-selection-list>
