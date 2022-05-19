@@ -1,16 +1,15 @@
 <mat-toolbar>
-  <span>A ser passado por parâmetro o que vai ser escrito aqui</span>
+  <span>{{ title }}</span>
 </mat-toolbar>
 
 <div class="container">
-
   <div class="esquerda">
-    <img src="../../../assets/logo.svg" alt="">
-    <app-menu></app-menu>
+    <img src="../../../assets/logo.svg" alt="" />
+    <app-menu (navegateEvent)="setTitle($event)"></app-menu>
   </div>
 
   <div class="direita">
-    
-    <ng-content></ng-content> <!--ng-content entende que é para trocar o conteúdo aqui-->
+    <ng-content></ng-content>
+    <!--ng-content entende que é para trocar o conteúdo aqui-->
   </div>
 </div>
