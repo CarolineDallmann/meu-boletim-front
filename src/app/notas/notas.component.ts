@@ -6,6 +6,7 @@ import { MateriaService } from '../services/materia.service';
 import { NotaService } from '../services/nota.service';
 import { TurmaService } from '../services/turma.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-notas',
@@ -16,22 +17,34 @@ export class NotasComponent implements OnInit {
 
   turmaSelecionada = ''
   materiaSelecionada = ''
-
   turmas: Turma[] = []
   materias: Materia[] = []
   atividades: Atividade[] = []
   displayedColumns: string[] = ['atividade', 'data', 'acoes'];
 
   constructor(private turmaService: TurmaService, private materiaService: MateriaService,
-    private notaService: NotaService, private snackBar: MatSnackBar) { }
+    private notaService: NotaService, private snackBar: MatSnackBar, private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.turmaService.getAllTurmas().subscribe((turmas) => { this.turmas = turmas })
     this.materiaService.getAllMaterias().subscribe((materias) => { this.materias = materias })
+    const turmaId = this.route.snapshot.queryParamMap.get('turmaId')
+    const materiaId = this.route.snapshot.queryParamMap.get('materiaId')
+
+    if (turmaId && materiaId) {
+      this.turmaSelecionada = turmaId
+      this.materiaSelecionada = materiaId
+      this.search()
+    }
   }
 
-  teste() {
-    console.log('cli');
+  navegarNovaAtividade() {
+    this.router.navigate(['/notas/lancamento'], {
+      queryParams: {
+        turmaId: this.turmaSelecionada, materiaId: this.materiaSelecionada
+      }
+    })
   }
 
   onTurmaChange(event: string) {
@@ -52,7 +65,9 @@ export class NotasComponent implements OnInit {
   }
 
   editar(atividade: Atividade) {
-    console.log(atividade);
+    this.router.navigate(['/notas/lancamento'], {
+      queryParams: { atividadeId: atividade.id }
+    })
   }
 
   excluir(atividade: Atividade) {
