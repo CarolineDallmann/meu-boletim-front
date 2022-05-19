@@ -5,15 +5,18 @@ import { LoginComponent } from './login/login.component';
 import { NotasLancamentoComponent } from './notas-lancamento/notas-lancamento.component';
 import { NotasComponent } from './notas/notas.component';
 import { PrincipalComponent } from './principal/principal.component';
+import { TurmasComponent } from './turmas/turmas.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: '', component: LoginComponent },
+  { path: 'principal', component: PrincipalComponent },
+  { path: 'turmas', component: TurmasComponent },
   { path: 'home', component: PrincipalComponent },
   { path: 'notas', component: NotasComponent },
   { path: 'notas/lancamento', component: NotasLancamentoComponent },
   { path: 'frequencias', component: FrequenciaComponent }
-  
+
 ];
 
 @NgModule({
