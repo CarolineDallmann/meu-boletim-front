@@ -1,0 +1,73 @@
+<app-layout-principal>
+    <app-card-filtro>
+
+        <mat-grid-list cols="4" rowHeight="60px">
+            <mat-grid-tile colspan="1">
+                <mat-form-field appearance="legacy">
+                    <mat-label>Turma</mat-label>
+                    <mat-select (selectionChange)="onTurmaChange($event.value)" [value]="turmaSelecionada">
+                        <mat-option *ngFor="let turma of turmas" [value]="turma.id">
+                            {{turma.nome | titlecase}} - 
+                            {{turma.serie | titlecase}} - {{turma.turno | titlecase}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile colspan="1">
+                <mat-form-field appearance="legacy">
+                    <mat-label>Matéria</mat-label>
+                    <mat-select (selectionChange)="onMateriaChange($event.value)" [value]="materiaSelecionada">
+                        <mat-option *ngFor="let materia of materias" [value]="materia.id">
+                            {{materia.nome | titlecase}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile colspan="1">
+                <mat-form-field appearance="legacy">
+                    <mat-label>Data</mat-label>
+                    <input matInput [matDatepicker]="picker" [value]="dataSelecionada"
+                        (dateChange)="onDateChange($event.value)">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile colspan="1">
+                <mat-checkbox [checked]="allComplete" (change)="setAll($event.checked)" [indeterminate]="indeterminate">
+                    Marcar todos</mat-checkbox>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </app-card-filtro>
+
+    <app-card-conteudo>
+        <table *ngIf="turmaSelecionada && materiaSelecionada" mat-table [dataSource]="listaFrequencia">
+            <ng-container matColumnDef="aluno">
+                <th mat-header-cell *matHeaderCellDef> Aluno </th>
+                <td mat-cell *matCellDef="let freq">{{freq.aluno.nome | titlecase}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="frequencia">
+                <th mat-header-cell *matHeaderCellDef> Frequência </th>
+                <td mat-cell *matCellDef="let freq">
+                    <mat-checkbox [checked]="freq.presenca" (change)="onCheckChange($event.checked, freq)">
+                    </mat-checkbox>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <app-button *ngIf="turmaSelecionada && materiaSelecionada" (click)="salvar()" [disabled]="disableSalvar">Salvar
+        </app-button>
+
+        <app-pgempty *ngIf="!turmaSelecionada || !materiaSelecionada || !listaFrequencia.length">
+            {{!turmaSelecionada || !materiaSelecionada ?
+            "Escolha Turma e Matéria para ver a lista" :
+            "Não foram encontrados resultados"}}
+        </app-pgempty>
+    </app-card-conteudo>
+</app-layout-principal>

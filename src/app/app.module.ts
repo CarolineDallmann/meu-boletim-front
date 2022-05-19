@@ -21,13 +21,16 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { NotasLancamentoComponent } from './notas-lancamento/notas-lancamento.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { FrequenciaComponent } from './frequencia/frequencia.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { FrequenciaService } from './services/frequencia.service';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, PrincipalComponent, NotasComponent, NotasLancamentoComponent],
+  declarations: [AppComponent, LoginComponent, PrincipalComponent, NotasComponent, NotasLancamentoComponent, FrequenciaComponent],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, MatFormFieldModule, MatInputModule, MatButtonModule,
     LayoutModule, MatSelectModule, MatGridListModule, HttpClientModule, MatTableModule, MatSnackBarModule,
-    MatDatepickerModule, MatNativeDateModule],
-  providers: [TurmaService, MateriaService, NotaService],
+    MatDatepickerModule, MatNativeDateModule, MatCheckboxModule],
+  providers: [TurmaService, MateriaService, NotaService, FrequenciaService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
