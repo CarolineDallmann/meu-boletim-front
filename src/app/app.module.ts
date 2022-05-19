@@ -16,17 +16,20 @@ import { HttpClientModule } from '@angular/common/http';
 import { TurmaService } from './services/turma.service';
 import { MateriaService } from './services/materia.service';
 import { NotaService } from './services/nota.service';
-import { MatTableModule } from '@angular/material/table';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
+import {MatTableModule} from '@angular/material/table';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { TurmasComponent } from './turmas/turmas.component';
+import { FormsModule } from '@angular/forms';
 import { NotasLancamentoComponent } from './notas-lancamento/notas-lancamento.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 
+
 @NgModule({
-  declarations: [AppComponent, LoginComponent, PrincipalComponent, NotasComponent, NotasLancamentoComponent],
+  declarations: [AppComponent, LoginComponent, PrincipalComponent, NotasComponent, NotasLancamentoComponent, TurmasComponent],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, MatFormFieldModule, MatInputModule, MatButtonModule,
     LayoutModule, MatSelectModule, MatGridListModule, HttpClientModule, MatTableModule, MatSnackBarModule,
-    MatDatepickerModule, MatNativeDateModule],
+    MatDatepickerModule, MatNativeDateModule, FormsModule],
   providers: [TurmaService, MateriaService, NotaService],
   bootstrap: [AppComponent],
 })
