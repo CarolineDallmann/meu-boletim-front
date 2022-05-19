@@ -1,4 +1,9 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import {
+  AfterContentChecked,
+  Component,
+  EventEmitter,
+  Output,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 type Menu = {
@@ -11,7 +16,7 @@ type Menu = {
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss'],
 })
-export class MenuComponent {
+export class MenuComponent implements AfterContentChecked {
   currentRoute = '';
 
   @Output()
@@ -25,19 +30,23 @@ export class MenuComponent {
     { path: 'materias', title: 'Matérias' },
     { path: 'principal', title: 'Turmas' },
     { path: 'notas', title: 'Notas' },
-    { path: 'frequencia', title: 'Frequências' },
+    { path: 'frequencias', title: 'Frequências' },
     { path: 'opcoes', title: 'Opções' },
     { path: 'sair', title: 'Sair' },
   ];
-
   constructor(private router: Router, private route: ActivatedRoute) {
-    route.url.subscribe(e => {
+    this.route.url.subscribe(e => {
       this.currentRoute = e[0].path;
     });
   }
 
+  ngAfterContentChecked() {
+    this.navegateEvent.emit(
+      this.itensMenu.find(m => m.path === this.currentRoute)?.title
+    );
+  }
+
   navegate(menu: Menu) {
-    this.navegateEvent.emit(menu.title);
     this.router.navigate([menu.path]);
   }
 }
