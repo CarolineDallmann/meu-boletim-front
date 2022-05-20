@@ -28,7 +28,7 @@ export class MenuComponent implements AfterContentChecked {
     { path: 'professores', title: 'Professores' },
     { path: 'secretaria', title: 'Secretaria' },
     { path: 'materias', title: 'Matérias' },
-    { path: 'principal', title: 'Turmas' },
+    { path: 'turmas', title: 'Turmas' },
     { path: 'notas', title: 'Notas' },
     { path: 'frequencias', title: 'Frequências' },
     { path: 'opcoes', title: 'Opções' },
