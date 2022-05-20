@@ -83,6 +83,7 @@ export class FrequenciaComponent implements OnInit {
         this.materiaSelecionada,
         this.dataSelecionada.toISOString().split('T')[0])
         .subscribe((lista) => {
+          lista.sort((a, b) => a.aluno.nome.localeCompare(b.aluno.nome))
           this.listaFrequencia = lista
           this.checkAllSelect()
         })
