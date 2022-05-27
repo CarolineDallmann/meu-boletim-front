@@ -6,6 +6,7 @@ import { NotasLancamentoComponent } from './notas-lancamento/notas-lancamento.co
 import { NotasComponent } from './notas/notas.component';
 import { PrincipalComponent } from './principal/principal.component';
 import { TurmasComponent } from './turmas/turmas.component';
+import { VisulizacaoboletimComponent } from './visulizacaoboletim/visulizacaoboletim.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -15,7 +16,8 @@ const routes: Routes = [
   { path: 'home', component: PrincipalComponent },
   { path: 'notas', component: NotasComponent },
   { path: 'notas/lancamento', component: NotasLancamentoComponent },
-  { path: 'frequencias', component: FrequenciaComponent }
+  { path: 'frequencias', component: FrequenciaComponent },
+  { path: 'boletim', component: VisulizacaoboletimComponent }
 
 ];
 

@@ -2,6 +2,7 @@ import {
   AfterContentChecked,
   ChangeDetectorRef,
   Component,
+  Input,
 } from '@angular/core';
 
 @Component({
@@ -10,7 +11,11 @@ import {
   styleUrls: ['./layout-principal.component.scss'],
 })
 export class LayoutPrincipalComponent implements AfterContentChecked {
+  @Input()
   title = '';
+
+  @Input()
+  hiddenMenu = false
 
   constructor(private cdref: ChangeDetectorRef) { }
 

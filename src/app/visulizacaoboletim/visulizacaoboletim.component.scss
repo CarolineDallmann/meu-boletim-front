@@ -1,0 +1,23 @@
+.cabecalho {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+th.mat-header-cell,
+td.mat-cell {
+    text-align: center;
+    border: 1px solid rgb(240, 240, 240);
+    padding: 0 !important;
+}
+
+p {
+    padding: 0;
+    margin: 0;
+}
+
+.red{
+    background-color: #D14B5F;
+    color: white;
+}
