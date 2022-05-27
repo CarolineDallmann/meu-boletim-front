@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {  Router } from '@angular/router';
 import { environment } from '../../environments/environment';
 import { Boletim, ConfigEscola } from '../entities/boletim.entity';
 import { Materia } from '../entities/materia.entity';
@@ -25,7 +25,7 @@ export class VisulizacaoboletimComponent implements OnInit {
     '3falta', '4nota', '4falta', 'media', 'resultado'];
   fechamentos = { bim1: '', bim2: '', bim3: '', bim4: '', final: ResultadoBoletim.INDETERMINADO }
 
-  constructor(private boletimService: BoletimVisualizacaoService, private route: ActivatedRoute, private materiaService: MateriaService) { }
+  constructor(private boletimService: BoletimVisualizacaoService, private router: Router, private materiaService: MateriaService) { }
 
   ngOnInit(): void {
     const pessoa: Pessoa = JSON.parse(localStorage.getItem('usuario') || '{}')
@@ -37,7 +37,7 @@ export class VisulizacaoboletimComponent implements OnInit {
       this.anoLetivo = anoLetivo
 
       //Preenchendo status bimestre
-      let dataAtual = new Date(environment.datateste)
+      const dataAtual = environment.datateste ? new Date(environment.datateste) : new Date()
       if (this.betweenDates(this.configEscola.inicioBim1, this.configEscola.fimBim1)) {
         this.fechamentos.bim1 = 'Em Progresso'
       } else if (this.betweenDates(this.configEscola.inicioBim2, this.configEscola.fimBim2)) {
@@ -49,7 +49,6 @@ export class VisulizacaoboletimComponent implements OnInit {
       } else if (dataAtual > this.configEscola.fimBim4) {
         this.fechamentos = {...this.fechamentos, bim1: 'Fechado', bim2: 'Fechado', bim3: 'Fechado', bim4: 'Fechado'}
       }
-
 
       //Buscando alunos do responsável
       this.boletimService.getBuscarFilhos(pessoa.id).subscribe((alunos) => {
@@ -80,7 +79,7 @@ export class VisulizacaoboletimComponent implements OnInit {
   }
 
   betweenDates(ini: Date, fim: Date) {
-    const dataAtual = new Date(environment.datateste)
+    const dataAtual = environment.datateste ? new Date(environment.datateste) : new Date()
     return dataAtual >= ini && dataAtual <= fim
   }
 
@@ -89,4 +88,9 @@ export class VisulizacaoboletimComponent implements OnInit {
     this.getBoletim()
   }
 
+  sairBoletim(){
+    localStorage.removeItem('usuario')
+    this.router.navigate(['login'])
+  }
+  
 }

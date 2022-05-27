@@ -37,7 +37,9 @@ export class BoletimVisualizacaoService {
   }
 
   preparaBoletim(boletim: BoletimResponse[], materias: Materia[], configEscola: ConfigEscola): Boletim[] {
-    const mostrarFinal = (new Date(environment.datateste)) > configEscola.fimBim4
+    const dataAtual = environment.datateste ? new Date(environment.datateste) : new Date()
+    const mostrarFinal = dataAtual > configEscola.fimBim4
+
     return boletim.map((b) => {
       return {
         ...b,
@@ -48,7 +50,6 @@ export class BoletimVisualizacaoService {
     })
   }
 
-  //tem que ser executado somente qdo tiver todos os valores
   mediaFinal({ notaBim1, notaBim2, notaBim3, notaBim4 }: BoletimResponse): number {
     return (notaBim1 + notaBim2 + notaBim3 + notaBim4) / 4
   }
@@ -67,7 +68,6 @@ export class BoletimVisualizacaoService {
     return status
   }
 
-  //tem que ser executado somente qdo tiver todos os valores
   resultadoParcial(b: BoletimResponse, config: ConfigEscola) {
     if (this.mediaFinal(b) >= config.mediaAprovacao && this.freqAprovacao(config, b)) {
       return ResultadoBoletim.APROVADO
@@ -78,14 +78,14 @@ export class BoletimVisualizacaoService {
     return ResultadoBoletim.REPROVADO
   }
 
-  avFinal(bol: Boletim[]): ResultadoBoletim{
-    if(bol.find((b)=>b.resultado === ResultadoBoletim.REPROVADO)){
+  avFinal(bol: Boletim[]): ResultadoBoletim {
+    if (bol.find((b) => b.resultado === ResultadoBoletim.REPROVADO)) {
       return ResultadoBoletim.REPROVADO
     }
-    if(bol.every((b)=>b.resultado === ResultadoBoletim.APROVADO)){
+    if (bol.every((b) => b.resultado === ResultadoBoletim.APROVADO)) {
       return ResultadoBoletim.APROVADO
     }
-    if(bol.every((b)=>b.resultado === ResultadoBoletim.REPROVADO_POR_FALTAS)){
+    if (bol.every((b) => b.resultado === ResultadoBoletim.REPROVADO_POR_FALTAS)) {
       return ResultadoBoletim.REPROVADO_POR_FALTAS
     }
     return ResultadoBoletim.INDETERMINADO

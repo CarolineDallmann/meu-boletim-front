@@ -10,7 +10,7 @@ export class CheckNotaPipe implements PipeTransform {
   transform(nota: number, configEscola?: ConfigEscola, numBim?: number): 'red' | '' {
    
     if(configEscola){
-     const dataAtual = new Date(environment.datateste)
+     const dataAtual = environment.datateste ? new Date(environment.datateste) : new Date()
      if (numBim === 1 && nota < (configEscola.mediaAprovacao || 0) && dataAtual > configEscola.fimBim1) {
        return "red"
      }
