@@ -26,6 +26,11 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { FrequenciaComponent } from './frequencia/frequencia.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FrequenciaService } from './services/frequencia.service';
+import { VisulizacaoboletimComponent } from './visulizacaoboletim/visulizacaoboletim.component';
+import { BoletimVisualizacaoService } from './services/boletim-visualizacao.service';
+import { SerieDeParaPipe } from './pipes/serie-de-para.pipe';
+import { CheckNotaPipe } from './pipes/check-nota.pipe';
+import { ResultadoBoletimPipe } from './pipes/resultado-boletim.pipe';
 
 
 @NgModule({
@@ -36,7 +41,11 @@ import { FrequenciaService } from './services/frequencia.service';
     NotasComponent,
     NotasLancamentoComponent,
     FrequenciaComponent,
-    TurmasComponent
+    TurmasComponent,
+    VisulizacaoboletimComponent,
+    SerieDeParaPipe,
+    CheckNotaPipe,
+    ResultadoBoletimPipe
   ],
   imports: [
     BrowserModule,
@@ -60,7 +69,8 @@ import { FrequenciaService } from './services/frequencia.service';
     TurmaService,
     MateriaService,
     NotaService,
-    FrequenciaService
+    FrequenciaService,
+    BoletimVisualizacaoService
   ],
   bootstrap: [AppComponent],
 })

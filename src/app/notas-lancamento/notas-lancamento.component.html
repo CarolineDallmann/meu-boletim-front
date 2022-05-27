@@ -8,7 +8,7 @@
                     <mat-select (selectionChange)="onTurmaChange($event.value)" [value]="turmaSelecionada"
                         [disabled]="disabledTurma">
                         <mat-option *ngFor="let turma of turmas" [value]="turma.id">
-                            {{turma.serie | titlecase}} - Turma {{turma.nome | titlecase}} - {{turma.turno | titlecase}}
+                            Série {{turma.serie | serieDePara}} - Turma {{turma.nome | titlecase}} - {{turma.turno | titlecase}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
