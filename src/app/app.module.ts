@@ -18,6 +18,7 @@ import { MateriaService } from './services/materia.service';
 import { NotaService } from './services/nota.service';
 import { MatTableModule } from '@angular/material/table';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MateriaComponent } from './materia/materia.component';
 import { TurmasComponent } from './turmas/turmas.component';
 import { FormsModule } from '@angular/forms';
 import { NotasLancamentoComponent } from './notas-lancamento/notas-lancamento.component';
@@ -39,6 +40,7 @@ import { ResultadoBoletimPipe } from './pipes/resultado-boletim.pipe';
     LoginComponent,
     PrincipalComponent,
     NotasComponent,
+    MateriaComponent,
     NotasLancamentoComponent,
     FrequenciaComponent,
     TurmasComponent,

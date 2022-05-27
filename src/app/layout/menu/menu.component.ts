@@ -24,6 +24,7 @@ export class MenuComponent implements AfterContentChecked {
 
   itensMenu: Menu[] = [
     { path: 'alunos', title: 'Alunos' },
+    { path: 'materia', title: 'Matérias' },
     { path: 'responsaveis', title: 'Responsáveis' },
     { path: 'professores', title: 'Professores' },
     { path: 'secretaria', title: 'Secretaria' },
