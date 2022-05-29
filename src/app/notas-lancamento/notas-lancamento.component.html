@@ -28,8 +28,8 @@
             <mat-grid-tile colspan="1">
                 <mat-form-field appearance="legacy">
                     <mat-label>Data</mat-label>
-                    <input matInput [matDatepicker]="picker" [value]="dataSelecionada"
-                        (dateChange)="onDateChange($event.value)">
+                    <input matInput [max]="maxDate" [matDatepicker]="picker" [value]="dataSelecionada"
+                        (dateChange)="onDateChange($event.value)" readonly="">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
