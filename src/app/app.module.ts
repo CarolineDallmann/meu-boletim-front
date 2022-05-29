@@ -32,7 +32,6 @@ import { BoletimVisualizacaoService } from './services/boletim-visualizacao.serv
 import { SerieDeParaPipe } from './pipes/serie-de-para.pipe';
 import { CheckNotaPipe } from './pipes/check-nota.pipe';
 import { ResultadoBoletimPipe } from './pipes/resultado-boletim.pipe';
-import { DialogElementsComponent } from './dialog-elements/dialog-elements.component';
 
 
 @NgModule({
@@ -49,7 +48,6 @@ import { DialogElementsComponent } from './dialog-elements/dialog-elements.compo
     SerieDeParaPipe,
     CheckNotaPipe,
     ResultadoBoletimPipe,
-    DialogElementsComponent
   ],
   imports: [
     BrowserModule,
