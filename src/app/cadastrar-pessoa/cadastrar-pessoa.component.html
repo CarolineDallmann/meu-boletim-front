@@ -1,0 +1,89 @@
+<app-layout-principal>
+
+    <app-card-conteudo>
+        <div fxLayout="row">
+            <fieldset>
+                <legend>Atribuições</legend>
+                <mat-grid-list cols="3">
+                    <input type="radio" name="tipoPessoa" value="ALUNO">Aluno
+                    <input type="radio" name="tipoPessoa" value="RESPONSAVEL">Responsável
+                    <input type="radio" name="tipoPessoa" value="PROFESSOR">Professor
+                    <input type="radio" name="tipoPessoa" value="FUNCIONARIO">Funcionário
+                </mat-grid-list>
+            </fieldset>
+        </div>
+        <div>
+            <form [formGroup]="cadastroPessoa" (ngSubmit)="onSubmit()">
+                <div fxLayout="row">
+                    <mat-form-field appearance="legacy">
+                        <mat-label>Nome</mat-label>
+                        <input matInput placeholder="Ex. Maria da Silva" name="nome" formControlName="nome" />
+                    </mat-form-field>
+                    <mat-form-field appearance="legacy">
+                        <mat-label>Gênero</mat-label>
+                        <mat-select name="generoSelecionado" formControlName="generoSelecionado">
+                            <mat-option *ngFor="let genero of generos" [value]="genero">
+                                {{genero | titlecase}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="legacy">
+                        <mat-label>Nascimento</mat-label>
+                        <input matInput [matDatepicker]="picker" name="datanasc" formControlName="datanasc">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row">
+                    <mat-form-field appearance="legacy">
+                        <mat-label>CEP</mat-label>
+                        <input matInput placeholder="Ex. 58051-830" name="cep" formControlName="cep" />
+                    </mat-form-field>
+                    <mat-form-field appearance="legacy">
+                        <mat-label>Rua</mat-label>
+                        <input matInput placeholder="Ex. Rua Cecilia" name="rua" formControlName="rua" />
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row">
+                    <mat-form-field appearance="legacy">
+                        <mat-label>Número</mat-label>
+                        <input matInput placeholder="Ex. 585" name="numero" formControlName="numero" />
+                    </mat-form-field>
+                    <mat-form-field appearance="legacy">
+                        <mat-label>Bairro</mat-label>
+                        <input matInput placeholder="Ex. Cid Universitária" name="bairro" formControlName="bairro" />
+                    </mat-form-field>
+                    <mat-form-field appearance="legacy">
+                        <mat-label>Cidade</mat-label>
+                        <input matInput placeholder="Ex. João Pessoa" name="cidade" formControlName="cidade" />
+                    </mat-form-field>
+                    <mat-form-field appearance="legacy">
+                        <mat-label>UF</mat-label>
+                        <input matInput placeholder="Ex. PB" name="uf" formControlName="uf" />
+                    </mat-form-field>
+                    <mat-form-field appearance="legacy">
+                        <mat-label>Telefone</mat-label>
+                        <input matInput type="tel" placeholder="Ex. (83)999993333" name="telefone" formControlName="telefone" />
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row">
+                    <mat-form-field appearance="legacy">
+                        <mat-label>Email</mat-label>
+                        <input matInput placeholder="Ex. maria@gmail.com" name="email" formControlName="email" />
+                    </mat-form-field>
+                    <mat-form-field appearance="legacy">
+                        <mat-label>Login</mat-label>
+                        <input matInput name="login" formControlName="login" />
+                    </mat-form-field>
+                    <mat-form-field appearance="legacy">
+                        <mat-label>Senha</mat-label>
+                        <input matInput type="password" name="senha" formControlName="senha" />
+                    </mat-form-field>
+                    <mat-checkbox name="status" formControlName="status" active>Ativo</mat-checkbox>
+                </div>
+                <app-button>Salvar</app-button>
+            </form>
+        </div>
+
+    </app-card-conteudo>
+</app-layout-principal>

@@ -19,13 +19,17 @@ import { NotaService } from './services/nota.service';
 import { MatTableModule } from '@angular/material/table';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { TurmasComponent } from './turmas/turmas.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NotasLancamentoComponent } from './notas-lancamento/notas-lancamento.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FrequenciaComponent } from './frequencia/frequencia.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FrequenciaService } from './services/frequencia.service';
+import { CadastrarPessoaComponent } from './cadastrar-pessoa/cadastrar-pessoa.component';
+import { BuscarPessoaComponent } from './buscar-pessoa/buscar-pessoa.component';
+import { PessoaService } from './services/pessoa.service';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 
 
 @NgModule({
@@ -36,7 +40,9 @@ import { FrequenciaService } from './services/frequencia.service';
     NotasComponent,
     NotasLancamentoComponent,
     FrequenciaComponent,
-    TurmasComponent
+    TurmasComponent,
+    CadastrarPessoaComponent,
+    BuscarPessoaComponent
   ],
   imports: [
     BrowserModule,
@@ -54,13 +60,16 @@ import { FrequenciaService } from './services/frequencia.service';
     MatDatepickerModule,
     MatNativeDateModule,
     MatCheckboxModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     TurmaService,
     MateriaService,
     NotaService,
-    FrequenciaService
+    FrequenciaService,
+    PessoaService,
+    {provide: MAT_DATE_LOCALE, useValue: 'pt-BR'}
   ],
   bootstrap: [AppComponent],
 })
