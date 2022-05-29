@@ -14,3 +14,12 @@
 .left{
    margin-left: 8px;
 }
+
+:host[ng-reflect-disabled="true"] {
+   pointer-events: none ;
+}
+
+:host[ng-reflect-disabled="false"] {
+   pointer-events: auto ;
+}
+
