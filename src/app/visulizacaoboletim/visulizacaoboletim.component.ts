@@ -73,7 +73,6 @@ export class VisulizacaoboletimComponent implements OnInit {
         }
       })
     })
-
   }
   getBoletim() {
     if (this.alunoSelecionado && this.anoLetivo) {
