@@ -23,7 +23,7 @@ import { TurmasComponent } from './turmas/turmas.component';
 import { FormsModule } from '@angular/forms';
 import { NotasLancamentoComponent } from './notas-lancamento/notas-lancamento.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { FrequenciaComponent } from './frequencia/frequencia.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FrequenciaService } from './services/frequencia.service';
@@ -32,6 +32,7 @@ import { BoletimVisualizacaoService } from './services/boletim-visualizacao.serv
 import { SerieDeParaPipe } from './pipes/serie-de-para.pipe';
 import { CheckNotaPipe } from './pipes/check-nota.pipe';
 import { ResultadoBoletimPipe } from './pipes/resultado-boletim.pipe';
+import { DialogElementsComponent } from './dialog-elements/dialog-elements.component';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { ResultadoBoletimPipe } from './pipes/resultado-boletim.pipe';
     VisulizacaoboletimComponent,
     SerieDeParaPipe,
     CheckNotaPipe,
-    ResultadoBoletimPipe
+    ResultadoBoletimPipe,
+    DialogElementsComponent
   ],
   imports: [
     BrowserModule,
@@ -72,7 +74,8 @@ import { ResultadoBoletimPipe } from './pipes/resultado-boletim.pipe';
     MateriaService,
     NotaService,
     FrequenciaService,
-    BoletimVisualizacaoService
+    BoletimVisualizacaoService,
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }
   ],
   bootstrap: [AppComponent],
 })
