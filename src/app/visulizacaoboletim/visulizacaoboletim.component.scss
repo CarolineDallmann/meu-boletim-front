@@ -21,3 +21,7 @@ p {
     background-color: #D14B5F;
     color: white;
 }
+
+::ng-deep.inputAluno .mat-form-field-wrapper{
+    padding-bottom: 0px;
+}

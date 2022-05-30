@@ -1,15 +1,19 @@
 <app-layout-principal [hiddenMenu]="true" title="Boletim">
     <app-card-filtro>
 
-        <mat-grid-list cols="4" rowHeight="60px">
+        <mat-grid-list cols="4" rowHeight="80px">
             <mat-grid-tile colspan="1">
-                <mat-form-field appearance="legacy">
+                <mat-form-field *ngIf="ehResponsavel" appearance="legacy">
                     <mat-label>Aluno</mat-label>
                     <mat-select (selectionChange)="onAlunoChange($event.value)" [value]="alunoSelecionado">
                         <mat-option *ngFor="let aluno of alunos" [value]="aluno">
                             {{aluno.nome | titlecase}}
                         </mat-option>
                     </mat-select>
+                </mat-form-field>
+                <mat-form-field *ngIf="!ehResponsavel" appearance="outline" class="inputAluno">
+                    <mat-label> Aluno </mat-label>
+                    <input matInput [value]="alunoSelecionado?.nome | titlecase" readonly>
                 </mat-form-field>
             </mat-grid-tile>
 
@@ -42,7 +46,7 @@
             </mat-form-field>
         </div>
 
-        <table mat-table [dataSource]="boletim">
+        <table mat-table [dataSource]="boletim" *ngIf="!isEmpty">
             <ng-container matColumnDef="disciplina">
                 <th mat-header-cell *matHeaderCellDef rowspan="2"> Disciplina </th>
             </ng-container>
@@ -136,13 +140,14 @@
                 <td mat-cell *matCellDef="let linha">{{linha.resultado | resultadoBoletim}}</td>
             </ng-container>
 
-
-
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-header-row *matHeaderRowDef="displayedSubColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedSubColumns"></tr>
         </table>
 
+        <app-pgempty *ngIf="isEmpty">
+            "Não foram encontrados dados para esse aluno"
+        </app-pgempty>
 
     </app-card-conteudo>
 </app-layout-principal>

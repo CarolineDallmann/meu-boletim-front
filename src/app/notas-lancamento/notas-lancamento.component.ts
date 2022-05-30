@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 import { Atividade, NotaAtividade, SalvarAtividadePayload } from '../entities/atividade.entity';
+import { ConfigEscola } from '../entities/boletim.entity';
 import { Materia } from '../entities/materia.entity';
 import { Turma } from '../entities/turma.entity';
 import { TipoAtividade } from '../enums/tipo-atividade.enum';
@@ -27,6 +29,7 @@ export class NotasLancamentoComponent implements OnInit {
   disabledTurma: boolean = false
   displayedColumns: string[] = ['aluno', 'nota'];
   atividadeId: string | null = null
+  maxDate = environment.datateste ? new Date(environment.datateste) : new Date()
 
   constructor(private turmaService: TurmaService, private materiaService: MateriaService,
     private notaService: NotaService, private snackBar: MatSnackBar, private route: ActivatedRoute,
@@ -58,6 +61,7 @@ export class NotasLancamentoComponent implements OnInit {
     }
     this.checkDisableButton()
   }
+
   onTurmaChange(event: string) {
     this.turmaSelecionada = event
     this.search(event)
@@ -126,7 +130,8 @@ export class NotasLancamentoComponent implements OnInit {
             turmaId: this.turmaSelecionada, materiaId: this.materiaSelecionada
           }
         })
-      })
+      }, ({error})=>{this.snackBar.open(error.msg, undefined, { duration: 5000 })}
+      )
     }
   }
 
@@ -135,6 +140,8 @@ export class NotasLancamentoComponent implements OnInit {
       this.materiaSelecionada &&
       this.dataSelecionada &&
       this.tipoSelecionado &&
-      this.notas.every((nota) => nota.nota))
+      this.notas.every((nota) => nota.nota !== undefined))
   }
+
+
 }
