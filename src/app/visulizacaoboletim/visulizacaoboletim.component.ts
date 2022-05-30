@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
+import { DataStoreService } from '../data-storage';
 import { Boletim, ConfigEscola } from '../entities/boletim.entity';
 import { Materia } from '../entities/materia.entity';
 import { BuscaFilhoResponse, Pessoa, PessoaLocalStorage } from '../entities/pessoa.entity';
@@ -28,7 +29,8 @@ export class VisulizacaoboletimComponent implements OnInit {
   ehResponsavel = true
   isEmpty = true
 
-  constructor(private boletimService: BoletimVisualizacaoService, private router: Router, private materiaService: MateriaService) { }
+  constructor(private boletimService: BoletimVisualizacaoService, private router: Router, 
+    private materiaService: MateriaService, private dataStorage: DataStoreService) { }
 
   ngOnInit(): void {
     const pessoa: PessoaLocalStorage = JSON.parse(localStorage.getItem('usuario') || '{}')
@@ -97,8 +99,7 @@ export class VisulizacaoboletimComponent implements OnInit {
   }
 
   sairBoletim() {
-    localStorage.removeItem('usuario')
-    this.router.navigate(['login'])
+   this.dataStorage.updateUsuario(undefined) 
   }
 
 }
