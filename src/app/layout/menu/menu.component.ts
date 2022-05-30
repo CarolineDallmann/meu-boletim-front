@@ -66,4 +66,8 @@ export class MenuComponent implements AfterContentChecked {
   navegate(menu: Menu) {
     this.router.navigate([menu.path]);
   }
+
+  sairSistema(){
+    this.dataStorage.updateUsuario(undefined)
+  }
 }
