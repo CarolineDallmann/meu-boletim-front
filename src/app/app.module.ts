@@ -32,6 +32,7 @@ import { BoletimVisualizacaoService } from './services/boletim-visualizacao.serv
 import { SerieDeParaPipe } from './pipes/serie-de-para.pipe';
 import { CheckNotaPipe } from './pipes/check-nota.pipe';
 import { ResultadoBoletimPipe } from './pipes/resultado-boletim.pipe';
+import { LoginService } from './services/login.service';
 
 
 @NgModule({
@@ -65,7 +66,7 @@ import { ResultadoBoletimPipe } from './pipes/resultado-boletim.pipe';
     MatDatepickerModule,
     MatNativeDateModule,
     MatCheckboxModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [
     TurmaService,
@@ -73,7 +74,8 @@ import { ResultadoBoletimPipe } from './pipes/resultado-boletim.pipe';
     NotaService,
     FrequenciaService,
     BoletimVisualizacaoService,
-    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
+    LoginService,
   ],
   bootstrap: [AppComponent],
 })

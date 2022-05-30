@@ -11,8 +11,7 @@ import { VisulizacaoboletimComponent } from './visulizacaoboletim/visulizacaobol
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: '', component: LoginComponent },
-  { path: 'principal', component: PrincipalComponent },
+  { path: '', component: PrincipalComponent },
   { path: 'turmas', component: TurmasComponent },
   { path: 'materias', component: MateriaComponent },
   { path: 'home', component: PrincipalComponent },

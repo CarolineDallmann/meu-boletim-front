@@ -7,12 +7,16 @@
 <div class="boxExternaLogin">
     <div class="caixaInternaLogin">
         <mat-form-field class="example-full-width" appearance="outline" style=" width: 80%;">
-            <input matInput placeholder="Login">
+            <input matInput placeholder="Login" (input)="onLoginChange($event)" (keypress)="keypress($event)">
         </mat-form-field>
+
         <mat-form-field class="example-full-width" appearance="outline" style=" width: 80%;">
-            <input matInput placeholder="Senha">
+            <input matInput placeholder="Senha" (input)="onSenhaChange($event)" type="password" (keypress)="keypress($event)">
         </mat-form-field>
-        <button mat-button style="background-color: #d14b5f; color: white; width: 80%; height: 55px;">ENTRAR</button>
+
+        <button mat-button style="background-color: #d14b5f; color: white; width: 80%; height: 55px;" (click)="login()"
+           >ENTRAR</button>
+        <span> {{erro}} </span>
     </div>
 
 </div>
