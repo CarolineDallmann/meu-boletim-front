@@ -23,9 +23,9 @@ export class MenuComponent implements AfterContentChecked {
   navegateEvent = new EventEmitter<string>();
 
   itensMenu: Menu[] = [
-    { path: 'alunos', title: 'Alunos' },
-    { path: 'responsaveis', title: 'Responsáveis' },
-    { path: 'professores', title: 'Professores' },
+    { path: 'aluno', title: 'Alunos' },
+    { path: 'responsavel', title: 'Responsáveis' },
+    { path: 'professor', title: 'Professores' },
     { path: 'secretaria', title: 'Secretaria' },
     { path: 'materias', title: 'Matérias' },
     { path: 'turmas', title: 'Turmas' },

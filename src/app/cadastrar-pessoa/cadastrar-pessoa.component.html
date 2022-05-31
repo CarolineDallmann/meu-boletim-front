@@ -1,25 +1,25 @@
 <app-layout-principal>
 
     <app-card-conteudo>
-        <div fxLayout="row">
-            <fieldset>
-                <legend>Atribuições</legend>
-                <mat-grid-list cols="3">
-                    <input type="radio" name="tipoPessoa" value="ALUNO">Aluno
-                    <input type="radio" name="tipoPessoa" value="RESPONSAVEL">Responsável
-                    <input type="radio" name="tipoPessoa" value="PROFESSOR">Professor
-                    <input type="radio" name="tipoPessoa" value="FUNCIONARIO">Funcionário
-                </mat-grid-list>
-            </fieldset>
-        </div>
-        <div>
-            <form [formGroup]="cadastroPessoa" (ngSubmit)="onSubmit()">
-                <div fxLayout="row">
-                    <mat-form-field appearance="legacy">
+        <form [formGroup]="cadastroPessoa" (ngSubmit)="onSubmit()">
+            <div fxLayout="row">
+                <fieldset>
+                    <legend>Atribuições</legend>
+                    <mat-radio-group formControlName="tipo_pessoa" (change)="changeTipoPessoa($event)">
+                        <mat-radio-button *ngFor="let pessoa of tipoPessoa" [value]="pessoa.value">
+                            {{ pessoa.nome }}
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </fieldset>
+            </div>
+            <div fxLayout="row">
+
+                <div fxLayout="row inline" fxLayoutGap="20px">
+                    <mat-form-field appearance="legacy" fxFlex="60">
                         <mat-label>Nome</mat-label>
                         <input matInput placeholder="Ex. Maria da Silva" name="nome" formControlName="nome" />
                     </mat-form-field>
-                    <mat-form-field appearance="legacy">
+                    <mat-form-field appearance="legacy" fxFlex="20">
                         <mat-label>Gênero</mat-label>
                         <mat-select name="generoSelecionado" formControlName="generoSelecionado">
                             <mat-option *ngFor="let genero of generos" [value]="genero">
@@ -27,7 +27,7 @@
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
-                    <mat-form-field appearance="legacy">
+                    <mat-form-field appearance="legacy" fxFlex>
                         <mat-label>Nascimento</mat-label>
                         <input matInput [matDatepicker]="picker" name="datanasc" formControlName="datanasc">
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -63,7 +63,8 @@
                     </mat-form-field>
                     <mat-form-field appearance="legacy">
                         <mat-label>Telefone</mat-label>
-                        <input matInput type="tel" placeholder="Ex. (83)999993333" name="telefone" formControlName="telefone" />
+                        <input matInput type="tel" placeholder="Ex. (83)999993333" name="telefone"
+                            formControlName="telefone" />
                     </mat-form-field>
                 </div>
                 <div fxLayout="row">
@@ -79,11 +80,47 @@
                         <mat-label>Senha</mat-label>
                         <input matInput type="password" name="senha" formControlName="senha" />
                     </mat-form-field>
-                    <mat-checkbox name="status" formControlName="status" active>Ativo</mat-checkbox>
+                    <mat-checkbox name="status" formControlName="status" [(ngModel)]="checked">Ativo</mat-checkbox>
                 </div>
-                <app-button>Salvar</app-button>
-            </form>
-        </div>
-
+            </div>
+            <div fxLayout="row" *ngIf="pessoa=='ALUNO'">
+                <fieldset>
+                    <legend>Aluno</legend>
+                    <div fxLayout="row"> 
+                        <mat-form-field appearance="legacy">
+                            <mat-label>Nome da Mãe</mat-label>
+                            <input matInput placeholder="Ex. Maria Jose" name="nomeMae" formControlName="nomeMae" />
+                        </mat-form-field>
+                        <mat-form-field appearance="legacy">
+                            <mat-label>Nome do Pai</mat-label>
+                            <input matInput name="nomePai" formControlName="nomePai" />
+                        </mat-form-field>
+                    </div>
+                    <div fxLayout="row">
+                        <mat-form-field appearance="legacy">
+                            <mat-label>Responsável</mat-label>
+                            <input matInput type="text" name="responsavel" formControlName="responsavel">
+                            <!-- <mat-autocomplete #autoResp="matAutocomplete">
+                                <mat-option *ngFor="let resp of listaResponsaveis | async" [value]="resp.id">
+                                  {{resp.nome}}
+                                </mat-option>
+                              </mat-autocomplete> -->
+                        </mat-form-field>
+                    </div>
+                    <div fxLayout="row">
+                        <mat-form-field appearance="legacy">
+                            <mat-label>Turma</mat-label>
+                            <mat-select name="turmaSelecionada" formControlName="turmaSelecionada">
+                                <mat-option *ngFor="let turma of turmas" [value]="turma.id">
+                                    {{turma.serie | titlecase}} - Turma {{turma.nome | titlecase}} - {{turma.turno | titlecase}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    
+                </fieldset>
+            </div>
+            <app-button>Salvar</app-button>
+        </form>
     </app-card-conteudo>
 </app-layout-principal>

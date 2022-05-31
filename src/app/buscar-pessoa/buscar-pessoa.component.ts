@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import { Pessoa } from '../entities/pessoa.entity';
+import { PessoaService } from '../services/pessoa.service';
 
 @Component({
   selector: 'app-buscar-pessoa',
@@ -9,16 +10,30 @@ import { Pessoa } from '../entities/pessoa.entity';
 export class BuscarPessoaComponent implements OnInit {
 
   displayedColumnsAlunos: string[] = ['nome', 'serie', 'turma', 'turno', 'editar'];
-  displayedColumnsResponsaveis: string[] = ['nome', 'telefone', 'editar'];
-  displayedColumnsFuncionarios: string[] = ['nome', 'telefone', 'editar'];
-  alunos: Pessoa[] = [];
+  displayedColumnsAdultos: string[] = ['nome', 'telefone', 'editar'];
+  pessoas: any = {};
   msg: string = '';
-  tipoPessoa: string = 'aluno'
+  path = window.location.pathname; 
+  tipoPessoa = this.path.split('/')[1].toUpperCase();
+  checkInitivo = false;
+  pesquisar = '';
 
-  constructor() { }
-
+  constructor(private pessoaService: PessoaService) { }
+  
   ngOnInit(): void {
-    
+    this.pessoaService.getAllPessoas(this.pesquisar, this.tipoPessoa, false).subscribe(pessoa => { this.pessoas = pessoa })
   }
 
+  onNomeChange() {
+    this.pessoaService.getAllPessoas(this.pesquisar, this.tipoPessoa, false).subscribe(pessoa => { this.pessoas = pessoa })
+  }
+
+  onInativoChange() {
+    if(this.checkInitivo==true){
+      this.pessoaService.getAllPessoas('', this.tipoPessoa, true).subscribe(pessoa => { this.pessoas = pessoa })
+    } else {
+      this.pessoaService.getAllPessoas('', this.tipoPessoa, false).subscribe(pessoa => { this.pessoas = pessoa })
+    }
+    
+  }
 }

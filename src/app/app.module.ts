@@ -29,7 +29,9 @@ import { FrequenciaService } from './services/frequencia.service';
 import { CadastrarPessoaComponent } from './cadastrar-pessoa/cadastrar-pessoa.component';
 import { BuscarPessoaComponent } from './buscar-pessoa/buscar-pessoa.component';
 import { PessoaService } from './services/pessoa.service';
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatRadioModule } from '@angular/material/radio';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 
 @NgModule({
@@ -61,7 +63,9 @@ import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/
     MatNativeDateModule,
     MatCheckboxModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatRadioModule,
+    MatAutocompleteModule
   ],
   providers: [
     TurmaService,

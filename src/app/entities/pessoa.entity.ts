@@ -12,5 +12,6 @@ export type Pessoa = {
     email: string,
     login: string,
     senha: string,
-    status: string
+    status: string,
+    tipo_pessoa: string
 }
