@@ -21,7 +21,7 @@
                     </mat-form-field>
                     <mat-form-field appearance="legacy" fxFlex="20">
                         <mat-label>Gênero</mat-label>
-                        <mat-select name="generoSelecionado" formControlName="generoSelecionado">
+                        <mat-select name="genero" formControlName="genero">
                             <mat-option *ngFor="let genero of generos" [value]="genero">
                                 {{genero | titlecase}}
                             </mat-option>
@@ -80,7 +80,7 @@
                         <mat-label>Senha</mat-label>
                         <input matInput type="password" name="senha" formControlName="senha" />
                     </mat-form-field>
-                    <mat-checkbox name="status" formControlName="status" [(ngModel)]="checked">Ativo</mat-checkbox>
+                    <mat-checkbox name="ativo" formControlName="ativo" [(ngModel)]="checked">Ativo</mat-checkbox>
                 </div>
             </div>
             <div fxLayout="row" *ngIf="pessoa=='ALUNO'">
@@ -89,22 +89,22 @@
                     <div fxLayout="row"> 
                         <mat-form-field appearance="legacy">
                             <mat-label>Nome da Mãe</mat-label>
-                            <input matInput placeholder="Ex. Maria Jose" name="nomeMae" formControlName="nomeMae" />
+                            <input matInput placeholder="Ex. Maria Jose" name="nome_mae" formControlName="nome_mae" />
                         </mat-form-field>
                         <mat-form-field appearance="legacy">
                             <mat-label>Nome do Pai</mat-label>
-                            <input matInput name="nomePai" formControlName="nomePai" />
+                            <input matInput name="nome_pai" formControlName="nome_pai" />
                         </mat-form-field>
                     </div>
                     <div fxLayout="row">
                         <mat-form-field appearance="legacy">
                             <mat-label>Responsável</mat-label>
-                            <input matInput type="text" name="responsavel" formControlName="responsavel">
-                            <!-- <mat-autocomplete #autoResp="matAutocomplete">
-                                <mat-option *ngFor="let resp of listaResponsaveis | async" [value]="resp.id">
-                                  {{resp.nome}}
+                            <input matInput type="text" name="responsavel" formControlName="responsavel" [matAutocomplete]="autoResp">
+                            <mat-autocomplete #autoResp="matAutocomplete">
+                                <mat-option *ngFor="let resp of listaResponsaveis" [value]="resp.nome">
+                                  {{resp.nome | titlecase}}
                                 </mat-option>
-                              </mat-autocomplete> -->
+                              </mat-autocomplete>
                         </mat-form-field>
                     </div>
                     <div fxLayout="row">
@@ -113,6 +113,23 @@
                             <mat-select name="turmaSelecionada" formControlName="turmaSelecionada">
                                 <mat-option *ngFor="let turma of turmas" [value]="turma.id">
                                     {{turma.serie | titlecase}} - Turma {{turma.nome | titlecase}} - {{turma.turno | titlecase}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    
+                </fieldset>
+            </div>
+
+            <div fxLayout="row" *ngIf="pessoa=='PROFESSOR'">
+                <fieldset>
+                    <legend>Professor</legend>
+                    <div fxLayout="row"> 
+                        <mat-form-field appearance="legacy">
+                            <mat-label>Matéria</mat-label>
+                            <mat-select name="materia" formControlName="materia">
+                                <mat-option *ngFor="let materia of materias" [value]="materia.id">
+                                    {{materia.nome | titlecase}}
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>

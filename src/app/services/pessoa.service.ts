@@ -12,7 +12,7 @@ export class PessoaService {
   constructor(private http: HttpClient) { }
 
   getAllPessoas(nome: string, tipo_pessoa: string, mostrarInativos: boolean) {
-    return this.http.get<Observable<any[]>>(`${environment.api}pessoas`, { params: { nome, tipo_pessoa, mostrarInativos } })
+    return this.http.get<Pessoa[]>(`${environment.api}pessoas`, { params: { nome, tipo_pessoa, mostrarInativos } })
   }
 
   savePessoa(pessoa: Pessoa) {

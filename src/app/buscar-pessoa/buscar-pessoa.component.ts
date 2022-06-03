@@ -14,14 +14,18 @@ export class BuscarPessoaComponent implements OnInit {
   pessoas: any = {};
   msg: string = '';
   path = window.location.pathname; 
-  tipoPessoa = this.path.split('/')[1].toUpperCase();
+  tipoPessoa = this.path.split('/')[1];
   checkInitivo = false;
   pesquisar = '';
+  tipo: string = '';
 
   constructor(private pessoaService: PessoaService) { }
   
   ngOnInit(): void {
-    this.pessoaService.getAllPessoas(this.pesquisar, this.tipoPessoa, false).subscribe(pessoa => { this.pessoas = pessoa })
+    this.filterTipoPessoa(this.tipoPessoa);
+    this.pessoaService.getAllPessoas(this.pesquisar, this.tipoPessoa, false).subscribe(pessoa => { 
+      this.pessoas = pessoa;
+    })
   }
 
   onNomeChange() {
@@ -35,5 +39,20 @@ export class BuscarPessoaComponent implements OnInit {
       this.pessoaService.getAllPessoas('', this.tipoPessoa, false).subscribe(pessoa => { this.pessoas = pessoa })
     }
     
+  }
+
+  filterTipoPessoa(tipo: String) {
+    if (tipo == "alunos"){
+      this.tipoPessoa = "ALUNO";
+    }
+    if (tipo == "responsaveis"){
+      this.tipoPessoa = "RESPONSAVEL";
+    }
+    if (tipo == "professores"){
+      this.tipoPessoa = "PROFESSOR";
+    }
+    if (tipo == "secretaria"){
+      this.tipoPessoa = "SECRETARIA";
+    }
   }
 }

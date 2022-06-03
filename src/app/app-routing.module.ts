@@ -20,9 +20,9 @@ const routes: Routes = [
   { path: 'frequencias', component: FrequenciaComponent },
   { path: 'cadastro/:tipoPessoa', component: CadastrarPessoaComponent },
   { path: 'cadastro/:idPessoa', component: CadastrarPessoaComponent },
-  { path: 'aluno', component: BuscarPessoaComponent}, 
-  { path: 'responsavel', component: BuscarPessoaComponent },
-  { path: 'professor', component: BuscarPessoaComponent },
+  { path: 'alunos', component: BuscarPessoaComponent}, 
+  { path: 'responsaveis', component: BuscarPessoaComponent },
+  { path: 'professores', component: BuscarPessoaComponent },
   { path: 'secretaria', component: BuscarPessoaComponent },
 ];
 
