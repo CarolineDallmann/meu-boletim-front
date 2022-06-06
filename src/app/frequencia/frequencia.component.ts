@@ -104,11 +104,13 @@ export class FrequenciaComponent implements OnInit {
         }
       })
     }
-    this.frequenciaService.salvarFrequencia(body).subscribe((res) => {
-      this.snackBar.open(res.msg, undefined, { duration: 5000 })
-      this.search()
-    }, ({ error }) => { this.snackBar.open(error.msg, undefined, { duration: 5000 }) }
-    )
+    this.frequenciaService.salvarFrequencia(body).subscribe({
+      next: (res) => {
+        this.snackBar.open(res.msg, undefined, { duration: 5000 })
+        this.search()
+      },
+      error: (err) => { this.snackBar.open(err.error.msg, undefined, { duration: 5000 }) }
+    })
   }
 
   checkDisableButton() {

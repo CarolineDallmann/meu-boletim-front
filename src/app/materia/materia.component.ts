@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Materia, MateriaPayload } from '../entities/materia.entity';
 import { MateriaService } from '../services/materia.service';
 
@@ -18,7 +17,7 @@ export class MateriaComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.search() 
+    this.search()
   }
 
   onInput(event: Event) {
@@ -50,10 +49,12 @@ export class MateriaComponent implements OnInit {
   }
 
   excluir(materia: Materia) {
-    this.materiaService.deleteMateria(materia.id).subscribe((res) => {
-      this.snackBar.open(res.msg, undefined, { duration: 5000 })
-      this.search()
-    }, ({error})=>{this.snackBar.open(error.msg, undefined, { duration: 5000 })
+    this.materiaService.deleteMateria(materia.id).subscribe({
+      next: (res) => {
+        this.snackBar.open(res.msg, undefined, { duration: 5000 })
+        this.search()
+      },
+      error: (err) => { this.snackBar.open(err.error.msg, undefined, { duration: 5000 }) }
     })
   }
 
