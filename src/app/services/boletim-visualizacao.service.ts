@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Boletim, BoletimResponse, ConfigEscola, ConfigEscolaResponse } from '../entities/boletim.entity';
 import { Materia } from '../entities/materia.entity';
+import { MsgResponse } from '../entities/msg-response.entity';
 import { BuscaFilhoResponse } from '../entities/pessoa.entity';
 import { ResultadoBoletim } from '../enums/resultado-boletim.enum';
 
@@ -30,6 +31,10 @@ export class BoletimVisualizacaoService {
   }
   getConfigEscola() {
     return this.http.get<ConfigEscolaResponse>(`${environment.api}config-escola`)
+  }
+
+  postConfigEscola(body: ConfigEscola){
+    return this.http.post<MsgResponse>(`${environment.api}config-escola`, body)
   }
 
   getBoletim(alunoId: string, anoLetivo: number) {
