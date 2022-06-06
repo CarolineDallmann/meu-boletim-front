@@ -20,7 +20,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MateriaComponent } from './materia/materia.component';
 import { TurmasComponent } from './turmas/turmas.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NotasLancamentoComponent } from './notas-lancamento/notas-lancamento.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
@@ -29,6 +29,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FrequenciaService } from './services/frequencia.service';
 import { VisulizacaoboletimComponent } from './visulizacaoboletim/visulizacaoboletim.component';
 import { BoletimVisualizacaoService } from './services/boletim-visualizacao.service';
+import { OpcoesComponent } from './opcoes/opcoes.component';
 import { SerieDeParaPipe } from './pipes/serie-de-para.pipe';
 import { CheckNotaPipe } from './pipes/check-nota.pipe';
 import { ResultadoBoletimPipe } from './pipes/resultado-boletim.pipe';
@@ -44,6 +45,7 @@ import { LoginService } from './services/login.service';
     MateriaComponent,
     NotasLancamentoComponent,
     FrequenciaComponent,
+    OpcoesComponent,
     TurmasComponent,
     VisulizacaoboletimComponent,
     SerieDeParaPipe,
@@ -56,6 +58,7 @@ import { LoginService } from './services/login.service';
     BrowserAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
+    ReactiveFormsModule,
     MatButtonModule,
     LayoutModule,
     MatSelectModule,
