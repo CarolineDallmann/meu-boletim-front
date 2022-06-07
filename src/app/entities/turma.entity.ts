@@ -8,3 +8,8 @@ export type Turma = {
     turno: Turno,
     serie: Serie
 }
+
+export type TurmaPayload = {
+    id?: string,
+    nome: string
+}
