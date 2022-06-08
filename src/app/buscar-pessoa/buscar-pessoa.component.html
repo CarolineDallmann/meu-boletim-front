@@ -1,19 +1,19 @@
 <app-layout-principal>
     <app-card-filtro>
         
-        <div style="padding: 10px;">
+        <div class="filtroContainer">
             <mat-grid-list cols="3" rowHeight="60px">
                 <mat-grid-tile colspan="1">
-                    <mat-form-field appearance="legacy" style="width:350px; margin-left:15px;">
+                    <mat-form-field appearance="legacy" class="inputNome">
                         <mat-label>Pesquisar</mat-label>
                         <input type="search" matInput placeholder="Ex. Maria" #nome [(ngModel)]="pesquisar" (change)="onNomeChange()">
                     </mat-form-field>
                 </mat-grid-tile>
                 <mat-grid-tile>
-                    <mat-checkbox [(ngModel)]="checkInitivo" style="margin-left:160px;" (change)="onInativoChange()">Mostrar Inativos</mat-checkbox>
+                    <mat-checkbox [(ngModel)]="checkInitivo" class="widthCheck" (change)="onInativoChange()">Mostrar Inativos</mat-checkbox>
                 </mat-grid-tile>
                 <mat-grid-tile>
-                    <app-button> <a [routerLink]="['/cadastro', tipoPessoa]" style="text-decoration: none; color: white">Adicionar novo</a> </app-button>
+                    <app-button> <a [routerLink]="['/cadastro', tipoPessoa]" class="button-edit">Adicionar novo</a> </app-button>
                 </mat-grid-tile>
             </mat-grid-list>
         </div>
@@ -45,7 +45,7 @@
 
                 <ng-container matColumnDef="editar">
                     <th mat-header-cell *matHeaderCellDef> </th>
-                    <td mat-cell *matCellDef="let pessoas"> <app-button><a [routerLink]="['/cadastro', pessoas.id]" class="button-edit">Edit</a></app-button> </td>
+                    <td mat-cell *matCellDef="let pessoas"> <app-button><a [routerLink]="['/editar', pessoas.id]" class="button-edit">Edit</a></app-button> </td>
                 </ng-container>
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumnsAlunos"></tr>
@@ -66,7 +66,7 @@
 
                 <ng-container matColumnDef="editar">
                     <th mat-header-cell *matHeaderCellDef> </th>
-                    <td mat-cell *matCellDef="let pessoas"> <app-button><a [routerLink]="['/cadastro', pessoas.id]" style="text-decoration: none; color: white">Edit</a></app-button> </td>
+                    <td mat-cell *matCellDef="let pessoas"> <app-button><a [routerLink]="['/editar', pessoas.id]" class="button-edit">Edit</a></app-button> </td>
                 </ng-container>
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumnsAdultos"></tr>

@@ -18,4 +18,8 @@ export class PessoaService {
   savePessoa(pessoa: Pessoa) {
     return this.http.post<Pessoa>(`${environment.api}pessoas`, pessoa);
   }
+
+  getPessoaById(id: string) {
+    return this.http.get<Observable<any>>(`${environment.api}pessoas/${id}`);
+  }
 }

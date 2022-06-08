@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BuscarPessoaComponent } from './buscar-pessoa/buscar-pessoa.component';
 import { CadastrarPessoaComponent } from './cadastrar-pessoa/cadastrar-pessoa.component';
+import { EditarPessoaComponent } from './editar-pessoa/editar-pessoa.component';
 import { FrequenciaComponent } from './frequencia/frequencia.component';
 import { LoginComponent } from './login/login.component';
 import { NotasLancamentoComponent } from './notas-lancamento/notas-lancamento.component';
@@ -19,7 +20,7 @@ const routes: Routes = [
   { path: 'notas/lancamento', component: NotasLancamentoComponent },
   { path: 'frequencias', component: FrequenciaComponent },
   { path: 'cadastro/:tipoPessoa', component: CadastrarPessoaComponent },
-  { path: 'cadastro/:idPessoa', component: CadastrarPessoaComponent },
+  { path: 'editar/:idPessoa', component: EditarPessoaComponent },
   { path: 'alunos', component: BuscarPessoaComponent}, 
   { path: 'responsaveis', component: BuscarPessoaComponent },
   { path: 'professores', component: BuscarPessoaComponent },

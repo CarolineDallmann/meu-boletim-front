@@ -16,7 +16,7 @@ export class TurmasComponent implements OnInit {
   constructor(private turmaService: TurmaService) { }
 
   ngOnInit(): void {
-    this.turmaService.getAllTurmas().subscribe((turmas) => { this.turmas = turmas })
+    this.turmaService.getAllTurmas().subscribe((turmas) => { this.turmas = turmas }, error => { this.turmas = [];this.msg = error.error.msg});
   }
 
   getOneTurma( nomeTurma: string ) {

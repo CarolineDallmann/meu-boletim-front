@@ -1,7 +1,7 @@
 <app-layout-principal>
 
     <app-card-conteudo>
-        <form [formGroup]="cadastroPessoa" (ngSubmit)="onSubmit()" class="container">
+        <form  [formGroup]="editarPessoa" (ngSubmit)="onSubmit()" class="container">
             <mat-grid-list cols="6" rowHeight="60px">
                 <fieldset>
                     <legend>Atribuições</legend>
@@ -38,7 +38,7 @@
                 <div fxLayout="row">
                     <mat-form-field appearance="legacy" class="spaceBetweenInput widthCep">
                         <mat-label>CEP</mat-label>
-                        <input matInput placeholder="Ex. 58051-830" name="cep" formControlName="cep" />
+                        <input matInput placeholder="Ex. 58051830" name="cep" formControlName="cep" />
                     </mat-form-field>
                     <mat-form-field appearance="legacy" class="spaceBetweenInput widthRua">
                         <mat-label>Rua</mat-label>
@@ -84,7 +84,7 @@
                     <mat-checkbox name="ativo" formControlName="ativo" [(ngModel)]="checked">Ativo</mat-checkbox>
                 </div>
             </div>
-            <div fxLayout="row" *ngIf="pessoa=='ALUNO'">
+            <div fxLayout="row" *ngIf="condicaoPessoa=='ALUNO'">
                 <fieldset>
                     <legend>Aluno</legend>
                     <div fxLayout="row">
@@ -124,7 +124,7 @@
                 </fieldset>
             </div>
 
-            <div fxLayout="row" *ngIf="pessoa=='PROFESSOR'">
+            <div fxLayout="row" *ngIf="condicaoPessoa=='PROFESSOR'">
                 <fieldset>
                     <legend>Professor</legend>
                     <div fxLayout="row">

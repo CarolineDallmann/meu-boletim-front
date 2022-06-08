@@ -28,14 +28,11 @@ export class CadastrarPessoaComponent implements OnInit {
   pessoa = '';
   listaResponsaveis: any = {};
 
-  path = window.location.pathname; 
+  path = window.location.pathname;
   tipo = this.path.split('/')[2]; 
 
   emailValidator = [Validators.maxLength(250), Validators.minLength(5), Validators.pattern(/.+@.+\..+/), Validators.required];
   senhaValidador = [Validators.pattern('^[0-9a-zA-Z]{8,}$'), Validators.required];
-  nome_maeValidator = [Validators.required];
-  turmaValidator = [Validators.required];
-  materiaValidator = [Validators.required];
 
   constructor(private fb: FormBuilder, private pessoaService: PessoaService, private turmaService: TurmaService, private materiaService: MateriaService) { }
 
@@ -65,18 +62,17 @@ export class CadastrarPessoaComponent implements OnInit {
       senha: ['', this.senhaValidador],
       ativo: [''],
       tipo_pessoa: [this.tipo, [Validators.required]],
-      nome_mae: ['', this.nome_maeValidator],
+      nome_mae: ['', [Validators.required]],
       nome_pai: [''],
-      responsavel: [''],
-      turmaSelecionada: ['', this.turmaValidator],
-      materia: ['', this.materiaValidator]
+      responsavel: ['', [Validators.required]],
+      turmaSelecionada: ['', [Validators.required]],
+      materia: ['', [Validators.required]]
     });
   }
 
   onSubmit() {
     this.cadastroPessoa.value.datanasc = this.dataFormat(this.cadastroPessoa.value.datanasc);
     this.captureIdResponsavel(this.cadastroPessoa.value.responsavel);
-    console.log(this.cadastroPessoa.value);
     //this.pessoaService.savePessoa(this.cadastroPessoa.value).subscribe(data => window.location.reload())
   }
 
@@ -89,7 +85,6 @@ export class CadastrarPessoaComponent implements OnInit {
 
   changeTipoPessoa(event: any) {
     this.pessoa = event.value;
-    this.cadastroPessoa.reset();
   }
 
   captureIdResponsavel(nomeResp: String) {

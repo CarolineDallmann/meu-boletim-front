@@ -6,6 +6,7 @@ export type Pessoa = {
     cep: string,
     rua: string,
     numero: number,
+    bairro: string,
     cidade: string,
     uf: string,
     telefone: string,

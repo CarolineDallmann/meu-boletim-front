@@ -25,18 +25,18 @@ export class BuscarPessoaComponent implements OnInit {
     this.filterTipoPessoa(this.tipoPessoa);
     this.pessoaService.getAllPessoas(this.pesquisar, this.tipoPessoa, false).subscribe(pessoa => { 
       this.pessoas = pessoa;
-    })
+    }, error => { this.pessoas = [];this.msg = error.err.message})
   }
 
   onNomeChange() {
-    this.pessoaService.getAllPessoas(this.pesquisar, this.tipoPessoa, false).subscribe(pessoa => { this.pessoas = pessoa })
+    this.pessoaService.getAllPessoas(this.pesquisar, this.tipoPessoa, false).subscribe(pessoa => { this.pessoas = pessoa }, error => { this.pessoas = [];this.msg = error.err.msg})
   }
 
   onInativoChange() {
     if(this.checkInitivo==true){
-      this.pessoaService.getAllPessoas('', this.tipoPessoa, true).subscribe(pessoa => { this.pessoas = pessoa })
+      this.pessoaService.getAllPessoas('', this.tipoPessoa, true).subscribe(pessoa => { this.pessoas = pessoa }, error => { this.pessoas = [];this.msg = error.error.msg})
     } else {
-      this.pessoaService.getAllPessoas('', this.tipoPessoa, false).subscribe(pessoa => { this.pessoas = pessoa })
+      this.pessoaService.getAllPessoas('', this.tipoPessoa, false).subscribe(pessoa => { this.pessoas = pessoa }, error => { this.pessoas = [];this.msg = error.error.msg})
     }
     
   }

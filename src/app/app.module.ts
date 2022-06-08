@@ -32,6 +32,7 @@ import { PessoaService } from './services/pessoa.service';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatRadioModule } from '@angular/material/radio';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { EditarPessoaComponent } from './editar-pessoa/editar-pessoa.component';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     FrequenciaComponent,
     TurmasComponent,
     CadastrarPessoaComponent,
-    BuscarPessoaComponent
+    BuscarPessoaComponent,
+    EditarPessoaComponent
   ],
   imports: [
     BrowserModule,
