@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Materia } from '../entities/materia.entity';
 import { Turma } from '../entities/turma.entity';
 import { MateriaService } from '../services/materia.service';
@@ -27,17 +28,17 @@ export class EditarPessoaComponent implements OnInit {
   materias: Materia[] = [];
   condicaoPessoa = '';
   listaResponsaveis: any = {};
-
-  path = window.location.pathname;
-  idPessoa = this.path.split('/')[2]; 
+  pessoaId = "";
 
   emailValidator = [Validators.maxLength(250), Validators.minLength(5), Validators.pattern(/.+@.+\..+/), Validators.required];
   senhaValidador = [Validators.pattern('^[0-9a-zA-Z]{8,}$'), Validators.required];
   public editPessoa: any;
 
-  constructor(private fb: FormBuilder, private pessoaService: PessoaService, private turmaService: TurmaService, private materiaService: MateriaService) { }
+  constructor(private fb: FormBuilder, private pessoaService: PessoaService, private turmaService: TurmaService, 
+    private materiaService: MateriaService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
+    this.pessoaId = this.route.snapshot.params['idPessoa'];
     this.loadPessoa();
     this.editarPessoa.value.tipo_pessoa = this.editarPessoa.value.tipo_pessoa
     this.turmaService.getAllTurmas().subscribe((turmas) => { this.turmas = turmas })
@@ -46,7 +47,7 @@ export class EditarPessoaComponent implements OnInit {
   }
 
   loadPessoa() {
-    this.pessoaService.getPessoaById(this.idPessoa).subscribe(pessoa => { 
+    this.pessoaService.getPessoaById(this.pessoaId).subscribe(pessoa => { 
       this.createForm(pessoa);
     })
   }
@@ -83,7 +84,6 @@ export class EditarPessoaComponent implements OnInit {
     this.editarPessoa.value.datanasc = this.dataFormat(this.editarPessoa.value.datanasc);
     this.captureIdResponsavel(this.editarPessoa.value.responsavel);
     console.log(this.editarPessoa.value)
-    //this.pessoaService.savePessoa(this.editarPessoa.value).subscribe(data => window.location.reload())
   }
 
   dataFormat(data: Date) {
@@ -109,7 +109,4 @@ export class EditarPessoaComponent implements OnInit {
     })
   }
 
-  ngOnLoad() {
-
-  }
 }

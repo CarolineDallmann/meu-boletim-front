@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Pessoa } from '../entities/pessoa.entity';
 import { PessoaService } from '../services/pessoa.service';
 
@@ -13,15 +14,15 @@ export class BuscarPessoaComponent implements OnInit {
   displayedColumnsAdultos: string[] = ['nome', 'telefone', 'editar'];
   pessoas: any = {};
   msg: string = '';
-  path = window.location.pathname; 
-  tipoPessoa = this.path.split('/')[1];
+  tipoPessoa = '';
   checkInitivo = false;
   pesquisar = '';
   tipo: string = '';
 
-  constructor(private pessoaService: PessoaService) { }
+  constructor(private pessoaService: PessoaService, private route: ActivatedRoute, private router: Router) { }
   
   ngOnInit(): void {
+    this.tipoPessoa = this.route.snapshot.url[0].path;
     this.filterTipoPessoa(this.tipoPessoa);
     this.pessoaService.getAllPessoas(this.pesquisar, this.tipoPessoa, false).subscribe(pessoa => { 
       this.pessoas = pessoa;
@@ -54,5 +55,9 @@ export class BuscarPessoaComponent implements OnInit {
     if (tipo == "secretaria"){
       this.tipoPessoa = "SECRETARIA";
     }
+  }
+
+  onClickEdit() {
+
   }
 }

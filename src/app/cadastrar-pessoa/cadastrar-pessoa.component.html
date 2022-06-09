@@ -84,7 +84,7 @@
                     <mat-checkbox name="ativo" formControlName="ativo" [(ngModel)]="checked">Ativo</mat-checkbox>
                 </div>
             </div>
-            <div fxLayout="row" *ngIf="pessoa=='ALUNO'">
+            <div fxLayout="row" *ngIf="condicaoPessoa=='ALUNO'">
                 <fieldset>
                     <legend>Aluno</legend>
                     <div fxLayout="row">
@@ -124,7 +124,7 @@
                 </fieldset>
             </div>
 
-            <div fxLayout="row" *ngIf="pessoa=='PROFESSOR'">
+            <div fxLayout="row" *ngIf="condicaoPessoa=='PROFESSOR'">
                 <fieldset>
                     <legend>Professor</legend>
                     <div fxLayout="row">
@@ -139,7 +139,7 @@
                     </div>
                 </fieldset>
             </div>
-            <app-button class="save-button">Salvar</app-button>
+            <app-button class="save-button" [disabled]="cadastroPessoa.invalid">Salvar</app-button>
         </form>
     </app-card-conteudo>
 </app-layout-principal>
