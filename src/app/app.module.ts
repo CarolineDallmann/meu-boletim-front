@@ -33,6 +33,7 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatRadioModule } from '@angular/material/radio';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { EditarPessoaComponent } from './editar-pessoa/editar-pessoa.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 @NgModule({
@@ -67,7 +68,8 @@ import { EditarPessoaComponent } from './editar-pessoa/editar-pessoa.component';
     FormsModule,
     ReactiveFormsModule,
     MatRadioModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    FlexLayoutModule
   ],
   providers: [
     TurmaService,

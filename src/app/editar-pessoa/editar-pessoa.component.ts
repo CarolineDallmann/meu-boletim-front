@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Materia } from '../entities/materia.entity';
 import { Turma } from '../entities/turma.entity';
@@ -32,7 +32,12 @@ export class EditarPessoaComponent implements OnInit {
 
   emailValidator = [Validators.maxLength(250), Validators.minLength(5), Validators.pattern(/.+@.+\..+/), Validators.required];
   senhaValidador = [Validators.pattern('^[0-9a-zA-Z]{8,}$'), Validators.required];
-  public editPessoa: any;
+  
+  nome_mae = new FormControl();
+  responsavel = new FormControl();
+  turmaSelecionada = new FormControl();
+  materia = new FormControl();
+  nome_pai = new FormControl();
 
   constructor(private fb: FormBuilder, private pessoaService: PessoaService, private turmaService: TurmaService, 
     private materiaService: MateriaService, private route: ActivatedRoute, private router: Router) { }
@@ -41,6 +46,7 @@ export class EditarPessoaComponent implements OnInit {
     this.pessoaId = this.route.snapshot.params['idPessoa'];
     this.loadPessoa();
     this.editarPessoa.value.tipo_pessoa = this.editarPessoa.value.tipo_pessoa
+    this.addSpecificControls(this.condicaoPessoa);
     this.turmaService.getAllTurmas().subscribe((turmas) => { this.turmas = turmas })
     this.materiaService.getAllMaterias().subscribe((materia) => { this.materias = materia})
     this.pessoaService.getAllPessoas('', 'RESPONSAVEL', true).subscribe(pessoa => {this.listaResponsaveis = pessoa});
@@ -68,12 +74,7 @@ export class EditarPessoaComponent implements OnInit {
       email: [pessoa.email, this.emailValidator],
       login: [pessoa.login, [Validators.required]],
       senha: [pessoa.senha, this.senhaValidador],
-      ativo: [pessoa.ativo],
-      nome_mae: [pessoa.nome_mae, [Validators.required]],
-      nome_pai: [pessoa.nome_pai],
-      responsavel: [pessoa.responsavel, [Validators.required]],
-      turmaSelecionada: [pessoa.turma, [Validators.required]],
-      materia: [pessoa.materia, [Validators.required]]
+      ativo: [pessoa.ativo]
     });
     this.condicaoPessoa = pessoa.tipo_pessoa;
     this.checked = pessoa.ativo;
@@ -95,6 +96,27 @@ export class EditarPessoaComponent implements OnInit {
 
   changeTipoPessoa(event: any) {
     this.condicaoPessoa = event.value;
+    this.addSpecificControls(this.condicaoPessoa);
+  }
+
+  addSpecificControls(tipoPessoa: string) {
+    if (tipoPessoa == 'ALUNO') {
+      this.nome_mae.setValidators([Validators.required]);
+      this.editarPessoa.addControl('nome_mae', this.nome_mae);
+
+      this.editarPessoa.addControl('nome_pai', this.nome_pai);
+
+      this.responsavel.setValidators([Validators.required]);
+      this.editarPessoa.addControl('responsavel', this.responsavel);
+
+      this.turmaSelecionada.setValidators([Validators.required]);
+      this.editarPessoa.addControl('turmaSelecionada', this.turmaSelecionada);
+
+    }
+    if (tipoPessoa == 'PROFESSOR') {
+      this.materia.setValidators([Validators.required]);
+      this.editarPessoa.addControl('materia', this.materia);
+    }
   }
 
   captureIdResponsavel(nomeResp: String) {
