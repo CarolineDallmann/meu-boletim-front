@@ -5,17 +5,20 @@ import { CadastrarPessoaComponent } from './cadastrar-pessoa/cadastrar-pessoa.co
 import { EditarPessoaComponent } from './editar-pessoa/editar-pessoa.component';
 import { FrequenciaComponent } from './frequencia/frequencia.component';
 import { LoginComponent } from './login/login.component';
+import { MateriaComponent } from './materia/materia.component';
 import { NotasLancamentoComponent } from './notas-lancamento/notas-lancamento.component';
 import { NotasComponent } from './notas/notas.component';
+import { OpcoesComponent } from './opcoes/opcoes.component';
 import { PrincipalComponent } from './principal/principal.component';
 import { TurmasComponent } from './turmas/turmas.component';
+import { VisulizacaoboletimComponent } from './visulizacaoboletim/visulizacaoboletim.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: '', component: LoginComponent },
-  { path: 'principal', component: PrincipalComponent },
+  { path: '', component: PrincipalComponent },
   { path: 'turmas', component: TurmasComponent },
-  { path: 'home', component: PrincipalComponent },
+  { path: 'materias', component: MateriaComponent },
+  { path: 'opcoes', component: OpcoesComponent },
   { path: 'notas', component: NotasComponent },
   { path: 'notas/lancamento', component: NotasLancamentoComponent },
   { path: 'frequencias', component: FrequenciaComponent },
@@ -25,6 +28,7 @@ const routes: Routes = [
   { path: 'responsaveis', component: BuscarPessoaComponent },
   { path: 'professores', component: BuscarPessoaComponent },
   { path: 'secretaria', component: BuscarPessoaComponent },
+  { path: 'boletim', component: VisulizacaoboletimComponent },
 ];
 
 @NgModule({

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { FrequenciaAlunoPayload, FrequenciaPayload, FrequenciaResponse } from '../entities/frequencia.entity';
+import { environment } from '../../environments/environment';
+import { FrequenciaPayload, FrequenciaResponse } from '../entities/frequencia.entity';
 import { Materia } from '../entities/materia.entity';
 import { Turma } from '../entities/turma.entity';
 import { FrequenciaService } from '../services/frequencia.service';
@@ -23,7 +24,8 @@ export class FrequenciaComponent implements OnInit {
   materias: Materia[] = []
   dataSelecionada = new Date()
   listaFrequencia: FrequenciaResponse[] = []
-  displayedColumns: string[] = ['aluno', 'frequencia'];
+  displayedColumns: string[] = ['aluno', 'frequencia']
+  maxDate = environment.datateste ? new Date(environment.datateste) : new Date()
 
   constructor(private turmaService: TurmaService, private materiaService: MateriaService,
     private frequenciaService: FrequenciaService, private snackBar: MatSnackBar) { }
@@ -102,9 +104,12 @@ export class FrequenciaComponent implements OnInit {
         }
       })
     }
-    this.frequenciaService.salvarFrequencia(body).subscribe((res) => {
-      this.snackBar.open(res.msg, undefined, { duration: 5000 })
-      this.search()
+    this.frequenciaService.salvarFrequencia(body).subscribe({
+      next: (res) => {
+        this.snackBar.open(res.msg, undefined, { duration: 5000 })
+        this.search()
+      },
+      error: (err) => { this.snackBar.open(err.error.msg, undefined, { duration: 5000 }) }
     })
   }
 

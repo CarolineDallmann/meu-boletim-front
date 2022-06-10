@@ -1,11 +1,11 @@
-<mat-toolbar>
-  <span>{{ title }}</span>
+<mat-toolbar >
+  <span>{{ title}}</span>
 </mat-toolbar>
 
 <div class="container">
-  <div class="esquerda">
+  <div class="esquerda" *ngIf="!hiddenMenu">
     <img src="../../../assets/logo.svg" alt="" />
-    <app-menu (navegateEvent)="setTitle($event)"></app-menu>
+    <app-menu (navegateEvent)="setTitle($event)" ></app-menu>
   </div>
 
   <div class="direita">

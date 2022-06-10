@@ -18,22 +18,29 @@ import { MateriaService } from './services/materia.service';
 import { NotaService } from './services/nota.service';
 import { MatTableModule } from '@angular/material/table';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MateriaComponent } from './materia/materia.component';
 import { TurmasComponent } from './turmas/turmas.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NotasLancamentoComponent } from './notas-lancamento/notas-lancamento.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { FrequenciaComponent } from './frequencia/frequencia.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FrequenciaService } from './services/frequencia.service';
 import { CadastrarPessoaComponent } from './cadastrar-pessoa/cadastrar-pessoa.component';
 import { BuscarPessoaComponent } from './buscar-pessoa/buscar-pessoa.component';
 import { PessoaService } from './services/pessoa.service';
-import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatRadioModule } from '@angular/material/radio';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { EditarPessoaComponent } from './editar-pessoa/editar-pessoa.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { VisulizacaoboletimComponent } from './visulizacaoboletim/visulizacaoboletim.component';
+import { BoletimVisualizacaoService } from './services/boletim-visualizacao.service';
+import { OpcoesComponent } from './opcoes/opcoes.component';
+import { SerieDeParaPipe } from './pipes/serie-de-para.pipe';
+import { CheckNotaPipe } from './pipes/check-nota.pipe';
+import { ResultadoBoletimPipe } from './pipes/resultado-boletim.pipe';
+import { LoginService } from './services/login.service';
 
 
 @NgModule({
@@ -42,12 +49,19 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     LoginComponent,
     PrincipalComponent,
     NotasComponent,
+    MateriaComponent,
     NotasLancamentoComponent,
     FrequenciaComponent,
     TurmasComponent,
     CadastrarPessoaComponent,
     BuscarPessoaComponent,
-    EditarPessoaComponent
+    EditarPessoaComponent,
+    OpcoesComponent,
+    TurmasComponent,
+    VisulizacaoboletimComponent,
+    SerieDeParaPipe,
+    CheckNotaPipe,
+    ResultadoBoletimPipe,
   ],
   imports: [
     BrowserModule,
@@ -55,6 +69,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     BrowserAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
+    ReactiveFormsModule,
     MatButtonModule,
     LayoutModule,
     MatSelectModule,
@@ -77,7 +92,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     NotaService,
     FrequenciaService,
     PessoaService,
-    {provide: MAT_DATE_LOCALE, useValue: 'pt-BR'}
+    BoletimVisualizacaoService,
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
+    LoginService,
   ],
   bootstrap: [AppComponent],
 })

@@ -5,6 +5,8 @@ import {
   Output,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DataStoreService } from 'src/app/data-storage';
+import { TipoPessoa } from 'src/app/enums/tipo-pesssoa.enum';
 
 type Menu = {
   path: string;
@@ -22,22 +24,37 @@ export class MenuComponent implements AfterContentChecked {
   @Output()
   navegateEvent = new EventEmitter<string>();
 
-  itensMenu: Menu[] = [
-    { path: 'alunos', title: 'Alunos' },
-    { path: 'responsaveis', title: 'Responsáveis' },
-    { path: 'professores', title: 'Professores' },
-    { path: 'secretaria', title: 'Secretaria' },
-    { path: 'materias', title: 'Matérias' },
-    { path: 'turmas', title: 'Turmas' },
-    { path: 'notas', title: 'Notas' },
-    { path: 'frequencias', title: 'Frequências' },
-    { path: 'opcoes', title: 'Opções' },
-    { path: 'sair', title: 'Sair' },
-  ];
-  constructor(private router: Router, private route: ActivatedRoute) {
+  itensMenu: Menu[] = [];
+
+  constructor(private router: Router, private route: ActivatedRoute, private dataStorage: DataStoreService) {
     this.route.url.subscribe(e => {
-      this.currentRoute = e[0].path;
+      if (e[0]) {
+        this.currentRoute = e[0].path;
+      }
     });
+
+    this.dataStorage.usuarioConectado.subscribe((usuarioConectado) => {
+      if (usuarioConectado?.tipoPessoa === TipoPessoa.PROFESSOR) {
+        this.itensMenu = [
+          { path: 'notas', title: 'Notas' },
+          { path: 'frequencias', title: 'Frequências' },
+        ]
+      }
+      if (usuarioConectado?.tipoPessoa === TipoPessoa.SECRETARIA) {
+        this.itensMenu = [
+          { path: 'alunos', title: 'Alunos' },
+          { path: 'materia', title: 'Matérias' },
+          { path: 'responsaveis', title: 'Responsáveis' },
+          { path: 'professores', title: 'Professores' },
+          { path: 'secretaria', title: 'Secretaria' },
+          { path: 'materias', title: 'Matérias' },
+          { path: 'turmas', title: 'Turmas' },
+          { path: 'notas', title: 'Notas' },
+          { path: 'frequencias', title: 'Frequências' },
+          { path: 'opcoes', title: 'Opções' }
+        ]
+      }
+    })
   }
 
   ngAfterContentChecked() {
@@ -48,5 +65,9 @@ export class MenuComponent implements AfterContentChecked {
 
   navegate(menu: Menu) {
     this.router.navigate([menu.path]);
+  }
+
+  sairSistema(){
+    this.dataStorage.updateUsuario(undefined)
   }
 }
