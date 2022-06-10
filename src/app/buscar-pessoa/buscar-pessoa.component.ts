@@ -12,7 +12,7 @@ export class BuscarPessoaComponent implements OnInit {
 
   displayedColumnsAlunos: string[] = ['nome', 'serie', 'turma', 'turno', 'editar'];
   displayedColumnsAdultos: string[] = ['nome', 'telefone', 'editar'];
-  pessoas: any = {};
+  pessoas: any = [];
   msg: string = '';
   tipoPessoa = '';
   checkInitivo = false;
@@ -25,19 +25,25 @@ export class BuscarPessoaComponent implements OnInit {
     this.tipoPessoa = this.route.snapshot.url[0].path;
     this.filterTipoPessoa(this.tipoPessoa);
     this.pessoaService.getAllPessoas(this.pesquisar, this.tipoPessoa, false).subscribe(pessoa => { 
-      this.pessoas = pessoa;
-    }, error => { this.pessoas = [];this.msg = error.err.message})
+      this.pessoas = pessoa.sort((a, b) => a.nome.localeCompare(b.nome));
+    })
   }
 
   onNomeChange() {
-    this.pessoaService.getAllPessoas(this.pesquisar, this.tipoPessoa, false).subscribe(pessoa => { this.pessoas = pessoa }, error => { this.pessoas = [];this.msg = error.err.msg})
+    this.pessoaService.getAllPessoas(this.pesquisar, this.tipoPessoa, false).subscribe(pessoa => { 
+      this.pessoas = pessoa.sort((a, b) => a.nome.localeCompare(b.nome));
+    })
   }
 
   onInativoChange() {
     if(this.checkInitivo==true){
-      this.pessoaService.getAllPessoas('', this.tipoPessoa, true).subscribe(pessoa => { this.pessoas = pessoa }, error => { this.pessoas = [];this.msg = error.error.msg})
+      this.pessoaService.getAllPessoas('', this.tipoPessoa, true).subscribe(pessoa => { 
+        this.pessoas = pessoa.sort((a, b) => a.nome.localeCompare(b.nome));
+      })
     } else {
-      this.pessoaService.getAllPessoas('', this.tipoPessoa, false).subscribe(pessoa => { this.pessoas = pessoa }, error => { this.pessoas = [];this.msg = error.error.msg})
+      this.pessoaService.getAllPessoas('', this.tipoPessoa, false).subscribe(pessoa => { 
+        this.pessoas = pessoa.sort((a, b) => a.nome.localeCompare(b.nome));
+      })
     }
     
   }
@@ -57,7 +63,15 @@ export class BuscarPessoaComponent implements OnInit {
     }
   }
 
-  onClickEdit() {
+  editar(pessoa: Pessoa) {
+    this.router.navigate(['/editar/'], {
+      queryParams: { pessoaId: pessoa.id }
+    })
+  }
 
+  cadastrar(tipoPessoa: string) {
+    this.router.navigate(['/cadastro/'], {
+      queryParams: { tipoPessoa: tipoPessoa }
+    })
   }
 }

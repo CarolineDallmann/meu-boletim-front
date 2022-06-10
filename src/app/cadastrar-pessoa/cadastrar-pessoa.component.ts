@@ -28,7 +28,7 @@ export class CadastrarPessoaComponent implements OnInit {
   materias: Materia[] = [];
   condicaoPessoa = '';
   listaResponsaveis: any = {};
-  tipo = '';
+  tipo: any;
 
   emailValidator = [Validators.maxLength(250), Validators.minLength(5), Validators.pattern(/.+@.+\..+/), Validators.required];
   senhaValidador = [Validators.pattern('^[0-9a-zA-Z]{8,}$'), Validators.required];
@@ -41,7 +41,7 @@ export class CadastrarPessoaComponent implements OnInit {
   constructor(private fb: FormBuilder, private pessoaService: PessoaService, private turmaService: TurmaService, private materiaService: MateriaService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.tipo = this.route.snapshot.url[1].path;
+    this.tipo = this.route.snapshot.queryParamMap.get('tipoPessoa');
     this.checked = true;
     this.turmaService.getAllTurmas().subscribe((turmas) => { this.turmas = turmas })
     this.materiaService.getAllMaterias().subscribe((materia) => { this.materias = materia })
@@ -93,7 +93,6 @@ export class CadastrarPessoaComponent implements OnInit {
 
   addSpecificControls(tipoPessoa: string) {
     if (tipoPessoa == 'ALUNO') {
-      this.nome_mae.setValidators([Validators.required]);
       this.cadastroPessoa.addControl('nome_mae', this.nome_mae);
 
       this.cadastroPessoa.addControl('nome_pai', this.nome_pai);

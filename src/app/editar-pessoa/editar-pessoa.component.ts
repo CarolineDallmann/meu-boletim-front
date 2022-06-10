@@ -28,7 +28,7 @@ export class EditarPessoaComponent implements OnInit {
   materias: Materia[] = [];
   condicaoPessoa = '';
   listaResponsaveis: any = {};
-  pessoaId = "";
+  pessoaId: any;
 
   emailValidator = [Validators.maxLength(250), Validators.minLength(5), Validators.pattern(/.+@.+\..+/), Validators.required];
   senhaValidador = [Validators.pattern('^[0-9a-zA-Z]{8,}$'), Validators.required];
@@ -43,7 +43,7 @@ export class EditarPessoaComponent implements OnInit {
     private materiaService: MateriaService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
-    this.pessoaId = this.route.snapshot.params['idPessoa'];
+    this.pessoaId = this.route.snapshot.queryParamMap.get('pessoaId');
     this.loadPessoa();
     this.editarPessoa.value.tipo_pessoa = this.editarPessoa.value.tipo_pessoa
     this.addSpecificControls(this.condicaoPessoa);
@@ -101,7 +101,6 @@ export class EditarPessoaComponent implements OnInit {
 
   addSpecificControls(tipoPessoa: string) {
     if (tipoPessoa == 'ALUNO') {
-      this.nome_mae.setValidators([Validators.required]);
       this.editarPessoa.addControl('nome_mae', this.nome_mae);
 
       this.editarPessoa.addControl('nome_pai', this.nome_pai);

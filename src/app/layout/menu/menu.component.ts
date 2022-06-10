@@ -43,7 +43,6 @@ export class MenuComponent implements AfterContentChecked {
       if (usuarioConectado?.tipoPessoa === TipoPessoa.SECRETARIA) {
         this.itensMenu = [
           { path: 'alunos', title: 'Alunos' },
-          { path: 'materia', title: 'Matérias' },
           { path: 'responsaveis', title: 'Responsáveis' },
           { path: 'professores', title: 'Professores' },
           { path: 'secretaria', title: 'Secretaria' },
