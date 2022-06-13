@@ -12,6 +12,7 @@ import { ButtonComponent } from './button/button.component';
 import { PgemptyComponent } from './pgempty/pgempty.component';
 import { RouterModule } from '@angular/router';
 import { FieldsetComponent } from './fieldset/fieldset.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { FieldsetComponent } from './fieldset/fieldset.component';
     MatListModule,
     MatCardModule,
     MatButtonModule,
-    RouterModule
+    RouterModule,
+    FlexLayoutModule
   ],
   exports: [
     LayoutPrincipalComponent,

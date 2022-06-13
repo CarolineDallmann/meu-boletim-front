@@ -7,6 +7,7 @@ import { NotaService } from '../services/nota.service';
 import { TurmaService } from '../services/turma.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DataStoreService } from '../data-storage';
 
 @Component({
   selector: 'app-notas',
@@ -21,10 +22,13 @@ export class NotasComponent implements OnInit {
   materias: Materia[] = []
   atividades: Atividade[] = []
   displayedColumns: string[] = ['atividade', 'data', 'acoes'];
+  isSmall = false
 
   constructor(private turmaService: TurmaService, private materiaService: MateriaService,
     private notaService: NotaService, private snackBar: MatSnackBar, private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router, private dataStorage: DataStoreService) {
+    this.dataStorage.isSmall.subscribe((e) => this.isSmall = e)
+  }
 
   ngOnInit(): void {
     this.turmaService.getAllTurmas().subscribe((turmas) => { this.turmas = turmas })
