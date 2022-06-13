@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Turma, TurmaPayload } from '../entities/turma.entity';
 import { TurmaService } from '../services/turma.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -16,7 +17,8 @@ export class TurmasComponent implements OnInit {
   displayedColumns: string[] = ['nome', 'anoLetivo', 'turno', 'serie', 'acoes'];
   turmaSelecionada?: TurmaPayload
 
-  constructor(private turmaService: TurmaService, private snackBar: MatSnackBar) { }
+  constructor(private turmaService: TurmaService, private snackBar: MatSnackBar,
+    private route: ActivatedRoute,private router: Router) { }
 
   ngOnInit(): void {
     this.turmaService.getAllTurmas().subscribe((turmas) => { this.turmas = turmas })
@@ -26,8 +28,24 @@ export class TurmasComponent implements OnInit {
     this.turmaService.getOneTurma(nomeTurma).subscribe(turma => { this.turmas = turma }, error => { this.turmas = [];this.msg = error.error.msg});
   }
 
+  salvar(){
+    if(this.turmaSelecionada){
+      this.turmaService.salvarTurma(this.turmaSelecionada).subscribe((res) => {
+        this.snackBar.open(res.msg, undefined, { duration: 5000})
+        this.turmaSelecionada = undefined
+        this.search
+      })
+    }
+  }
+
+  navegarNovaTurma(){
+    this.router.navigate(['/turmas/lancamento'])
+  }
+
   editar(turma: Turma){
-    this.turmaSelecionada = turma
+    this.router.navigate(['turmas/lancamento'], {
+      queryParams: {turmaId: turma.id}
+    })
   }
 
   search(){
