@@ -24,10 +24,10 @@ export class TurmasLancamentoComponent implements OnInit {
   serieSelecionada = ''
   nome: string[] = []
   anoLetivo: number[] = []
-  turnos: string[] = Object.values(Turno)
-  series: string[] = Object.values(Serie)
+  tipoTurnos: string[] = Object.values(Turno)
+  tipoSeries: string[] = Object.values(Serie)
 
-  constructor(  private snackBar: MatSnackBar, private formBuilder: FormBuilder,) { }
+  constructor(private snackBar: MatSnackBar, private formBuilder: FormBuilder,) { }
 
   ngOnInit(): void {
   }
