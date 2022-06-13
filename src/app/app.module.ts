@@ -21,6 +21,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MateriaComponent } from './materia/materia.component';
 import { TurmasComponent } from './turmas/turmas.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { NotasLancamentoComponent } from './notas-lancamento/notas-lancamento.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
@@ -63,6 +64,7 @@ import { LoginService } from './services/login.service';
     LayoutModule,
     MatSelectModule,
     MatGridListModule,
+    FlexLayoutModule,
     HttpClientModule,
     MatTableModule,
     MatSnackBarModule,

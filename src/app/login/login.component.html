@@ -1,22 +1,24 @@
-<div class="logoPrincipal">
-    <img src="../../assets/meu boletim.svg" alt="">
+<div class="logoPrincipal" [ngStyle.sm]="centerSmall" [ngStyle.xs]="centerSmall">
+    <img src="../../assets/meu boletim.svg" [ngStyle.xs]="{'width': '100%'}" alt="">
 </div>
-<div class="fundo">
-    <img src="../../assets/fundo.svg" alt="">
+
+<div class="fundo" fxHide.xs fxHide.sm>
+    <img src="../../assets/fundo.svg"  alt="">
 </div>
-<div class="boxExternaLogin">
+
+<div class="boxExternaLogin" [ngStyle.sm]="centerSmall" [ngStyle.xs]="centerXSmall">
     <div class="caixaInternaLogin">
         <mat-form-field class="example-full-width" appearance="outline" style=" width: 80%;">
-            <input matInput placeholder="Login" (input)="onLoginChange($event)" (keypress)="keypress($event)">
+            <input matInput placeholder="Login" (input)="onLoginChange($event)" (keypress)="keypress($event)" autocomplete="off">
         </mat-form-field>
 
         <mat-form-field class="example-full-width" appearance="outline" style=" width: 80%;">
-            <input matInput placeholder="Senha" (input)="onSenhaChange($event)" type="password" (keypress)="keypress($event)">
+            <input matInput placeholder="Senha" (input)="onSenhaChange($event)" type="password"
+                (keypress)="keypress($event)" autocomplete="off">
         </mat-form-field>
 
-        <button mat-button style="background-color: #d14b5f; color: white; width: 80%; height: 55px;" (click)="login()"
-           >ENTRAR</button>
+        <button mat-button style="background-color: #d14b5f; color: white; width: 80%; height: 55px;"
+            (click)="login()">ENTRAR</button>
         <span> {{erro}} </span>
     </div>
-
 </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { environment } from '../../environments/environment';
+import { DataStoreService } from '../data-storage';
 import { FrequenciaPayload, FrequenciaResponse } from '../entities/frequencia.entity';
 import { Materia } from '../entities/materia.entity';
 import { Turma } from '../entities/turma.entity';
@@ -26,9 +27,13 @@ export class FrequenciaComponent implements OnInit {
   listaFrequencia: FrequenciaResponse[] = []
   displayedColumns: string[] = ['aluno', 'frequencia']
   maxDate = environment.datateste ? new Date(environment.datateste) : new Date()
+  isSmall = false
 
   constructor(private turmaService: TurmaService, private materiaService: MateriaService,
-    private frequenciaService: FrequenciaService, private snackBar: MatSnackBar) { }
+    private frequenciaService: FrequenciaService, private snackBar: MatSnackBar, 
+    private dataStorage: DataStoreService) {
+      this.dataStorage.isSmall.subscribe((e)=>this.isSmall = e)
+     }
 
   ngOnInit(): void {
     this.turmaService.getAllTurmas().subscribe((turmas) => { this.turmas = turmas })

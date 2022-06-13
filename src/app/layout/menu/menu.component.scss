@@ -6,8 +6,24 @@
   background-color: #ffefab;
 }
 
-.mat-selection-list{
-    text-align: center;
+.mat-selection-list {
+  text-align: center;
 }
 
+::ng-deep.mat-list-text{
+  align-items: center;
+  padding: 0px !important;
+}
 
+img{
+  width: 32px;
+}
+
+::ng-deep .mat-list-base.small {
+   .mat-list-item,
+  .mat-list-option {
+    .mat-list-item-content.mat-list-item-content-reverse {
+      padding: 0px 5px;
+    }
+  }
+}
