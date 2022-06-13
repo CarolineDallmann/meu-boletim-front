@@ -1,0 +1,60 @@
+<app-layout-principal>
+    <app-card-conteudo class="card">
+
+        <form [formGroup]="form">
+            <mat-grid-list cols="4" rowHeight="60px">
+
+                <mat-grid-tile colspan="1">
+                    <mat-form-field appearance="legacy" style="margin-bottom: -1.25em; width: 160px;">
+                        <mat-label>Nome</mat-label>
+                        <input matInput formControlName="nomeTurma">
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile colspan="1">
+                    <mat-form-field appearance="legacy" style="margin-bottom: -1.25em; width: 160px;">
+                        <mat-label>Ano Letivo</mat-label>
+                        <input matInput formControlName="anoTurma">
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile colspan="1">
+                    <mat-form-field appearance="legacy" style="margin-bottom: -1.25em; width: 160px;">
+                        <mat-label>Turno</mat-label>
+                        <mat-select>
+                            <mat-option>
+                                opcoes aqui                               
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>  
+                </mat-grid-tile>
+    
+                <mat-grid-tile colspan="1">
+                    <mat-form-field appearance="legacy" style="margin-bottom: -1.25em; width: 160px;">
+                        <mat-label>Serie</mat-label>
+                        <mat-select>
+                            <mat-option>
+                                opcoes aqui                                
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>  
+                </mat-grid-tile>
+
+
+            </mat-grid-list>
+
+
+
+
+        </form>
+
+
+
+
+
+
+
+
+        <app-button (click)="salvar()">Salvar</app-button>
+    </app-card-conteudo>
+</app-layout-principal>
