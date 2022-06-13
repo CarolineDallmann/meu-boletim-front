@@ -34,6 +34,7 @@ import { SerieDeParaPipe } from './pipes/serie-de-para.pipe';
 import { CheckNotaPipe } from './pipes/check-nota.pipe';
 import { ResultadoBoletimPipe } from './pipes/resultado-boletim.pipe';
 import { LoginService } from './services/login.service';
+import { TurmasLancamentoComponent } from './turmas-lancamento/turmas-lancamento.component';
 
 
 @NgModule({
@@ -51,6 +52,7 @@ import { LoginService } from './services/login.service';
     SerieDeParaPipe,
     CheckNotaPipe,
     ResultadoBoletimPipe,
+    TurmasLancamentoComponent,
   ],
   imports: [
     BrowserModule,

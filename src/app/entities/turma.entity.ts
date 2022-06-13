@@ -13,3 +13,11 @@ export type TurmaPayload = {
     id?: string,
     nome: string
 }
+
+export type SalvarTurmaPayload = {
+    turmaId?: string,
+    nome: string,
+    anoLetivo: number,
+    turno: string,
+    serie: string
+}
