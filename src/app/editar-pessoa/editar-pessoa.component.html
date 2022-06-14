@@ -1,8 +1,9 @@
 <app-layout-principal>
 
     <app-card-conteudo>
+        <ng-container *ngIf="isLoad">
         <form [formGroup]="editarPessoa" (ngSubmit)="onSubmit()" class="container">
-            <div fxLayout="row">
+            <div fxLayout="row" style="margin-bottom: 15px;">
                 <fieldset fxFlex=100>
                     <legend>Atribuições</legend>
                     <mat-radio-group formControlName="tipo_pessoa" (change)="changeTipoPessoa($event)">
@@ -12,7 +13,7 @@
                     </mat-radio-group>
                 </fieldset>
             </div>
-            <div fxLayout="column">
+            <div fxLayout="column" style="margin-bottom: 15px;">
                 <div fxLayout="row" fxLayoutGap="15px">
                     <mat-form-field appearance="legacy" fxFlex=60>
                         <mat-label>Nome</mat-label>
@@ -75,9 +76,11 @@
                         <mat-label>Login</mat-label>
                         <input matInput name="login" formControlName="login" />
                     </mat-form-field>
-                    <mat-form-field appearance="legacy" fxFlex=20>
+                    <mat-form-field appearance="legacy" fxFlex=20 >
                         <mat-label>Senha</mat-label>
-                        <input matInput type="password" name="senha" formControlName="senha" />
+                        <input matInput type="password" formControlName="senha" (change)="changeSenha()"/>
+                        <mat-hint fxFlex=80 fxLayoutAlign="start"><strong>Clique acima para alterar senha</strong> </mat-hint>
+                        <mat-hint fxFlex=10 fxLayoutAlign="end"><i class="material-icons" style="font-size:15px;" [title]="configSenha">info</i></mat-hint>
                     </mat-form-field>
                     <mat-checkbox name="ativo" formControlName="ativo" [(ngModel)]="checked" fxFlex=10>Ativo
                     </mat-checkbox>
@@ -100,7 +103,7 @@
                         <mat-form-field appearance="legacy" fxFlex=25>
                             <mat-label>Responsável</mat-label>
                             <input matInput type="text" name="responsavel" formControlName="responsavel"
-                                [matAutocomplete]="autoResp">
+                                [matAutocomplete]="autoResp" required>
                             <mat-autocomplete #autoResp="matAutocomplete">
                                 <mat-option *ngFor="let resp of listaResponsaveis" [value]="resp.nome">
                                     {{resp.nome | titlecase}}
@@ -111,7 +114,7 @@
                     <div fxLayout="row">
                         <mat-form-field appearance="legacy" fxFlex=25>
                             <mat-label>Turma</mat-label>
-                            <mat-select name="turmaSelecionada" formControlName="turmaSelecionada">
+                            <mat-select name="turmaSelecionada" formControlName="turmaSelecionada" required>
                                 <mat-option *ngFor="let turma of turmas" [value]="turma.id">
                                     {{turma.serie | titlecase}} - Turma {{turma.nome | titlecase}} - {{turma.turno |
                                     titlecase}}
@@ -138,7 +141,8 @@
                     </div>
                 </fieldset>
             </div>
-            <app-button class="save-button" [disabled]="editarPessoa.invalid">Salvar</app-button>
+            <app-button class="save-button" [disabled]="editarPessoa.invalid">Alterar</app-button>
         </form>
+    </ng-container>
     </app-card-conteudo>
 </app-layout-principal>

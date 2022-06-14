@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Materia } from '../entities/materia.entity';
 import { Turma } from '../entities/turma.entity';
+import { Genero } from '../enums/genero.enum';
 import { MateriaService } from '../services/materia.service';
 import { PessoaService } from '../services/pessoa.service';
 import { TurmaService } from '../services/turma.service';
@@ -15,7 +17,7 @@ import { TurmaService } from '../services/turma.service';
 export class CadastrarPessoaComponent implements OnInit {
 
   cadastroPessoa: FormGroup = new FormGroup({});
-  generos: string[] = ['FEMININO', 'MASCULINO', 'OUTRO'];
+  generos: string[] = Object.values(Genero);
   generoSelecionado: string = '';
   checked: boolean = false;
   tipoPessoa: Array<any> = [
@@ -30,15 +32,17 @@ export class CadastrarPessoaComponent implements OnInit {
   listaResponsaveis: any = {};
   tipo: any;
 
-  emailValidator = [Validators.maxLength(250), Validators.minLength(5), Validators.pattern(/.+@.+\..+/), Validators.required];
-  senhaValidador = [Validators.pattern('^[0-9a-zA-Z]{8,}$'), Validators.required];
-  nome_mae = new FormControl();
-  responsavel = new FormControl();
-  turmaSelecionada = new FormControl();
-  materia = new FormControl();
-  nome_pai = new FormControl();
+  configSenha: string = `A senha deve conter, no mínino, 8 caracteres da seguinte forma:
+    - Pelo menos 1 letra MAIÚSCULA;
+    - Pelo menos 1 letra minúscula;
+    - Pelo menos 1 número;
+    - E caracter especial do tipo: !@#$`;
 
-  constructor(private fb: FormBuilder, private pessoaService: PessoaService, private turmaService: TurmaService, private materiaService: MateriaService, private route: ActivatedRoute) { }
+  emailValidator = [Validators.maxLength(250), Validators.minLength(5), Validators.pattern(/.+@.+\..+/), Validators.required];
+  senhaValidador = [Validators.pattern('^[0-9a-zA-Z!@#$]{8,}$'), Validators.required];
+
+  constructor(private fb: FormBuilder, private pessoaService: PessoaService, private turmaService: TurmaService, private materiaService: MateriaService, 
+    private route: ActivatedRoute, private router: Router, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.tipo = this.route.snapshot.queryParamMap.get('tipoPessoa');
@@ -47,7 +51,6 @@ export class CadastrarPessoaComponent implements OnInit {
     this.materiaService.getAllMaterias().subscribe((materia) => { this.materias = materia })
     this.createForm();
     this.condicaoPessoa = this.cadastroPessoa.value.tipo_pessoa;
-    this.addSpecificControls(this.condicaoPessoa);
     this.pessoaService.getAllPessoas('', 'RESPONSAVEL', true).subscribe(pessoa => { this.listaResponsaveis = pessoa })
   }
 
@@ -67,7 +70,12 @@ export class CadastrarPessoaComponent implements OnInit {
       login: ['', [Validators.required]],
       senha: ['', this.senhaValidador],
       ativo: [''],
-      tipo_pessoa: [this.tipo, [Validators.required]]
+      tipo_pessoa: [this.tipo, [Validators.required]],
+      nome_mae: [''],
+      nome_pai: [''],
+      responsavel: [''],
+      turmaSelecionada: [''],
+      materia: ['']
     });
   }
 
@@ -75,7 +83,25 @@ export class CadastrarPessoaComponent implements OnInit {
     this.cadastroPessoa.value.datanasc = this.dataFormat(this.cadastroPessoa.value.datanasc);
     this.captureIdResponsavel(this.cadastroPessoa.value.responsavel);
     if(this.cadastroPessoa.valid) {
-      this.pessoaService.savePessoa(this.cadastroPessoa.value).subscribe(data => window.location.reload())
+      this.pessoaService.savePessoa(this.cadastroPessoa.value).subscribe({
+        next: (res) => {
+          this.snackBar.open(res.msg, undefined, { duration: 4000 })
+          setTimeout(() => {
+            if(this.cadastroPessoa.value.tipo_pessoa === 'ALUNO'){
+              this.router.navigate(['/alunos'])
+            } else if(this.cadastroPessoa.value.tipo_pessoa === 'RESPONSAVEL') {
+              this.router.navigate(['/responsaveis'])
+            } else if(this.cadastroPessoa.value.tipo_pessoa === 'PROFESSOR') {
+              this.router.navigate(['/professores'])
+            } else if(this.cadastroPessoa.value.tipo_pessoa === 'SECRETARIA') {
+              this.router.navigate(['/secretaria'])
+            }
+          }, 4000);
+        },
+        error: (err) => {
+          this.snackBar.open(err.error.msg, undefined, { duration: 5000 })
+        }
+      })
     }
   }
 
@@ -88,27 +114,8 @@ export class CadastrarPessoaComponent implements OnInit {
 
   changeTipoPessoa(event: any) {
     this.condicaoPessoa = event.value;
-    this.addSpecificControls(this.condicaoPessoa);
   }
 
-  addSpecificControls(tipoPessoa: string) {
-    if (tipoPessoa == 'ALUNO') {
-      this.cadastroPessoa.addControl('nome_mae', this.nome_mae);
-
-      this.cadastroPessoa.addControl('nome_pai', this.nome_pai);
-
-      this.responsavel.setValidators([Validators.required]);
-      this.cadastroPessoa.addControl('responsavel', this.responsavel);
-
-      this.turmaSelecionada.setValidators([Validators.required]);
-      this.cadastroPessoa.addControl('turmaSelecionada', this.turmaSelecionada);
-
-    }
-    if (tipoPessoa == 'PROFESSOR') {
-      this.materia.setValidators([Validators.required]);
-      this.cadastroPessoa.addControl('materia', this.materia);
-    }
-  }
 
   captureIdResponsavel(nomeResp: String) {
     this.pessoaService.getAllPessoas('', 'RESPONSAVEL', true).subscribe(pessoa => {

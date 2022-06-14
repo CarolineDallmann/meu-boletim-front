@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { MsgResponse } from '../entities/msg-response.entity';
 import { Pessoa } from '../entities/pessoa.entity';
 
 @Injectable({
@@ -16,10 +17,14 @@ export class PessoaService {
   }
 
   savePessoa(pessoa: Pessoa) {
-    return this.http.post<Pessoa>(`${environment.api}pessoas`, pessoa);
+    return this.http.post<MsgResponse>(`${environment.api}pessoas`, pessoa);
   }
 
   getPessoaById(id: string) {
     return this.http.get<Observable<any>>(`${environment.api}pessoas/${id}`);
+  }
+
+  updatePessoa(pessoa: Pessoa, pessoaId: string) {
+    return this.http.put<MsgResponse>(`${environment.api}pessoas/${pessoaId}`, pessoa);
   }
 }
