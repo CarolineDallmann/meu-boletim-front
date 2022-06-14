@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '../../environments/environment';
+import { DataStoreService } from '../data-storage';
 import { Atividade, NotaAtividade, SalvarAtividadePayload } from '../entities/atividade.entity';
 import { ConfigEscola } from '../entities/boletim.entity';
 import { Materia } from '../entities/materia.entity';
@@ -30,10 +31,13 @@ export class NotasLancamentoComponent implements OnInit {
   displayedColumns: string[] = ['aluno', 'nota'];
   atividadeId: string | null = null
   maxDate = environment.datateste ? new Date(environment.datateste) : new Date()
+  isSmall = false
 
   constructor(private turmaService: TurmaService, private materiaService: MateriaService,
     private notaService: NotaService, private snackBar: MatSnackBar, private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router, private dataStorage: DataStoreService) {
+      this.dataStorage.isSmall.subscribe((e) => this.isSmall = e)
+     }
 
   ngOnInit(): void {
     this.turmaService.getAllTurmas().subscribe((turmas) => { this.turmas = turmas })

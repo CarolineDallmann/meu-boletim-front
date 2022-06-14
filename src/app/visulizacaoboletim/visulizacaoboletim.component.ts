@@ -28,9 +28,12 @@ export class VisulizacaoboletimComponent implements OnInit {
   fechamentos = { bim1: '', bim2: '', bim3: '', bim4: '', final: ResultadoBoletim.INDETERMINADO }
   ehResponsavel = true
   isEmpty = true
+  isSmall = false
 
   constructor(private boletimService: BoletimVisualizacaoService, private router: Router, 
-    private materiaService: MateriaService, private dataStorage: DataStoreService) { }
+    private materiaService: MateriaService, private dataStorage: DataStoreService) {
+      this.dataStorage.isSmall.subscribe((e) => this.isSmall = e)
+     }
 
   ngOnInit(): void {
     const pessoa: PessoaLocalStorage = JSON.parse(localStorage.getItem('usuario') || '{}')

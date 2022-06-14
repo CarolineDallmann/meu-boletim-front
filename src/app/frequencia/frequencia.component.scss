@@ -8,13 +8,22 @@
   background-color: #153A84;
 }
 
-app-button {
+::ng-deep app-button[ng-reflect-full-size="true"] .mat-raised-button {
+  left: 12px;
+
+  &.full-size {
+    width: auto;
+  }
+}
+
+::ng-deep app-button .mat-raised-button {
   position: absolute;
   right: 12px;
   bottom: 12px;
-
 }
 
-::ng-deep .mat-select-content, ::ng-deep .mat-option{
-  width:100% !important;;
+::ng-deep .mat-select-content,
+::ng-deep .mat-option {
+  width: 100% !important;
+  ;
 }

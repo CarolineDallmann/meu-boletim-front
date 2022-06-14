@@ -3,6 +3,10 @@
   color: white;
 }
 
+app-menu {
+  width: 100%;
+}
+
 .container {
   display: flex;
   width: 100%;
@@ -13,6 +17,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0px;
 }
 
 .direita {
@@ -24,8 +29,22 @@
   min-height: 100%;
 }
 
-img {
+.normal {
   width: 70px;
   height: 88px;
   margin: 30px 0px;
+}
+
+.small {
+  width: 60px;
+  height: 75px;
+  margin: 30px 0px;
+}
+
+@media screen and(max-width: 1162px) {
+  .container {
+    &.sem-menu {
+      width: calc(100% - 50px);
+    }
+  }
 }

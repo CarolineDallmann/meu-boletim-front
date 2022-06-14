@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DataStoreService } from '../data-storage';
 import { ConfigEscola } from '../entities/boletim.entity';
 import { BoletimVisualizacaoService } from '../services/boletim-visualizacao.service';
 
@@ -11,6 +12,8 @@ import { BoletimVisualizacaoService } from '../services/boletim-visualizacao.ser
   styleUrls: ['./opcoes.component.scss']
 })
 export class OpcoesComponent implements OnInit {
+
+  isSmall = false
   form: FormGroup = this.formBuilder.group({
     mediaAprovacao: new FormControl("", [
       Validators.required, Validators.min(1), Validators.max(10)]),
@@ -28,7 +31,9 @@ export class OpcoesComponent implements OnInit {
   })
 
   constructor(private boletimService: BoletimVisualizacaoService, private formBuilder: FormBuilder,
-    private snackBar: MatSnackBar) { }
+    private snackBar: MatSnackBar, private dataStorage: DataStoreService) {
+      this.dataStorage.isSmall.subscribe((e)=>this.isSmall = e)
+     }
 
   ngOnInit(): void {
     this.boletimService.getConfigEscola().subscribe((config) => {

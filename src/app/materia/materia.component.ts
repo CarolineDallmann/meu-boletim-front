@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DataStoreService } from '../data-storage';
 import { Materia, MateriaPayload } from '../entities/materia.entity';
 import { MateriaService } from '../services/materia.service';
 
@@ -12,9 +13,12 @@ export class MateriaComponent implements OnInit {
   materias: Materia[] = []
   displayedColumns: string[] = ['materias', 'acoes'];
   materiaSelecionada?: MateriaPayload
+  isSmall = false
 
-  constructor(private materiaService: MateriaService, private snackBar: MatSnackBar,
-  ) { }
+  constructor(private materiaService: MateriaService, private snackBar: MatSnackBar, private dataStorage: DataStoreService) {
+    
+    this.dataStorage.isSmall.subscribe((e)=>this.isSmall = e)
+   }
 
   ngOnInit(): void {
     this.search()

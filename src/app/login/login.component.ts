@@ -12,6 +12,8 @@ export class LoginComponent implements OnInit {
   loginInput = ""
   senhaInput = ""
   erro = ""
+  centerXSmall = { left: 0, right: 0, 'margin-left': 'auto', 'margin-right': 'auto', 'width': '75%' }
+  centerSmall = { left: 0, right: 0, 'margin-left': 'auto', 'margin-right': 'auto', 'width': '60%' }
 
   constructor(private loginService: LoginService, private dataStorage: DataStoreService) { }
 

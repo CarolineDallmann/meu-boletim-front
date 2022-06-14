@@ -1,13 +1,16 @@
-<mat-selection-list [multiple]="false">
-  <mat-list-option
-    *ngFor="let item of itensMenu"
-    [value]="item.path"
-    [class]="
-      currentRoute === item.path ? 'mat-list-single-selected-option' : ''
-    "
-    (selectedChange)="navegate(item)">
-    {{ item.title }}
+<mat-selection-list [multiple]="false" [class]="isSmall ? 'small' : ''">
+  <mat-list-option *ngFor="let item of itensMenu" [value]="item.path" 
+  [ngClass]="{
+      'mat-list-single-selected-option': currentRoute === item.path
+      }" 
+      (selectedChange)="navegate(item)">
+      
+    {{!isSmall? item.title : ""}}
+    <img *ngIf="isSmall" [src]="'../../../assets/'+ item.path +'.svg'" />
   </mat-list-option>
 
-  <mat-list-option (click)="sairSistema()">Sair</mat-list-option>
+  <mat-list-option (click)="sairSistema()">
+    {{!isSmall? "Sair" : ""}}
+    <img *ngIf="isSmall" [src]="'../../../assets/sair.svg'" />
+  </mat-list-option>
 </mat-selection-list>
