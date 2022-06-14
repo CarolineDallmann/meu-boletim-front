@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Turma, TurmaPayload } from '../entities/turma.entity';
 import { TurmaService } from '../services/turma.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,27 +15,20 @@ export class TurmasComponent implements OnInit {
   turmas: Turma[] = [];
   msg: string = '';
   displayedColumns: string[] = ['nome', 'anoLetivo', 'turno', 'serie', 'acoes'];
-  turmaSelecionada?: TurmaPayload
+  turmaSelecionada = ''
+  anoSelecionado = ''
+  turnoSelecionado = ''
+  serieSelecionada = ''
 
-  constructor(private turmaService: TurmaService, private snackBar: MatSnackBar,
-    private route: ActivatedRoute,private router: Router) { }
+  constructor(private turmaService: TurmaService, private snackBar: MatSnackBar, private router: Router) { }
 
   ngOnInit(): void {
     this.turmaService.getAllTurmas().subscribe((turmas) => { this.turmas = turmas })
+     
   }
 
   getOneTurma( nomeTurma: string ) {
     this.turmaService.getOneTurma(nomeTurma).subscribe(turma => { this.turmas = turma }, error => { this.turmas = [];this.msg = error.error.msg});
-  }
-
-  salvar(){
-    if(this.turmaSelecionada){
-      this.turmaService.salvarTurma(this.turmaSelecionada).subscribe((res) => {
-        this.snackBar.open(res.msg, undefined, { duration: 5000})
-        this.turmaSelecionada = undefined
-        this.search
-      })
-    }
   }
 
   navegarNovaTurma(){
@@ -48,20 +41,11 @@ export class TurmasComponent implements OnInit {
     })
   }
 
-  search(){
-    this.turmaService.getAllTurmas().subscribe((turmas) => {
-      this.turmas = turmas.sort((a, b) => a.nome.localeCompare(b.nome))
-    })
-  }
-
   excluir(turma: Turma){
-    this.turmaService.deleteTurma(turma.id).subscribe({
-      next: (res) => {
-        this.snackBar.open(res.msg, undefined, {duration: 5000})
-        this.search()
-      },
-      error: (err) => {this.snackBar.open(err.error.msg, undefined, {duration: 5000})}
-    })    
+    this.turmaService.deleteTurma(turma.id).subscribe((res) => {
+        this.snackBar.open(res.msg, undefined, {duration: 5000})        
+      }
+    )    
   }
 
 }

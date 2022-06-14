@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { SalvarTurmaPayload } from '../entities/turma.entity';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Turno } from '../enums/turno.enum'
 import { Serie } from '../enums/serie.enum'
+import { TurmaService } from '../services/turma.service';
 
 
 @Component({
@@ -22,14 +21,17 @@ export class TurmasLancamentoComponent implements OnInit {
 
   turnoSelecionado = ''
   serieSelecionada = ''
+
   nome: string[] = []
   anoLetivo: number[] = []
+  
   tipoTurnos: string[] = Object.values(Turno)
   tipoSeries: string[] = Object.values(Serie)
 
-  constructor(private snackBar: MatSnackBar, private formBuilder: FormBuilder,) { }
+  constructor(private formBuilder: FormBuilder, private turmaService: TurmaService) { }
 
   ngOnInit(): void {
+    
   }
 
   salvar(){
