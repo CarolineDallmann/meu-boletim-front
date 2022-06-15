@@ -7,21 +7,21 @@
                 <mat-grid-tile colspan="1">
                     <mat-form-field appearance="legacy" style="margin-bottom: -1.25em; width: 160px;">
                         <mat-label>Nome</mat-label>
-                        <input matInput formControlName="nomeTurma">
+                        <input matInput formControlName="nome">
                     </mat-form-field>
                 </mat-grid-tile>
 
                 <mat-grid-tile colspan="1">
                     <mat-form-field appearance="legacy" style="margin-bottom: -1.25em; width: 160px;">
                         <mat-label>Ano Letivo</mat-label>
-                        <input matInput formControlName="anoTurma">
+                        <input matInput formControlName="anoLetivo">
                     </mat-form-field>
                 </mat-grid-tile>
 
                 <mat-grid-tile colspan="1">
                     <mat-form-field appearance="legacy" style="margin-bottom: -1.25em; width: 160px;">
                         <mat-label>Turno</mat-label>
-                        <mat-select>
+                        <mat-select formControlName="turno">
                             <mat-option *ngFor="let tipo of tipoTurnos" [value]="tipo">
                                 {{tipo | titlecase}}                               
                             </mat-option>
@@ -32,7 +32,7 @@
                 <mat-grid-tile colspan="1">
                     <mat-form-field appearance="legacy" style="margin-bottom: -1.25em; width: 160px;">
                         <mat-label>Serie</mat-label>
-                        <mat-select>
+                        <mat-select formControlName="serie">
                             <mat-option *ngFor="let tipo of tipoSeries" [value]="tipo">
                                 {{tipo | titlecase }}                               
                             </mat-option>
@@ -44,17 +44,8 @@
             </mat-grid-list>
 
 
-
-
         </form>
 
-
-
-
-
-
-
-
-        <app-button (click)="salvar()">Salvar</app-button>
+    <app-button (click)="salvar()">Salvar</app-button>
     </app-card-conteudo>
 </app-layout-principal>

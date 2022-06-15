@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Turma, TurmaPayload } from '../entities/turma.entity';
+import { Turma} from '../entities/turma.entity';
 import { TurmaService } from '../services/turma.service';
 import { Router } from '@angular/router';
 
@@ -24,28 +24,24 @@ export class TurmasComponent implements OnInit {
 
   ngOnInit(): void {
     this.turmaService.getAllTurmas().subscribe((turmas) => { this.turmas = turmas })
-     
+
   }
 
-  getOneTurma( nomeTurma: string ) {
-    this.turmaService.getOneTurma(nomeTurma).subscribe(turma => { this.turmas = turma }, error => { this.turmas = [];this.msg = error.error.msg});
-  }
-
-  navegarNovaTurma(){
+  navegarNovaTurma() {
     this.router.navigate(['/turmas/lancamento'])
   }
 
-  editar(turma: Turma){
+  editar(turma: Turma) {
     this.router.navigate(['turmas/lancamento'], {
-      queryParams: {turmaId: turma.id}
+      queryParams: { turmaId: turma.id }
     })
   }
 
-  excluir(turma: Turma){
+  excluir(turma: Turma) {
     this.turmaService.deleteTurma(turma.id).subscribe((res) => {
-        this.snackBar.open(res.msg, undefined, {duration: 5000})        
-      }
-    )    
+      this.snackBar.open(res.msg, undefined, { duration: 5000 })
+    }
+    )
   }
 
 }

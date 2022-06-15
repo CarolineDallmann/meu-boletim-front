@@ -9,11 +9,6 @@ export type Turma = {
     serie: Serie
 }
 
-export type TurmaPayload = {
-    id?: string,
-    nome: string
-}
-
 export type SalvarTurmaPayload = {
     turmaId?: string,
     nome: string,

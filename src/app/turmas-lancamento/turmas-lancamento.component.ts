@@ -3,6 +3,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Turno } from '../enums/turno.enum'
 import { Serie } from '../enums/serie.enum'
 import { TurmaService } from '../services/turma.service';
+import { Turma } from '../entities/turma.entity';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -13,8 +15,9 @@ import { TurmaService } from '../services/turma.service';
 export class TurmasLancamentoComponent implements OnInit {
 
   form: FormGroup = this.formBuilder.group({
-    nomeTurma: new FormControl("", [Validators.required]),
-    anoTurma: new FormControl("", [Validators.required]),
+    id:  new FormControl(""),
+    nome: new FormControl("", [Validators.required]),
+    anoLetivo: new FormControl("", [Validators.required]),
     turno: new FormControl("", [Validators.required]),
     serie: new FormControl("", [Validators.required])
   })
@@ -27,11 +30,21 @@ export class TurmasLancamentoComponent implements OnInit {
   
   tipoTurnos: string[] = Object.values(Turno)
   tipoSeries: string[] = Object.values(Serie)
+  
 
-  constructor(private formBuilder: FormBuilder, private turmaService: TurmaService) { }
+  constructor(private formBuilder: FormBuilder, private turmaService: TurmaService, 
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    const turmaId = this.route.snapshot.queryParamMap.get('turmaId')
+    if(turmaId){
+      this.turmaService.getOneTurma(turmaId).subscribe((turma)=>{
+        this.form.setValue(turma)
+      })
+    }
     
+    
+   
   }
 
   salvar(){
