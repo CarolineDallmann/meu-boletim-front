@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { Turma } from '../entities/turma.entity';
+import { SalvarTurmaPayload, Turma} from '../entities/turma.entity';
+import { MsgResponse } from '../entities/msg-response.entity';
 
 @Injectable()
 export class TurmaService {
@@ -12,7 +13,16 @@ export class TurmaService {
      return this.http.get<Turma[]>(`${environment.api}turmas`)
   }
 
-  getOneTurma(nomeTurma: string) {
-    return this.http.post<Turma[]>(`${environment.api}turmas`, { params: { nomeTurma } })
+  getOneTurma(id: string) {
+    return this.http.get<Turma>(`${environment.api}turmas/${id}`)
   }
+
+  salvarTurma(body: SalvarTurmaPayload){
+    return this.http.post<MsgResponse>(`${environment.api}turmas`, body)
+  }
+
+  deleteTurma(id: string){
+    return this.http.delete<MsgResponse>(`${environment.api}turmas/${id}`)
+  }
+  
 }
