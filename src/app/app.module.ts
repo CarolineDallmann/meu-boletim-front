@@ -41,6 +41,7 @@ import { CadastrarPessoaComponent } from './cadastrar-pessoa/cadastrar-pessoa.co
 import { BuscarPessoaComponent } from './buscar-pessoa/buscar-pessoa.component';
 import { EditarPessoaComponent } from './editar-pessoa/editar-pessoa.component';
 import { PessoaService } from './services/pessoa.service';
+import { TurmasLancamentoComponent } from './turmas-lancamento/turmas-lancamento.component';
 
 
 @NgModule({
@@ -62,6 +63,7 @@ import { PessoaService } from './services/pessoa.service';
     SerieDeParaPipe,
     CheckNotaPipe,
     ResultadoBoletimPipe,
+    TurmasLancamentoComponent,
   ],
   imports: [
     BrowserModule,
