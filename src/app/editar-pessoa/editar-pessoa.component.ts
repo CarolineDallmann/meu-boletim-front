@@ -41,7 +41,7 @@ export class EditarPessoaComponent implements OnInit {
     - Pelo menos 1 letra MAIÚSCULA;
     - Pelo menos 1 letra minúscula;
     - Pelo menos 1 número;
-    - E caracter especial do tipo: !@#$`;
+    - E caracter especial do tipo: !@#$`; 
 
   constructor(private fb: FormBuilder, private pessoaService: PessoaService, private turmaService: TurmaService, 
     private materiaService: MateriaService, private route: ActivatedRoute, private router: Router, private snackBar: MatSnackBar) { }

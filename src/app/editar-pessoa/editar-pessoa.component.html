@@ -3,7 +3,8 @@
     <app-card-conteudo>
         <ng-container *ngIf="isLoad">
         <form [formGroup]="editarPessoa" (ngSubmit)="onSubmit()" class="container">
-            <div fxLayout="row" style="margin-bottom: 15px;">
+            <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="row" fxLayoutAlign="space-around center"
+            fxLayoutAlign.sm="space-around center" fxLayoutAlign.xs="space-between stretch" style="margin-bottom: 15px;">
                 <fieldset fxFlex=100>
                     <legend>Atribuições</legend>
                     <mat-radio-group formControlName="tipo_pessoa" (change)="changeTipoPessoa($event)">
@@ -14,8 +15,9 @@
                 </fieldset>
             </div>
             <div fxLayout="column" style="margin-bottom: 15px;">
-                <div fxLayout="row" fxLayoutGap="15px">
-                    <mat-form-field appearance="legacy" fxFlex=60>
+                <div fxLayout="row" fxLayoutGap="2%" fxLayout.xs="column" fxLayout.sm="row" fxLayoutAlign="space-around center"
+                fxLayoutAlign.sm="space-around center" fxLayoutAlign.xs="space-between stretch">
+                    <mat-form-field appearance="legacy" fxFlex=60 [ngStyle.xs]="{'width': '100%'}">
                         <mat-label>Nome</mat-label>
                         <input matInput placeholder="Ex. Maria da Silva" name="nome" formControlName="nome" />
                     </mat-form-field>
@@ -27,14 +29,15 @@
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
-                    <mat-form-field appearance="legacy" fxFlex=20>
+                    <mat-form-field appearance="legacy" fxFlex=20 [ngStyle.xs]="{'width': '100%'}">
                         <mat-label>Nascimento</mat-label>
                         <input matInput [matDatepicker]="picker" name="datanasc" formControlName="datanasc">
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
                     </mat-form-field>
                 </div>
-                <div fxFlex="row" fxLayoutGap="15px">
+                <div fxFlex="row" fxLayoutGap="2%" fxLayout.xs="column" fxLayout.sm="row" fxLayoutAlign="space-around center"
+                fxLayoutAlign.sm="space-around center" fxLayoutAlign.xs="space-between stretch">
                     <mat-form-field appearance="legacy" fxFlex=20>
                         <mat-label>CEP</mat-label>
                         <input matInput placeholder="Ex. 58051-830" name="cep" formControlName="cep" />
@@ -44,7 +47,8 @@
                         <input matInput placeholder="Ex. Rua Cecilia" name="rua" formControlName="rua" />
                     </mat-form-field>
                 </div>
-                <div fxLayout="row" fxLayoutGap="15px">
+                <div fxLayout="row" fxLayoutGap="2%" fxLayout.xs="column" fxLayout.sm="row" fxLayoutAlign="space-around center"
+                fxLayoutAlign.sm="space-around center" fxLayoutAlign.xs="space-between stretch">
                     <mat-form-field appearance="legacy" fxFlex=10>
                         <mat-label>Número</mat-label>
                         <input matInput placeholder="Ex. 585" name="numero" formControlName="numero" />
@@ -67,29 +71,31 @@
                             formControlName="telefone" />
                     </mat-form-field>
                 </div>
-                <div fxLayout="row" fxLayoutGap="15px">
-                    <mat-form-field appearance="legacy" fxFlex=40>
+                <div fxLayout="row" fxLayoutGap="2%" fxLayout.xs="column" fxLayout.sm="row" fxLayoutAlign="space-around center"
+                fxLayoutAlign.sm="space-around center" fxLayoutAlign.xs="space-between stretch">
+                    <mat-form-field appearance="legacy" fxFlex=40 [ngStyle.xs]="{'width': '100%'}">
                         <mat-label>Email</mat-label>
                         <input matInput placeholder="Ex. maria@gmail.com" name="email" formControlName="email" />
                     </mat-form-field>
-                    <mat-form-field appearance="legacy" fxFlex=20>
+                    <mat-form-field appearance="legacy" fxFlex=20 >
                         <mat-label>Login</mat-label>
                         <input matInput name="login" formControlName="login" />
                     </mat-form-field>
-                    <mat-form-field appearance="legacy" fxFlex=20 >
+                    <mat-form-field appearance="legacy" fxFlex=20 [ngStyle.xs]="{'width': '100%'}">
                         <mat-label>Senha</mat-label>
                         <input matInput type="password" formControlName="senha" (change)="changeSenha()"/>
                         <mat-hint fxFlex=80 fxLayoutAlign="start"><strong>Clique acima para alterar senha</strong> </mat-hint>
                         <mat-hint fxFlex=10 fxLayoutAlign="end"><i class="material-icons" style="font-size:15px;" [title]="configSenha">info</i></mat-hint>
                     </mat-form-field>
-                    <mat-checkbox name="ativo" formControlName="ativo" [(ngModel)]="checked" fxFlex=10>Ativo
+                    <mat-checkbox name="ativo" formControlName="ativo" (ngModel)="checked" fxFlex=10 >Ativo
                     </mat-checkbox>
                 </div>
             </div>
             <div fxLayout="row" *ngIf="condicaoPessoa=='ALUNO'">
                 <fieldset fxFlex=100>
                     <legend>Aluno</legend>
-                    <div fxLayout="row" fxLayoutGap="15px">
+                    <div fxLayout="row" fxLayoutGap="2%" fxLayout.xs="column" fxLayout.sm="row" fxLayoutAlign="start center"
+                    fxLayoutAlign.sm="space-around center" fxLayoutAlign.xs="space-between stretch">
                         <mat-form-field appearance="legacy" fxFlex=25>
                             <mat-label>Nome da Mãe</mat-label>
                             <input matInput placeholder="Ex. Maria Jose" name="nome_mae" formControlName="nome_mae" />
@@ -99,7 +105,8 @@
                             <input matInput name="nome_pai" formControlName="nome_pai" />
                         </mat-form-field>
                     </div>
-                    <div fxLayout="row">
+                    <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="row" fxLayoutAlign="start center"
+                    fxLayoutAlign.sm="space-around center" fxLayoutAlign.xs="space-between stretch">
                         <mat-form-field appearance="legacy" fxFlex=25>
                             <mat-label>Responsável</mat-label>
                             <input matInput type="text" name="responsavel" formControlName="responsavel"
@@ -111,7 +118,8 @@
                             </mat-autocomplete>
                         </mat-form-field>
                     </div>
-                    <div fxLayout="row">
+                    <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="row" fxLayoutAlign="start center"
+                    fxLayoutAlign.sm="space-around center" fxLayoutAlign.xs="space-between stretch">
                         <mat-form-field appearance="legacy" fxFlex=25>
                             <mat-label>Turma</mat-label>
                             <mat-select name="turmaSelecionada" formControlName="turmaSelecionada" required>
@@ -126,11 +134,12 @@
                 </fieldset>
             </div>
 
-            <div fxLayout="row" *ngIf="condicaoPessoa=='PROFESSOR'">
+            <div fxLayout="row" *ngIf="condicaoPessoa=='PROFESSOR'" >
                 <fieldset fxFlex=100>
                     <legend>Professor</legend>
-                    <div fxLayout="row">
-                        <mat-form-field appearance="legacy" fxFlex=25>
+                    <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="row" fxLayoutAlign="start center"
+                    fxLayoutAlign.sm="space-around center" fxLayoutAlign.xs="space-between stretch">
+                        <mat-form-field appearance="legacy" fxFlex=25 [ngStyle.xs]="{'width': '100%'}">
                             <mat-label>Matéria</mat-label>
                             <mat-select name="materia" formControlName="materia">
                                 <mat-option *ngFor="let materia of materias" [value]="materia.id">
