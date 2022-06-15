@@ -1,51 +1,75 @@
 <app-layout-principal>
     <app-card-conteudo class="card">
 
+        <mat-grid-list cols="4" rowHeight="30px">
+            <mat-grid-tile colspan="4"></mat-grid-tile>
+        </mat-grid-list>
+
         <form [formGroup]="form">
-            <mat-grid-list cols="4" rowHeight="60px">
+            <div>
 
-                <mat-grid-tile colspan="1">
-                    <mat-form-field appearance="legacy" style="margin-bottom: -1.25em; width: 160px;">
-                        <mat-label>Nome</mat-label>
-                        <input matInput formControlName="nome">
-                    </mat-form-field>
-                </mat-grid-tile>
+                <app-fieldset title="Nome e Ano Letivo">
 
-                <mat-grid-tile colspan="1">
-                    <mat-form-field appearance="legacy" style="margin-bottom: -1.25em; width: 160px;">
-                        <mat-label>Ano Letivo</mat-label>
-                        <input matInput formControlName="anoLetivo">
-                    </mat-form-field>
-                </mat-grid-tile>
+                    <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="row" fxLayoutAlign="space-around center"
+                        fxLayoutAlign.sm="space-around center" fxLayoutAlign.xs="space-between stretch" fxFlex>
 
-                <mat-grid-tile colspan="1">
-                    <mat-form-field appearance="legacy" style="margin-bottom: -1.25em; width: 160px;">
-                        <mat-label>Turno</mat-label>
-                        <mat-select formControlName="turno">
-                            <mat-option *ngFor="let tipo of tipoTurnos" [value]="tipo">
-                                {{tipo | titlecase}}                               
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>  
-                </mat-grid-tile>
-    
-                <mat-grid-tile colspan="1">
-                    <mat-form-field appearance="legacy" style="margin-bottom: -1.25em; width: 160px;">
-                        <mat-label>Serie</mat-label>
-                        <mat-select formControlName="serie">
-                            <mat-option *ngFor="let tipo of tipoSeries" [value]="tipo">
-                                {{tipo | titlecase }}                               
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>  
-                </mat-grid-tile>
+                        <div fxFlex="flex-start">
+                            <mat-form-field appearance="legacy" style="margin-bottom: -1.25em; width: 260px;"
+                                [ngStyle.xs]="{'width': '100%'}">
+                                <mat-label>Nome</mat-label>
+                                <input matInput formControlName="nome" placeholder="Ex: A">
+                            </mat-form-field>
+                        </div>
 
+                        <div fxFlex="flex-start">
+                            <mat-form-field appearance="legacy" style="margin-bottom: -1.25em; width: 260px;"
+                                [ngStyle.xs]="{'width': '100%'}">
+                                <mat-label>Ano Letivo</mat-label>
+                                <input matInput formControlName="ano_letivo" placeholder="Ex: 2022">
+                            </mat-form-field>
+                        </div>
 
-            </mat-grid-list>
+                    </div>
+                </app-fieldset>
 
+                <mat-grid-list cols="4" rowHeight="60px">
+                    <mat-grid-tile colspan="4"></mat-grid-tile>
+                </mat-grid-list>
 
-        </form>
+                <app-fieldset title="Turno e Série"> 
 
-    <app-button (click)="salvar()">Salvar</app-button>
+                    <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="row" fxLayoutAlign="space-around center"
+                        fxLayoutAlign.sm="space-around center" fxLayoutAlign.xs="space-between stretch" fxFlex>
+
+                        <div fxFlex="flex-start">
+                            <mat-form-field appearance="legacy" style="margin-bottom: -1.25em; width: 260px;"
+                                [ngStyle.xs]="{'width': '100%'}">
+                                    <mat-label>Turno</mat-label>
+                                        <mat-select formControlName="turno">
+                                            <mat-option *ngFor="let tipo of tipoTurnos" [value]="tipo">
+                                                    {{tipo | titlecase}}                               
+                                            </mat-option>
+                                        </mat-select>                                
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="flex-start">
+                            <mat-form-field appearance="legacy" style="margin-bottom: -1.25em; width: 260px;"
+                                [ngStyle.xs]="{'width': '100%'}">
+                                    <mat-label>Serie</mat-label>
+                                        <mat-select formControlName="serie">
+                                            <mat-option *ngFor="let tipo of tipoSeries" [value]="tipo">
+                                                    {{tipo | titlecase }}                               
+                                            </mat-option>
+                                        </mat-select>                                
+                            </mat-form-field>
+                        </div>                     
+                    
+                    </div>
+                </app-fieldset>
+
+                <app-button (click)="salvar()">Salvar</app-button>
+            </div>
+        </form>    
     </app-card-conteudo>
 </app-layout-principal>

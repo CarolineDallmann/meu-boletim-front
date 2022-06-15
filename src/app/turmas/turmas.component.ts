@@ -39,8 +39,7 @@ export class TurmasComponent implements OnInit {
   excluir(turma: Turma) {
     this.turmaService.deleteTurma(turma.id).subscribe((res) => {
       this.snackBar.open(res.msg, undefined, { duration: 5000 })
-    }
-    )
+      window.location.reload()
+    })
   }
-
 }
