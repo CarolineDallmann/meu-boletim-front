@@ -5,21 +5,23 @@
   bottom: 0;
   width: 700px;
   height: 800px;
-  
+
   img {
     height: 100%;
   }
 }
-.logoPrincipal{
+
+.logoPrincipal {
   display: flex;
+  justify-content: center;
   position: absolute;
-  left: 750px;
+  right: 180px;
   top: 100px;
 }
 
 .boxExternaLogin {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   position: absolute;
   right: 200px;
   top: 342px;
@@ -45,8 +47,38 @@
   border-radius: 5px;
 }
 
-
-span{
+span {
   color: white;
   padding-top: 24px;
 }
+
+@media screen and (max-width: 1500px){
+  .fundo{
+    height: 700px;
+  }
+}
+
+@media screen and (max-width: 1400px){
+  .fundo{
+    height: 650px;
+  }
+}
+
+@media screen and (max-width: 1300px){
+  .fundo{
+    height: 600px;
+  }
+}
+
+@media screen and (max-width: 1200px){
+  .fundo{
+    height: 550px;
+  }
+}
+
+@media screen and (max-width: 1150px){
+  .fundo{
+    height: 500px;
+  }
+}
+

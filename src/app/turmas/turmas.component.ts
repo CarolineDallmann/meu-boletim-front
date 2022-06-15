@@ -23,8 +23,7 @@ export class TurmasComponent implements OnInit {
   constructor(private turmaService: TurmaService, private snackBar: MatSnackBar, private router: Router) { }
 
   ngOnInit(): void {
-    this.turmaService.getAllTurmas().subscribe((turmas) => { this.turmas = turmas })
-
+    this.turmaService.getAllTurmas().subscribe((turmas) => { this.turmas = turmas }, error => { this.turmas = [];this.msg = error.error.msg});
   }
 
   navegarNovaTurma() {

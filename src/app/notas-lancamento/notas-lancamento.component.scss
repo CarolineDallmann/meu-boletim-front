@@ -1,6 +1,19 @@
-app-button {
-    position: absolute;
-    right: 12px;
-    bottom: 12px;
-  
+::ng-deep app-button[ng-reflect-full-size="true"] .mat-raised-button {
+  left: 12px;
+
+  &.full-size {
+    width: auto;
   }
+}
+
+::ng-deep app-button .mat-raised-button {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+}
+
+::ng-deep .small mat-card{
+  display: flex;
+    align-items: stretch;
+    flex-direction: column;
+}

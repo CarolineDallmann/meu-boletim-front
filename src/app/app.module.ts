@@ -21,12 +21,20 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MateriaComponent } from './materia/materia.component';
 import { TurmasComponent } from './turmas/turmas.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { NotasLancamentoComponent } from './notas-lancamento/notas-lancamento.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { FrequenciaComponent } from './frequencia/frequencia.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FrequenciaService } from './services/frequencia.service';
+import { CadastrarPessoaComponent } from './cadastrar-pessoa/cadastrar-pessoa.component';
+import { BuscarPessoaComponent } from './buscar-pessoa/buscar-pessoa.component';
+import { PessoaService } from './services/pessoa.service';
+import { MatRadioModule } from '@angular/material/radio';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { EditarPessoaComponent } from './editar-pessoa/editar-pessoa.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { VisulizacaoboletimComponent } from './visulizacaoboletim/visulizacaoboletim.component';
 import { BoletimVisualizacaoService } from './services/boletim-visualizacao.service';
 import { OpcoesComponent } from './opcoes/opcoes.component';
@@ -46,6 +54,10 @@ import { TurmasLancamentoComponent } from './turmas-lancamento/turmas-lancamento
     MateriaComponent,
     NotasLancamentoComponent,
     FrequenciaComponent,
+    TurmasComponent,
+    CadastrarPessoaComponent,
+    BuscarPessoaComponent,
+    EditarPessoaComponent,
     OpcoesComponent,
     TurmasComponent,
     VisulizacaoboletimComponent,
@@ -65,6 +77,7 @@ import { TurmasLancamentoComponent } from './turmas-lancamento/turmas-lancamento
     LayoutModule,
     MatSelectModule,
     MatGridListModule,
+    FlexLayoutModule,
     HttpClientModule,
     MatTableModule,
     MatSnackBarModule,
@@ -72,12 +85,17 @@ import { TurmasLancamentoComponent } from './turmas-lancamento/turmas-lancamento
     MatNativeDateModule,
     MatCheckboxModule,
     FormsModule,
+    ReactiveFormsModule,
+    MatRadioModule,
+    MatAutocompleteModule,
+    FlexLayoutModule
   ],
   providers: [
     TurmaService,
     MateriaService,
     NotaService,
     FrequenciaService,
+    PessoaService,
     BoletimVisualizacaoService,
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
     LoginService,

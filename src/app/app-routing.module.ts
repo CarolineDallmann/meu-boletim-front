@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BuscarPessoaComponent } from './buscar-pessoa/buscar-pessoa.component';
+import { CadastrarPessoaComponent } from './cadastrar-pessoa/cadastrar-pessoa.component';
+import { EditarPessoaComponent } from './editar-pessoa/editar-pessoa.component';
 import { FrequenciaComponent } from './frequencia/frequencia.component';
 import { LoginComponent } from './login/login.component';
 import { MateriaComponent } from './materia/materia.component';
@@ -21,6 +24,12 @@ const routes: Routes = [
   { path: 'notas/lancamento', component: NotasLancamentoComponent },
   { path: 'turmas/lancamento', component: TurmasLancamentoComponent},
   { path: 'frequencias', component: FrequenciaComponent },
+  { path: 'cadastro', component: CadastrarPessoaComponent },
+  { path: 'editar', component: EditarPessoaComponent },
+  { path: 'alunos', component: BuscarPessoaComponent}, 
+  { path: 'responsaveis', component: BuscarPessoaComponent },
+  { path: 'professores', component: BuscarPessoaComponent },
+  { path: 'secretaria', component: BuscarPessoaComponent },
   { path: 'boletim', component: VisulizacaoboletimComponent },
 ];
 

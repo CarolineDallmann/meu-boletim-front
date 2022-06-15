@@ -2,10 +2,13 @@
   <span>{{ title}}</span>
 </mat-toolbar>
 
-<div class="container">
+<div class="container" 
+[ngClass.lt-lg]="{'sem-menu': hiddenMenu}" 
+
+[ngStyle.xs]="{'min-height': 'calc(100% - 56px)'}">
   <div class="esquerda" *ngIf="!hiddenMenu">
-    <img src="../../../assets/logo.svg" alt="" />
-    <app-menu (navegateEvent)="setTitle($event)" ></app-menu>
+    <img [class]="isSmall ? 'small' : 'normal'" src="../../../assets/logo.svg" alt="" />
+    <app-menu (navegateEvent)="setTitle($event)"></app-menu>
   </div>
 
   <div class="direita">

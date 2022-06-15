@@ -1,7 +1,12 @@
 <app-layout-principal>
     <app-card-conteudo>
-        <div class="bemvindo">
-            <img src="../../assets/bemvindo.svg" alt="">
+
+        <div class="bemvindo" fxLayout="row" fxLayoutAlign="space-around center">
+            <img src="../../assets/bemvindo.svg" alt="" 
+            [ngStyle.xs]="{'width': '80%'}"
+            [ngStyle.sm]="{'width': '60%'}"
+            [ngStyle.md]="{'width': '50%'}">
         </div>
+
     </app-card-conteudo>
 </app-layout-principal>
