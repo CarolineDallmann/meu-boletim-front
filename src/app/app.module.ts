@@ -28,13 +28,8 @@ import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { FrequenciaComponent } from './frequencia/frequencia.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FrequenciaService } from './services/frequencia.service';
-import { CadastrarPessoaComponent } from './cadastrar-pessoa/cadastrar-pessoa.component';
-import { BuscarPessoaComponent } from './buscar-pessoa/buscar-pessoa.component';
-import { PessoaService } from './services/pessoa.service';
 import { MatRadioModule } from '@angular/material/radio';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import { EditarPessoaComponent } from './editar-pessoa/editar-pessoa.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { VisulizacaoboletimComponent } from './visulizacaoboletim/visulizacaoboletim.component';
 import { BoletimVisualizacaoService } from './services/boletim-visualizacao.service';
 import { OpcoesComponent } from './opcoes/opcoes.component';
@@ -42,6 +37,10 @@ import { SerieDeParaPipe } from './pipes/serie-de-para.pipe';
 import { CheckNotaPipe } from './pipes/check-nota.pipe';
 import { ResultadoBoletimPipe } from './pipes/resultado-boletim.pipe';
 import { LoginService } from './services/login.service';
+import { CadastrarPessoaComponent } from './cadastrar-pessoa/cadastrar-pessoa.component';
+import { BuscarPessoaComponent } from './buscar-pessoa/buscar-pessoa.component';
+import { EditarPessoaComponent } from './editar-pessoa/editar-pessoa.component';
+import { PessoaService } from './services/pessoa.service';
 import { TurmasLancamentoComponent } from './turmas-lancamento/turmas-lancamento.component';
 
 
