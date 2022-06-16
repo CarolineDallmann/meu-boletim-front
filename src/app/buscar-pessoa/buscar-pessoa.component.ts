@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DataStoreService } from '../data-storage';
 import { Pessoa } from '../entities/pessoa.entity';
+import { TipoPessoa } from '../enums/tipo-pesssoa.enum';
 import { PessoaService } from '../services/pessoa.service';
 
 @Component({
@@ -18,60 +20,62 @@ export class BuscarPessoaComponent implements OnInit {
   checkInitivo = false;
   pesquisar = '';
   tipo: string = '';
+  isSmall = false
 
-  constructor(private pessoaService: PessoaService, private route: ActivatedRoute, private router: Router) { }
-  
+  constructor(private pessoaService: PessoaService, private route: ActivatedRoute, private router: Router,
+    private dataStorage: DataStoreService) {
+    this.dataStorage.isSmall.subscribe((e) => this.isSmall = e)
+  }
+
   ngOnInit(): void {
     this.tipoPessoa = this.route.snapshot.url[0].path;
-    this.filterTipoPessoa(this.tipoPessoa);
-    this.pessoaService.getAllPessoas(this.pesquisar, this.tipoPessoa, false).subscribe(pessoa => { 
+    //this.filterTipoPessoa(this.tipoPessoa);
+    this.pessoaService.getAllPessoas(this.pesquisar, this.filterTipoPessoa(this.tipoPessoa), false).subscribe(pessoa => {
       this.pessoas = pessoa.sort((a, b) => a.nome.localeCompare(b.nome));
     })
   }
 
   onNomeChange() {
-    this.pessoaService.getAllPessoas(this.pesquisar, this.tipoPessoa, false).subscribe(pessoa => { 
+    this.pessoaService.getAllPessoas(this.pesquisar, this.tipoPessoa, false).subscribe(pessoa => {
       this.pessoas = pessoa.sort((a, b) => a.nome.localeCompare(b.nome));
     })
   }
 
   onInativoChange() {
-    if(this.checkInitivo==true){
-      this.pessoaService.getAllPessoas('', this.tipoPessoa, true).subscribe(pessoa => { 
+    if (this.checkInitivo == true) {
+      this.pessoaService.getAllPessoas('', this.tipoPessoa, true).subscribe(pessoa => {
         this.pessoas = pessoa.sort((a, b) => a.nome.localeCompare(b.nome));
       })
     } else {
-      this.pessoaService.getAllPessoas('', this.tipoPessoa, false).subscribe(pessoa => { 
+      this.pessoaService.getAllPessoas('', this.tipoPessoa, false).subscribe(pessoa => {
         this.pessoas = pessoa.sort((a, b) => a.nome.localeCompare(b.nome));
       })
     }
-    
   }
 
-  filterTipoPessoa(tipo: String) {
-    if (tipo == "alunos"){
-      this.tipoPessoa = "ALUNO";
+  filterTipoPessoa(tipo: string): TipoPessoa {
+    if (tipo == "alunos") {
+      return TipoPessoa.ALUNO
     }
-    if (tipo == "responsaveis"){
-      this.tipoPessoa = "RESPONSAVEL";
+    if (tipo == "responsaveis") {
+      return TipoPessoa.RESPONSAVEL
     }
-    if (tipo == "professores"){
-      this.tipoPessoa = "PROFESSOR";
+    if (tipo == "professores") {
+      return TipoPessoa.PROFESSOR
     }
-    if (tipo == "secretaria"){
-      this.tipoPessoa = "SECRETARIA";
-    }
+
+    return TipoPessoa.SECRETARIA
   }
 
   editar(pessoa: Pessoa) {
-    this.router.navigate(['/editar/'], {
+    this.router.navigate([`${this.tipoPessoa}/editar/`], {
       queryParams: { pessoaId: pessoa.id }
     })
   }
 
-  cadastrar(tipoPessoa: string) {
-    this.router.navigate(['/cadastro/'], {
-      queryParams: { tipoPessoa: tipoPessoa }
+  cadastrar() {
+    this.router.navigate([`${this.tipoPessoa}/cadastro/`], {
+      queryParams: { tipoPessoa: this.filterTipoPessoa(this.tipoPessoa) }
     })
   }
 }

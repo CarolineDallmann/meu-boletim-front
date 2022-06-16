@@ -2,15 +2,12 @@
     text-align: right;
 }
 
-.filtroContainer{
-    padding: 10px;
-}
-
-/* .inputNome{
-    width: 80%; 
-    margin-left:15px;
-} */
-/* 
-.widthCheck{
-    margin-left: 20%;
-} */
+:ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-ripple .mat-ripple-element {
+    opacity: 0.03 !important;
+    background-color: #153A84 !important;
+  }
+  
+  ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,
+  ::ng-deep .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+    background-color: #153A84;
+  }

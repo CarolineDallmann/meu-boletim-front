@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Materia } from '../entities/materia.entity';
+import { Pessoa } from '../entities/pessoa.entity';
 import { Turma } from '../entities/turma.entity';
 import { Genero } from '../enums/genero.enum';
 import { MateriaService } from '../services/materia.service';
@@ -17,7 +18,7 @@ import { TurmaService } from '../services/turma.service';
 export class EditarPessoaComponent implements OnInit {
 
   editarPessoa: FormGroup = new FormGroup({});
-  
+
   emailValidator = [Validators.maxLength(250), Validators.minLength(5), Validators.pattern(/.+@.+\..+/), Validators.required];
   senhaValidador = [Validators.pattern('^[0-9a-zA-Z!@#$]{8,}$'), Validators.required];
 
@@ -33,39 +34,44 @@ export class EditarPessoaComponent implements OnInit {
   turmas: Turma[] = [];
   materias: Materia[] = [];
   condicaoPessoa = '';
-  listaResponsaveis: any = [];
+  listaResponsaveis: Pessoa[] = [];
   pessoaId: any;
   isLoad: boolean = false;
-  responsavelNome: String = '';
   configSenha: string = `A senha deve conter, no mínino, 8 caracteres da seguinte forma:
     - Pelo menos 1 letra MAIÚSCULA;
     - Pelo menos 1 letra minúscula;
     - Pelo menos 1 número;
-    - E caracter especial do tipo: !@#$`; 
+    - E caracter especial do tipo: !@#$`;
 
-  constructor(private fb: FormBuilder, private pessoaService: PessoaService, private turmaService: TurmaService, 
+  constructor(private fb: FormBuilder, private pessoaService: PessoaService, private turmaService: TurmaService,
     private materiaService: MateriaService, private route: ActivatedRoute, private router: Router, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.pessoaId = this.route.snapshot.queryParamMap.get('pessoaId');
-    this.loadPessoa();
     this.turmaService.getAllTurmas().subscribe((turmas) => { this.turmas = turmas })
-    this.materiaService.getAllMaterias().subscribe((materia) => { this.materias = materia})
-    this.pessoaService.getAllPessoas('', 'RESPONSAVEL', true).subscribe(pessoa => {this.listaResponsaveis = pessoa});
+    this.materiaService.getAllMaterias().subscribe((materia) => { this.materias = materia })
+    this.pessoaService.getAllPessoas('', 'RESPONSAVEL', true).subscribe(pessoa => {
+      this.listaResponsaveis = pessoa;
+      this.loadPessoa();
+    })
+
+
   }
 
   loadPessoa() {
-    this.pessoaService.getPessoaById(this.pessoaId).subscribe(pessoa => { 
+    this.pessoaService.getPessoaById(this.pessoaId).subscribe(pessoa => {
       this.isLoad = true;
       this.createForm(pessoa);
     })
   }
 
   createForm(pessoa: any) {
+    console.log(pessoa);
+
     this.editarPessoa = this.fb.group({
       tipo_pessoa: [pessoa.tipo_pessoa, [Validators.required]],
       nome: [pessoa.nome, [Validators.required]],
-      genero: [pessoa.genero, [Validators.required]], 
+      genero: [pessoa.genero, [Validators.required]],
       datanasc: [new Date(pessoa.datanasc), [Validators.required]],
       cep: [pessoa.cep, [Validators.required]],
       rua: [pessoa.rua, [Validators.required]],
@@ -86,28 +92,30 @@ export class EditarPessoaComponent implements OnInit {
     });
     this.condicaoPessoa = pessoa.tipo_pessoa;
     this.checked = pessoa.ativo;
-    this.captureNomeResponsavel(this.editarPessoa.value.responsavel);
+    // this.captureNomeResponsavel(this.editarPessoa.value.responsavel);
 
   }
 
   onSubmit() {
-    this.editarPessoa.value.datanasc = this.dataFormat(this.editarPessoa.value.datanasc);
-    this.captureIdResponsavel(this.editarPessoa.value.responsavel);
-    if(this.editarPessoa.valid) {
-      this.pessoaService.updatePessoa(this.editarPessoa.value, this.pessoaId).subscribe({
+    // this.editarPessoa.value.datanasc = this.dataFormat(this.editarPessoa.value.datanasc);
+    // this.captureIdResponsavel(this.editarPessoa.value.responsavel);
+
+    if (this.editarPessoa.valid) {
+      this.pessoaService.updatePessoa({
+        ...this.editarPessoa.value,
+        datanasc: this.dataFormat(this.editarPessoa.value.datanasc)
+      }, this.pessoaId).subscribe({
         next: (res) => {
           this.snackBar.open(res.msg, undefined, { duration: 4000 })
-          setTimeout(() => {
-            if(this.editarPessoa.value.tipo_pessoa === 'ALUNO'){
-              this.router.navigate(['/alunos'])
-            } else if(this.editarPessoa.value.tipo_pessoa === 'RESPONSAVEL') {
-              this.router.navigate(['/responsaveis'])
-            } else if(this.editarPessoa.value.tipo_pessoa === 'PROFESSOR') {
-              this.router.navigate(['/professores'])
-            } else if(this.editarPessoa.value.tipo_pessoa === 'SECRETARIA') {
-              this.router.navigate(['/secretaria'])
-            }
-          }, 4000);
+          if (this.editarPessoa.value.tipo_pessoa === 'ALUNO') {
+            this.router.navigate(['/alunos'])
+          } else if (this.editarPessoa.value.tipo_pessoa === 'RESPONSAVEL') {
+            this.router.navigate(['/responsaveis'])
+          } else if (this.editarPessoa.value.tipo_pessoa === 'PROFESSOR') {
+            this.router.navigate(['/professores'])
+          } else if (this.editarPessoa.value.tipo_pessoa === 'SECRETARIA') {
+            this.router.navigate(['/secretaria'])
+          }
         },
         error: (err) => {
           this.snackBar.open(err.error.msg, undefined, { duration: 5000 })
@@ -118,9 +126,9 @@ export class EditarPessoaComponent implements OnInit {
 
   dataFormat(data: Date) {
     let dia = data.getDate();
-    let mes = data.getMonth()+1;
+    let mes = data.getMonth() + 1;
     let ano = data.getFullYear();
-    return(ano+"-"+mes+"-"+dia);
+    return (ano + "-" + mes + "-" + dia);
   }
 
   changeTipoPessoa(event: any) {
@@ -131,24 +139,28 @@ export class EditarPessoaComponent implements OnInit {
     this.editarPessoa.controls['senha'].setValidators(this.senhaValidador);
   }
 
-  captureIdResponsavel(nomeResp: String) {
-    this.pessoaService.getAllPessoas('', 'RESPONSAVEL', true).subscribe(pessoa => {
-      for (let i = 0; i < pessoa.length; i++) {
-        if(pessoa[i].nome == nomeResp) {
-          this.editarPessoa.value.responsavel = pessoa[i].id;
-        }
-      }
-    })
+  getNome(responsavelId: string) {
+    return this.listaResponsaveis.find(r => r.id === responsavelId)?.nome || '';
   }
 
-  captureNomeResponsavel(event: any) {
-    this.pessoaService.getAllPessoas('', 'RESPONSAVEL', true).subscribe(pessoa => {
-      for (let i = 0; i < pessoa.length; i++) {
-        if(pessoa[i].id == event) {
-          this.editarPessoa.controls['responsavel'].setValue(pessoa[i].nome);
-        }
-      }
-    })
-  }
+  // captureIdResponsavel(nomeResp: string) {
+  //   this.pessoaService.getAllPessoas('', 'RESPONSAVEL', true).subscribe(pessoa => {
+  //     for (let i = 0; i < pessoa.length; i++) {
+  //       if (pessoa[i].nome == nomeResp) {
+  //         this.editarPessoa.value.responsavel = pessoa[i].id;
+  //       }
+  //     }
+  //   })
+  // }
+
+  // captureNomeResponsavel(event: any) {
+  //   this.pessoaService.getAllPessoas('', 'RESPONSAVEL', true).subscribe(pessoa => {
+  //     for (let i = 0; i < pessoa.length; i++) {
+  //       if (pessoa[i].id == event) {
+  //         this.editarPessoa.controls['responsavel'].setValue(pessoa[i].nome);
+  //       }
+  //     }
+  //   })
+  // }
 
 }

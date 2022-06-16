@@ -5,14 +5,13 @@
         <form [formGroup]="editarPessoa" (ngSubmit)="onSubmit()" class="container">
             <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="row" fxLayoutAlign="space-around center"
             fxLayoutAlign.sm="space-around center" fxLayoutAlign.xs="space-between stretch" style="margin-bottom: 15px;">
-                <fieldset fxFlex=100>
-                    <legend>Atribuições</legend>
+                <app-fieldset title="Atribuições" fxFlex=100>
                     <mat-radio-group formControlName="tipo_pessoa" (change)="changeTipoPessoa($event)">
                         <mat-radio-button *ngFor="let pessoa of tipoPessoa" [value]="pessoa.value" class="radio-button">
                             {{ pessoa.nome }}
                         </mat-radio-button>
                     </mat-radio-group>
-                </fieldset>
+                </app-fieldset>
             </div>
             <div fxLayout="column" style="margin-bottom: 15px;">
                 <div fxLayout="row" fxLayoutGap="2%" fxLayout.xs="column" fxLayout.sm="row" fxLayoutAlign="space-around center"
@@ -92,8 +91,7 @@
                 </div>
             </div>
             <div fxLayout="row" *ngIf="condicaoPessoa=='ALUNO'">
-                <fieldset fxFlex=100>
-                    <legend>Aluno</legend>
+                <app-fieldset title="Aluno" fxFlex=100>
                     <div fxLayout="row" fxLayoutGap="2%" fxLayout.xs="column" fxLayout.sm="row" fxLayoutAlign="start center"
                     fxLayoutAlign.sm="space-around center" fxLayoutAlign.xs="space-between stretch">
                         <mat-form-field appearance="legacy" fxFlex=25>
@@ -111,8 +109,8 @@
                             <mat-label>Responsável</mat-label>
                             <input matInput type="text" name="responsavel" formControlName="responsavel"
                                 [matAutocomplete]="autoResp" required>
-                            <mat-autocomplete #autoResp="matAutocomplete">
-                                <mat-option *ngFor="let resp of listaResponsaveis" [value]="resp.nome">
+                            <mat-autocomplete #autoResp="matAutocomplete" [displayWith]="getNome.bind(this)">
+                                <mat-option *ngFor="let resp of listaResponsaveis" [value]="resp.id">
                                     {{resp.nome | titlecase}}
                                 </mat-option>
                             </mat-autocomplete>
@@ -124,19 +122,17 @@
                             <mat-label>Turma</mat-label>
                             <mat-select name="turmaSelecionada" formControlName="turmaSelecionada" required>
                                 <mat-option *ngFor="let turma of turmas" [value]="turma.id">
-                                    {{turma.serie | titlecase}} - Turma {{turma.nome | titlecase}} - {{turma.turno |
-                                    titlecase}}
+                                    Série {{turma.serie | serieDePara}} - Turma {{turma.nome | titlecase}} - {{turma.turno | titlecase}}
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>
                     </div>
 
-                </fieldset>
+                </app-fieldset>
             </div>
 
             <div fxLayout="row" *ngIf="condicaoPessoa=='PROFESSOR'" >
-                <fieldset fxFlex=100>
-                    <legend>Professor</legend>
+                <app-fieldset title="Professor" fxFlex=100>
                     <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="row" fxLayoutAlign="start center"
                     fxLayoutAlign.sm="space-around center" fxLayoutAlign.xs="space-between stretch">
                         <mat-form-field appearance="legacy" fxFlex=25 [ngStyle.xs]="{'width': '100%'}">
@@ -148,7 +144,7 @@
                             </mat-select>
                         </mat-form-field>
                     </div>
-                </fieldset>
+                </app-fieldset>
             </div>
             <app-button class="save-button" [disabled]="editarPessoa.invalid">Alterar</app-button>
         </form>

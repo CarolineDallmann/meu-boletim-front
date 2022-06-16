@@ -3,14 +3,13 @@
     <app-card-conteudo>
         <form [formGroup]="cadastroPessoa" (ngSubmit)="onSubmit()" class="container">
             <div fxLayout="row" style="margin-bottom: 15px;">
-                <fieldset fxFlex=100>
-                    <legend>Atribuições</legend>
+                <app-fieldset title="Atribuições" fxFlex=100>
                     <mat-radio-group formControlName="tipo_pessoa" (change)="changeTipoPessoa($event)">
                         <mat-radio-button *ngFor="let pessoa of tipoPessoa" [value]="pessoa.value" class="radio-button">
                             {{ pessoa.nome }}
                         </mat-radio-button>
                     </mat-radio-group>
-                </fieldset>
+                </app-fieldset>
             </div>
             <div fxLayout="column" style="margin-bottom: 15px;">
                 <div fxLayout="row" fxLayoutGap="15px">
@@ -85,8 +84,7 @@
                 </div>
             </div>
             <div fxLayout="row" *ngIf="condicaoPessoa=='ALUNO'">
-                <fieldset fxFlex=100>
-                    <legend>Aluno</legend>
+                <app-fieldset title="Aluno" fxFlex=100>
                     <div fxLayout="row" fxLayoutGap="15px">
                         <mat-form-field appearance="legacy" fxFlex=25>
                             <mat-label>Nome da Mãe</mat-label>
@@ -102,9 +100,9 @@
                             <mat-label>Responsável</mat-label>
                             <input matInput type="text" name="responsavel" formControlName="responsavel"
                                 [matAutocomplete]="autoResp" required>
-                            <mat-autocomplete #autoResp="matAutocomplete">
-                                <mat-option *ngFor="let resp of listaResponsaveis" [value]="resp.nome">
-                                    {{resp.nome | titlecase}}
+                            <mat-autocomplete #autoResp="matAutocomplete" [displayWith]="getNome.bind(this)">
+                                <mat-option *ngFor="let resp of listaResponsaveis" [value]="resp.id">
+                                    {{resp.nome}}
                                 </mat-option>
                             </mat-autocomplete>
                         </mat-form-field>
@@ -114,19 +112,17 @@
                             <mat-label>Turma</mat-label>
                             <mat-select name="turmaSelecionada" formControlName="turmaSelecionada" required>
                                 <mat-option *ngFor="let turma of turmas" [value]="turma.id">
-                                    {{turma.serie | titlecase}} - Turma {{turma.nome | titlecase}} - {{turma.turno |
-                                    titlecase}}
+                                    Série {{turma.serie | serieDePara}} - Turma {{turma.nome | titlecase}} - {{turma.turno |titlecase}}
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>
                     </div>
 
-                </fieldset>
+                </app-fieldset>
             </div>
 
             <div fxLayout="row" *ngIf="condicaoPessoa=='PROFESSOR'">
-                <fieldset fxFlex=100>
-                    <legend>Professor</legend>
+                <app-fieldset title="Professor" fxFlex=100>
                     <div fxLayout="row">
                         <mat-form-field appearance="legacy" fxFlex=25>
                             <mat-label>Matéria</mat-label>
@@ -137,9 +133,10 @@
                             </mat-select>
                         </mat-form-field>
                     </div>
-                </fieldset>
+                </app-fieldset>
             </div>
-            <app-button class="save-button" [disabled]="cadastroPessoa.invalid">Salvar</app-button>
+            <app-button class="canto" [disabled]="cadastroPessoa.invalid">Salvar</app-button>
         </form>
+        
     </app-card-conteudo>
 </app-layout-principal>
