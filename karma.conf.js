@@ -73,32 +73,6 @@ module.exports = function (config) {
           subdir: 'html'
         }
       },
- 
-      // enforce percentage thresholds
-      // anything under these percentages will cause karma to fail with an exit code of 1 if not running in watch mode
-      thresholds: {
-        emitWarning: false, // set to `true` to not fail the test command when thresholds are not met
-        // thresholds for all files
-        global: {
-          statements: 100,
-          lines: 100,
-          branches: 100,
-          functions: 100
-        },
-        // thresholds per file
-        each: {
-          statements: 100,
-          lines: 100,
-          branches: 100,
-          functions: 100,
-          overrides: {
-            'baz/component/**/*.js': {
-              statements: 98
-            }
-          }
-        }
-      },
- 
       verbose: true // output config used by istanbul for debugging
     }
   });
