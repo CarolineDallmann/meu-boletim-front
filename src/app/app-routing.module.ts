@@ -22,14 +22,25 @@ const routes: Routes = [
   { path: 'opcoes', component: OpcoesComponent },
   { path: 'notas', component: NotasComponent },
   { path: 'notas/lancamento', component: NotasLancamentoComponent },
-  { path: 'turmas/lancamento', component: TurmasLancamentoComponent},
+  { path: 'turmas/lancamento', component: TurmasLancamentoComponent },
   { path: 'frequencias', component: FrequenciaComponent },
-  { path: 'cadastro', component: CadastrarPessoaComponent },
-  { path: 'editar', component: EditarPessoaComponent },
-  { path: 'alunos', component: BuscarPessoaComponent}, 
+
+  { path: 'alunos', component: BuscarPessoaComponent },
+  { path: 'alunos/cadastro', component: CadastrarPessoaComponent },
+  { path: 'alunos/editar', component: EditarPessoaComponent },
+
   { path: 'responsaveis', component: BuscarPessoaComponent },
+  { path: 'responsaveis/cadastro', component: CadastrarPessoaComponent },
+  { path: 'responsaveis/editar', component: EditarPessoaComponent },
+
   { path: 'professores', component: BuscarPessoaComponent },
+  { path: 'professores/cadastro', component: CadastrarPessoaComponent },
+  { path: 'professores/editar', component: EditarPessoaComponent },
+
   { path: 'secretaria', component: BuscarPessoaComponent },
+  { path: 'secretaria/cadastro', component: CadastrarPessoaComponent },
+  { path: 'secretaria/editar', component: EditarPessoaComponent },
+
   { path: 'boletim', component: VisulizacaoboletimComponent },
 ];
 
