@@ -6,6 +6,7 @@ import { TurmaService } from '../services/turma.service';
 import { Turma } from '../entities/turma.entity';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DataStoreService } from '../data-storage';
 
 
 @Component({
@@ -16,9 +17,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class TurmasLancamentoComponent implements OnInit {
 
   form: FormGroup = this.formBuilder.group({
-    id:  new FormControl(""),
+    id: new FormControl(""),
     nome: new FormControl("", [Validators.required]),
-    ano_letivo: new FormControl("", [Validators.required, Validators.min(2022)]),
+    anoLetivo: new FormControl("", [Validators.required, Validators.min(4)]),
     turno: new FormControl("", [Validators.required]),
     serie: new FormControl("", [Validators.required])
   })
@@ -28,24 +29,28 @@ export class TurmasLancamentoComponent implements OnInit {
 
   nome: string[] = []
   anoLetivo: number[] = []
-  
+
   tipoTurnos: string[] = Object.values(Turno)
   tipoSeries: string[] = Object.values(Serie)
-  
 
-  constructor(private formBuilder: FormBuilder, private turmaService: TurmaService, 
-    private route: ActivatedRoute, private snackBar: MatSnackBar, private router: Router) { }
+  isSmall = false
+
+  constructor(private formBuilder: FormBuilder, private turmaService: TurmaService,
+    private route: ActivatedRoute, private snackBar: MatSnackBar, private router: Router, 
+    private dataStorage: DataStoreService) { 
+      this.dataStorage.isSmall.subscribe((e)=>this.isSmall = e)
+    }
 
   ngOnInit(): void {
     const turmaId = this.route.snapshot.queryParamMap.get('turmaId')
-    if(turmaId){
-      this.turmaService.getOneTurma(turmaId).subscribe((turma)=>{
+    if (turmaId) {
+      this.turmaService.getOneTurma(turmaId).subscribe((turma) => {
         this.form.setValue(turma)
       })
     }
   }
 
-  salvar(){
+  salvar() {
     if (this.form.valid) {
       this.turmaService.salvarTurma(this.form.value).subscribe({
         next: (res) => {

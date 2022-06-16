@@ -1,5 +1,13 @@
-app-button {
-    position: absolute;
-    right: 12px;
-    bottom: 12px;  
+::ng-deep app-button.canto .mat-raised-button {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+}
+
+::ng-deep app-button[ng-reflect-full-size="true"].canto .mat-raised-button {
+  left: 12px;
+
+  &.full-size {
+    width: auto;
   }
+}

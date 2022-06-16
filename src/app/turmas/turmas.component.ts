@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Turma} from '../entities/turma.entity';
+import { Turma } from '../entities/turma.entity';
 import { TurmaService } from '../services/turma.service';
 import { Router } from '@angular/router';
+import { DataStoreService } from '../data-storage';
 
 
 @Component({
@@ -13,17 +14,18 @@ import { Router } from '@angular/router';
 export class TurmasComponent implements OnInit {
 
   turmas: Turma[] = [];
-  msg: string = '';
   displayedColumns: string[] = ['nome', 'anoLetivo', 'turno', 'serie', 'acoes'];
   turmaSelecionada = ''
   anoSelecionado = ''
   turnoSelecionado = ''
   serieSelecionada = ''
+  isSmall = false
 
-  constructor(private turmaService: TurmaService, private snackBar: MatSnackBar, private router: Router) { }
+  constructor(private turmaService: TurmaService, private snackBar: MatSnackBar, private router: Router, 
+    private dataStorage: DataStoreService) { this.dataStorage.isSmall.subscribe((e)=>this.isSmall = e)}
 
   ngOnInit(): void {
-    this.turmaService.getAllTurmas().subscribe((turmas) => { this.turmas = turmas }, error => { this.turmas = [];this.msg = error.error.msg});
+    this.turmaService.getAllTurmas().subscribe((turmas) => { this.turmas = turmas.sort((a, b) => a.serie.localeCompare(b.serie))});
   }
 
   navegarNovaTurma() {
