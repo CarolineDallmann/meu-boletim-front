@@ -1,16 +1,26 @@
-<mat-toolbar >
-  <span>{{ title}}</span>
+<mat-toolbar>
+  <span>{{ title }}</span>
 </mat-toolbar>
 
-<div class="container" 
-[ngClass.lt-lg]="{'sem-menu': hiddenMenu}" 
-[ngStyle.xs]="{'min-height': 'calc(100% - 56px)'}">
+<div
+  class="container"
+  [ngClass.lt-lg]="{ 'sem-menu': hiddenMenu }"
+  [ngStyle.xs]="{ 'min-height': 'calc(100% - 56px)' }"
+>
   <div class="esquerda" *ngIf="!hiddenMenu">
-    <img [class]="isSmall ? 'small' : 'normal'" src="../../../assets/logo.svg" alt="" />
+    <img
+      [class]="isSmall ? 'small' : 'normal'"
+      src="../../../assets/logo.svg"
+      alt=""
+    />
     <app-menu (navegateEvent)="setTitle($event)"></app-menu>
   </div>
 
-  <div class="direita" [ngClass.xs]="'direita-small'" [ngStyle.sm]="{'width': 'calc(100% - 181px)'}">
+  <div
+    class="direita"
+    [ngClass.xs]="'direita-small'"
+    [ngStyle.sm]="{ width: 'calc(100% - 181px)' }"
+  >
     <ng-content></ng-content>
     <!--ng-content entende que é para trocar o conteúdo aqui-->
   </div>

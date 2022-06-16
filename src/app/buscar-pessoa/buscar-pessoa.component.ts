@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataStoreService } from '../data-storage';
 import { Pessoa } from '../entities/pessoa.entity';
@@ -11,71 +11,92 @@ import { PessoaService } from '../services/pessoa.service';
   styleUrls: ['./buscar-pessoa.component.scss']
 })
 export class BuscarPessoaComponent implements OnInit {
-
-  displayedColumnsAlunos: string[] = ['nome', 'serie', 'turma', 'turno', 'editar'];
+  displayedColumnsAlunos: string[] = [
+    'nome',
+    'serie',
+    'turma',
+    'turno',
+    'editar'
+  ];
   displayedColumnsAdultos: string[] = ['nome', 'telefone', 'editar'];
   pessoas: any = [];
-  msg: string = '';
+  msg = '';
   tipoPessoa = '';
   checkInitivo = false;
   pesquisar = '';
-  tipo: string = '';
-  isSmall = false
+  tipo = '';
+  isSmall = false;
 
-  constructor(private pessoaService: PessoaService, private route: ActivatedRoute, private router: Router,
-    private dataStorage: DataStoreService) {
-    this.dataStorage.isSmall.subscribe((e) => this.isSmall = e)
+  constructor(
+    private pessoaService: PessoaService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private dataStorage: DataStoreService
+  ) {
+    this.dataStorage.isSmall.subscribe((e) => (this.isSmall = e));
   }
 
   ngOnInit(): void {
     this.tipoPessoa = this.route.snapshot.url[0].path;
     //this.filterTipoPessoa(this.tipoPessoa);
-    this.pessoaService.getAllPessoas(this.pesquisar, this.filterTipoPessoa(this.tipoPessoa), false).subscribe(pessoa => {
-      this.pessoas = pessoa.sort((a, b) => a.nome.localeCompare(b.nome));
-    })
+    this.pessoaService
+      .getAllPessoas(
+        this.pesquisar,
+        this.filterTipoPessoa(this.tipoPessoa),
+        false
+      )
+      .subscribe((pessoa) => {
+        this.pessoas = pessoa.sort((a, b) => a.nome.localeCompare(b.nome));
+      });
   }
 
   onNomeChange() {
-    this.pessoaService.getAllPessoas(this.pesquisar, this.tipoPessoa, false).subscribe(pessoa => {
-      this.pessoas = pessoa.sort((a, b) => a.nome.localeCompare(b.nome));
-    })
+    this.pessoaService
+      .getAllPessoas(this.pesquisar, this.tipoPessoa, false)
+      .subscribe((pessoa) => {
+        this.pessoas = pessoa.sort((a, b) => a.nome.localeCompare(b.nome));
+      });
   }
 
   onInativoChange() {
     if (this.checkInitivo == true) {
-      this.pessoaService.getAllPessoas('', this.tipoPessoa, true).subscribe(pessoa => {
-        this.pessoas = pessoa.sort((a, b) => a.nome.localeCompare(b.nome));
-      })
+      this.pessoaService
+        .getAllPessoas('', this.tipoPessoa, true)
+        .subscribe((pessoa) => {
+          this.pessoas = pessoa.sort((a, b) => a.nome.localeCompare(b.nome));
+        });
     } else {
-      this.pessoaService.getAllPessoas('', this.tipoPessoa, false).subscribe(pessoa => {
-        this.pessoas = pessoa.sort((a, b) => a.nome.localeCompare(b.nome));
-      })
+      this.pessoaService
+        .getAllPessoas('', this.tipoPessoa, false)
+        .subscribe((pessoa) => {
+          this.pessoas = pessoa.sort((a, b) => a.nome.localeCompare(b.nome));
+        });
     }
   }
 
   filterTipoPessoa(tipo: string): TipoPessoa {
-    if (tipo == "alunos") {
-      return TipoPessoa.ALUNO
+    if (tipo == 'alunos') {
+      return TipoPessoa.ALUNO;
     }
-    if (tipo == "responsaveis") {
-      return TipoPessoa.RESPONSAVEL
+    if (tipo == 'responsaveis') {
+      return TipoPessoa.RESPONSAVEL;
     }
-    if (tipo == "professores") {
-      return TipoPessoa.PROFESSOR
+    if (tipo == 'professores') {
+      return TipoPessoa.PROFESSOR;
     }
 
-    return TipoPessoa.SECRETARIA
+    return TipoPessoa.SECRETARIA;
   }
 
   editar(pessoa: Pessoa) {
     this.router.navigate([`${this.tipoPessoa}/editar/`], {
       queryParams: { pessoaId: pessoa.id }
-    })
+    });
   }
 
   cadastrar() {
     this.router.navigate([`${this.tipoPessoa}/cadastro/`], {
       queryParams: { tipoPessoa: this.filterTipoPessoa(this.tipoPessoa) }
-    })
+    });
   }
 }

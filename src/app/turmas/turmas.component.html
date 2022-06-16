@@ -1,64 +1,81 @@
 <app-layout-principal>
-    <app-card-filtro>
-        <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="row" fxLayoutAlign="end center"
-            fxLayoutAlign.xs="space-between stretch" fxFlex>
-            <div>
-                <app-button (click)="navegarNovaTurma()" [fullSize]="isSmall">Adicionar nova turma</app-button>
-            </div>
-        </div>
-    </app-card-filtro>
+  <app-card-filtro>
+    <div
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayout.sm="row"
+      fxLayoutAlign="end center"
+      fxLayoutAlign.xs="space-between stretch"
+      fxFlex
+    >
+      <div>
+        <app-button (click)="navegarNovaTurma()" [fullSize]="isSmall"
+          >Adicionar nova turma</app-button
+        >
+      </div>
+    </div>
+  </app-card-filtro>
 
-    <app-card-conteudo>
-        <div [ngStyle.sm]="{'overflow-x': 'auto', 'max-width': '100%'}" [ngStyle.xs]="{'overflow-x': 'auto', 'max-width': '100%'}">
-            <table mat-table [dataSource]="turmas" [ngStyle.sm]="{'min-width': '576px'}" [ngStyle.xs]="{'min-width': '576px'}">
-                <ng-container matColumnDef="nome">
-                    <th mat-header-cell *matHeaderCellDef> Nome </th>
-                    <td mat-cell *matCellDef="let turmas">{{turmas.nome | titlecase}} </td>
+  <app-card-conteudo>
+    <div
+      [ngStyle.sm]="{ 'overflow-x': 'auto', 'max-width': '100%' }"
+      [ngStyle.xs]="{ 'overflow-x': 'auto', 'max-width': '100%' }"
+    >
+      <table
+        mat-table
+        [dataSource]="turmas"
+        [ngStyle.sm]="{ 'min-width': '576px' }"
+        [ngStyle.xs]="{ 'min-width': '576px' }"
+      >
+        <ng-container matColumnDef="nome">
+          <th mat-header-cell *matHeaderCellDef>Nome</th>
+          <td mat-cell *matCellDef="let turmas">
+            {{ turmas.nome | titlecase }}
+          </td>
+        </ng-container>
 
-                </ng-container>
+        <ng-container matColumnDef="anoLetivo">
+          <th mat-header-cell *matHeaderCellDef>Ano Letivo</th>
+          <td mat-cell *matCellDef="let turmas">{{ turmas.anoLetivo }}</td>
+        </ng-container>
 
-                <ng-container matColumnDef="anoLetivo">
-                    <th mat-header-cell *matHeaderCellDef> Ano Letivo </th>
-                    <td mat-cell *matCellDef="let turmas"> {{turmas.anoLetivo}} </td>
-                </ng-container>
+        <ng-container matColumnDef="turno">
+          <th mat-header-cell *matHeaderCellDef>Turno</th>
+          <td mat-cell *matCellDef="let turmas">
+            {{ turmas.turno | titlecase }}
+          </td>
+        </ng-container>
 
-                <ng-container matColumnDef="turno">
-                    <th mat-header-cell *matHeaderCellDef> Turno </th>
-                    <td mat-cell *matCellDef="let turmas"> {{turmas.turno | titlecase}} </td>
-                </ng-container>
+        <ng-container matColumnDef="serie">
+          <th mat-header-cell *matHeaderCellDef>Série</th>
+          <td mat-cell *matCellDef="let turmas">
+            {{ turmas.serie | serieDePara }}
+          </td>
+        </ng-container>
 
-                <ng-container matColumnDef="serie">
-                    <th mat-header-cell *matHeaderCellDef> Série </th>
-                    <td mat-cell *matCellDef="let turmas"> {{turmas.serie | serieDePara}} </td>
-                </ng-container>
+        <ng-container matColumnDef="acoes">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let turma" style="text-align: right">
+            <app-button (click)="editar(turma)">
+              <span class="material-icons"> edit </span>
+            </app-button>
 
-                <ng-container matColumnDef="acoes">
-                    <th mat-header-cell *matHeaderCellDef></th>
-                    <td mat-cell *matCellDef="let turma" style="text-align: right;">
+            <app-button
+              type="danger"
+              [leftSpace]="true"
+              (click)="excluir(turma)"
+            >
+              <span class="material-icons"> delete_outline </span>
+            </app-button>
+          </td>
+        </ng-container>
 
-                        <app-button (click)="editar(turma)">
-                            <span class="material-icons">
-                                edit
-                            </span>
-                        </app-button>
-
-                        <app-button type="danger" [leftSpace]="true" (click)="excluir(turma)">
-                            <span class="material-icons">
-                                delete_outline
-                            </span>
-                        </app-button>
-
-                    </td>
-                </ng-container>
-
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-            </table>
-        </div>
-        <app-pgempty *ngIf="!turmas">
-            {{ "Não foram encontrados resultados"}}
-        </app-pgempty>
-
-    </app-card-conteudo>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+    <app-pgempty *ngIf="!turmas">
+      {{ 'Não foram encontrados resultados' }}
+    </app-pgempty>
+  </app-card-conteudo>
 </app-layout-principal>

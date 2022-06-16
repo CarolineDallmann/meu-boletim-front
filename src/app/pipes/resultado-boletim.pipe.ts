@@ -5,7 +5,6 @@ import { ResultadoBoletim } from '../enums/resultado-boletim.enum';
   name: 'resultadoBoletim'
 })
 export class ResultadoBoletimPipe implements PipeTransform {
-
   transform(value: ResultadoBoletim): string {
     switch (value) {
       case ResultadoBoletim.APROVADO:
@@ -15,8 +14,7 @@ export class ResultadoBoletimPipe implements PipeTransform {
       case ResultadoBoletim.REPROVADO_POR_FALTAS:
         return 'Reprovado por faltas';
       default:
-        return ''
+        return '';
     }
   }
-
 }

@@ -8,9 +8,8 @@ describe('VisulizacaoboletimComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ VisulizacaoboletimComponent ]
-    })
-    .compileComponents();
+      declarations: [VisulizacaoboletimComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {

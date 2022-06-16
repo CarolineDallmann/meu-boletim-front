@@ -90,7 +90,7 @@
                     </mat-checkbox>
                 </div>
             </div>
-            <div fxLayout="row" *ngIf="condicaoPessoa=='ALUNO'">
+            <div fxLayout="row" *ngIf="condicaoPessoa==='ALUNO'">
                 <app-fieldset title="Aluno" fxFlex=100>
                     <div fxLayout="row" fxLayoutGap="2%" fxLayout.xs="column" fxLayout.sm="row" fxLayoutAlign="start center"
                     fxLayoutAlign.sm="space-around center" fxLayoutAlign.xs="space-between stretch">
@@ -131,7 +131,7 @@
                 </app-fieldset>
             </div>
 
-            <div fxLayout="row" *ngIf="condicaoPessoa=='PROFESSOR'" >
+            <div fxLayout="row" *ngIf="condicaoPessoa==='PROFESSOR'" >
                 <app-fieldset title="Professor" fxFlex=100>
                     <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="row" fxLayoutAlign="start center"
                     fxLayoutAlign.sm="space-around center" fxLayoutAlign.xs="space-between stretch">

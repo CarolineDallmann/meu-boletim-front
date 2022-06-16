@@ -2,8 +2,7 @@ import {
   AfterContentChecked,
   Component,
   EventEmitter,
-  Input,
-  Output,
+  Output
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataStoreService } from 'src/app/data-storage';
@@ -17,7 +16,7 @@ type Menu = {
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.scss'],
+  styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements AfterContentChecked {
   currentRoute = '';
@@ -29,21 +28,25 @@ export class MenuComponent implements AfterContentChecked {
 
   isSmall = false;
 
-  constructor(private router: Router, private route: ActivatedRoute, private dataStorage: DataStoreService) {
-    this.route.url.subscribe(e => {
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private dataStorage: DataStoreService
+  ) {
+    this.route.url.subscribe((e) => {
       if (e[0]) {
         this.currentRoute = e[0].path;
       }
     });
 
-    this.dataStorage.isSmall.subscribe((e) => this.isSmall = e)
+    this.dataStorage.isSmall.subscribe((e) => (this.isSmall = e));
 
     this.dataStorage.usuarioConectado.subscribe((usuarioConectado) => {
       if (usuarioConectado?.tipoPessoa === TipoPessoa.PROFESSOR) {
         this.itensMenu = [
           { path: 'notas', title: 'Notas' },
-          { path: 'frequencias', title: 'Frequências' },
-        ]
+          { path: 'frequencias', title: 'Frequências' }
+        ];
       }
       if (usuarioConectado?.tipoPessoa === TipoPessoa.SECRETARIA) {
         this.itensMenu = [
@@ -56,14 +59,14 @@ export class MenuComponent implements AfterContentChecked {
           { path: 'notas', title: 'Notas' },
           { path: 'frequencias', title: 'Frequências' },
           { path: 'opcoes', title: 'Opções' }
-        ]
+        ];
       }
-    })
+    });
   }
 
   ngAfterContentChecked() {
     this.navegateEvent.emit(
-      this.itensMenu.find(m => m.path === this.currentRoute)?.title
+      this.itensMenu.find((m) => m.path === this.currentRoute)?.title
     );
   }
 
@@ -72,6 +75,6 @@ export class MenuComponent implements AfterContentChecked {
   }
 
   sairSistema() {
-    this.dataStorage.updateUsuario(undefined)
+    this.dataStorage.updateUsuario(undefined);
   }
 }

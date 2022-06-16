@@ -16,11 +16,10 @@ import { TurmaService } from '../services/turma.service';
   styleUrls: ['./cadastrar-pessoa.component.scss']
 })
 export class CadastrarPessoaComponent implements OnInit {
-
   cadastroPessoa: FormGroup = new FormGroup({});
   generos: string[] = Object.values(Genero);
-  generoSelecionado: string = '';
-  checked: boolean = false;
+  generoSelecionado = '';
+  checked = false;
   tipoPessoa: Array<any> = [
     { nome: 'Aluno', value: 'ALUNO' },
     { nome: 'Responsável', value: 'RESPONSAVEL' },
@@ -33,26 +32,49 @@ export class CadastrarPessoaComponent implements OnInit {
   listaResponsaveis: Pessoa[] = [];
   tipo: any;
 
-  configSenha: string = `A senha deve conter, no mínino, 8 caracteres da seguinte forma:
+  configSenha = `A senha deve conter, no mínino, 8 caracteres da seguinte forma:
     - Pelo menos 1 letra MAIÚSCULA;
     - Pelo menos 1 letra minúscula;
     - Pelo menos 1 número;
     - E caracter especial do tipo: !@#$`;
 
-  emailValidator = [Validators.maxLength(250), Validators.minLength(5), Validators.pattern(/.+@.+\..+/), Validators.required];
-  senhaValidador = [Validators.pattern('^[0-9a-zA-Z!@#$]{8,}$'), Validators.required];
+  emailValidator = [
+    Validators.maxLength(250),
+    Validators.minLength(5),
+    Validators.pattern(/.+@.+\..+/),
+    Validators.required
+  ];
+  senhaValidador = [
+    Validators.pattern('^[0-9a-zA-Z!@#$]{8,}$'),
+    Validators.required
+  ];
 
-  constructor(private fb: FormBuilder, private pessoaService: PessoaService, private turmaService: TurmaService, private materiaService: MateriaService,
-    private route: ActivatedRoute, private router: Router, private snackBar: MatSnackBar) { }
+  constructor(
+    private fb: FormBuilder,
+    private pessoaService: PessoaService,
+    private turmaService: TurmaService,
+    private materiaService: MateriaService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     this.tipo = this.route.snapshot.queryParamMap.get('tipoPessoa');
     this.checked = true;
-    this.turmaService.getAllTurmas().subscribe((turmas) => { this.turmas = turmas })
-    this.materiaService.getAllMaterias().subscribe((materia) => { this.materias = materia })
+    this.turmaService.getAllTurmas().subscribe((turmas) => {
+      this.turmas = turmas;
+    });
+    this.materiaService.getAllMaterias().subscribe((materia) => {
+      this.materias = materia;
+    });
     this.createForm();
     this.condicaoPessoa = this.cadastroPessoa.value.tipo_pessoa;
-    this.pessoaService.getAllPessoas('', 'RESPONSAVEL', true).subscribe(pessoa => { this.listaResponsaveis = pessoa })
+    this.pessoaService
+      .getAllPessoas('', 'RESPONSAVEL', true)
+      .subscribe((pessoa) => {
+        this.listaResponsaveis = pessoa;
+      });
   }
 
   createForm() {
@@ -82,34 +104,38 @@ export class CadastrarPessoaComponent implements OnInit {
 
   onSubmit() {
     if (this.cadastroPessoa.valid) {
-      this.pessoaService.savePessoa({
-        ...this.cadastroPessoa.value,
-        datanasc: this.dataFormat(this.cadastroPessoa.value.datanasc)
-      }).subscribe({
-        next: (res) => {
-          this.snackBar.open(res.msg, undefined, { duration: 4000 })
-          if (this.cadastroPessoa.value.tipo_pessoa === 'ALUNO') {
-            this.router.navigate(['/alunos'])
-          } else if (this.cadastroPessoa.value.tipo_pessoa === 'RESPONSAVEL') {
-            this.router.navigate(['/responsaveis'])
-          } else if (this.cadastroPessoa.value.tipo_pessoa === 'PROFESSOR') {
-            this.router.navigate(['/professores'])
-          } else if (this.cadastroPessoa.value.tipo_pessoa === 'SECRETARIA') {
-            this.router.navigate(['/secretaria'])
+      this.pessoaService
+        .savePessoa({
+          ...this.cadastroPessoa.value,
+          datanasc: this.dataFormat(this.cadastroPessoa.value.datanasc)
+        })
+        .subscribe({
+          next: (res) => {
+            this.snackBar.open(res.msg, undefined, { duration: 4000 });
+            if (this.cadastroPessoa.value.tipo_pessoa === 'ALUNO') {
+              this.router.navigate(['/alunos']);
+            } else if (
+              this.cadastroPessoa.value.tipo_pessoa === 'RESPONSAVEL'
+            ) {
+              this.router.navigate(['/responsaveis']);
+            } else if (this.cadastroPessoa.value.tipo_pessoa === 'PROFESSOR') {
+              this.router.navigate(['/professores']);
+            } else if (this.cadastroPessoa.value.tipo_pessoa === 'SECRETARIA') {
+              this.router.navigate(['/secretaria']);
+            }
+          },
+          error: (err) => {
+            this.snackBar.open(err.error.msg, undefined, { duration: 5000 });
           }
-        },
-        error: (err) => {
-          this.snackBar.open(err.error.msg, undefined, { duration: 5000 })
-        }
-      })
+        });
     }
   }
 
   dataFormat(data: Date) {
-    let dia = data.getDate();
-    let mes = data.getMonth() + 1;
-    let ano = data.getFullYear();
-    return (ano + "-" + mes + "-" + dia);
+    const dia = data.getDate();
+    const mes = data.getMonth() + 1;
+    const ano = data.getFullYear();
+    return ano + '-' + mes + '-' + dia;
   }
 
   changeTipoPessoa(event: any) {
@@ -117,9 +143,8 @@ export class CadastrarPessoaComponent implements OnInit {
   }
 
   getNome(responsavelId: string) {
-    return this.listaResponsaveis.find(r => r.id === responsavelId)?.nome || '';
+    return (
+      this.listaResponsaveis.find((r) => r.id === responsavelId)?.nome || ''
+    );
   }
-
-
-
 }

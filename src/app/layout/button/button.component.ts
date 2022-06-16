@@ -1,26 +1,20 @@
-import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-button',
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.scss']
 })
-export class ButtonComponent implements OnInit {
+export class ButtonComponent {
+  @Input()
+  type: 'primary' | 'danger' = 'primary';
 
   @Input()
-  type: "primary" | "danger" = "primary"
+  leftSpace = false;
 
   @Input()
-  leftSpace = false
-
-  @Input()
-  disabled = false
+  disabled = false;
 
   @Input()
   fullSize = false;
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
 }

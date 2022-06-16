@@ -1,7 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { Boletim, BoletimResponse, ConfigEscola, ConfigEscolaResponse } from '../entities/boletim.entity';
+import {
+  Boletim,
+  BoletimResponse,
+  ConfigEscola,
+  ConfigEscolaResponse
+} from '../entities/boletim.entity';
 import { Materia } from '../entities/materia.entity';
 import { MsgResponse } from '../entities/msg-response.entity';
 import { BuscaFilhoResponse } from '../entities/pessoa.entity';
@@ -9,14 +14,18 @@ import { ResultadoBoletim } from '../enums/resultado-boletim.enum';
 
 @Injectable()
 export class BoletimVisualizacaoService {
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getBuscarFilhos(id: string) {
-    return this.http.get<BuscaFilhoResponse[]>(`${environment.api}consultar-filhos`, { params: { id } })
+    return this.http.get<BuscaFilhoResponse[]>(
+      `${environment.api}consultar-filhos`,
+      { params: { id } }
+    );
   }
 
-  configEscolaResponseToConfigEscola(configEscolaResponse: ConfigEscolaResponse): ConfigEscola {
+  configEscolaResponseToConfigEscola(
+    configEscolaResponse: ConfigEscolaResponse
+  ): ConfigEscola {
     return {
       ...configEscolaResponse,
       inicioBim1: new Date(configEscolaResponse.inicioBim1),
@@ -26,73 +35,111 @@ export class BoletimVisualizacaoService {
       inicioBim3: new Date(configEscolaResponse.inicioBim3),
       fimBim3: new Date(configEscolaResponse.fimBim3),
       inicioBim4: new Date(configEscolaResponse.inicioBim4),
-      fimBim4: new Date(configEscolaResponse.fimBim4),
-    }
+      fimBim4: new Date(configEscolaResponse.fimBim4)
+    };
   }
   getConfigEscola() {
-    return this.http.get<ConfigEscolaResponse>(`${environment.api}config-escola`)
+    return this.http.get<ConfigEscolaResponse>(
+      `${environment.api}config-escola`
+    );
   }
 
-  postConfigEscola(body: ConfigEscola){
-    return this.http.post<MsgResponse>(`${environment.api}config-escola`, body)
+  postConfigEscola(body: ConfigEscola) {
+    return this.http.post<MsgResponse>(`${environment.api}config-escola`, body);
   }
 
   getBoletim(alunoId: string, anoLetivo: number) {
-    return this.http.get<BoletimResponse[]>(`${environment.apijava}boletim`, { params: { alunoId, anoLetivo } })
+    return this.http.get<BoletimResponse[]>(`${environment.apijava}boletim`, {
+      params: { alunoId, anoLetivo }
+    });
   }
 
-  preparaBoletim(boletim: BoletimResponse[], materias: Materia[], configEscola: ConfigEscola): Boletim[] {
-    const dataAtual = environment.datateste ? new Date(environment.datateste) : new Date()
-    const mostrarFinal = dataAtual > configEscola.fimBim4
+  preparaBoletim(
+    boletim: BoletimResponse[],
+    materias: Materia[],
+    configEscola: ConfigEscola
+  ): Boletim[] {
+    const dataAtual = environment.datateste
+      ? new Date(environment.datateste)
+      : new Date();
+    const mostrarFinal = dataAtual > configEscola.fimBim4;
 
     return boletim.map((b) => {
       return {
         ...b,
         materia: materias.find((m) => m.id === b.materiaId)?.nome || '',
         mediaFinal: mostrarFinal ? this.mediaFinal(b).toString() : '',
-        resultado: mostrarFinal ? this.resultadoParcial(b, configEscola) : ResultadoBoletim.INDETERMINADO
-      }
-    })
+        resultado: mostrarFinal
+          ? this.resultadoParcial(b, configEscola)
+          : ResultadoBoletim.INDETERMINADO
+      };
+    });
   }
 
-  mediaFinal({ notaBim1, notaBim2, notaBim3, notaBim4 }: BoletimResponse): number {
-    return (notaBim1 + notaBim2 + notaBim3 + notaBim4) / 4
+  mediaFinal({
+    notaBim1,
+    notaBim2,
+    notaBim3,
+    notaBim4
+  }: BoletimResponse): number {
+    return (notaBim1 + notaBim2 + notaBim3 + notaBim4) / 4;
   }
 
-  freqAprovacao({ frequenciaAprovacao }: ConfigEscola,
-    { qtdeFaltaBim1, qtdeFaltaBim2, qtdeFaltaBim3, qtdeFaltaBim4, qtdePresenca }: BoletimResponse): boolean {
-    const qtdeAulas = qtdeFaltaBim1 + qtdeFaltaBim2 + qtdeFaltaBim3 + qtdeFaltaBim4 + qtdePresenca
-    const freqEsperada = (qtdeAulas * frequenciaAprovacao) / 100
-    let status: boolean = false
+  freqAprovacao(
+    { frequenciaAprovacao }: ConfigEscola,
+    {
+      qtdeFaltaBim1,
+      qtdeFaltaBim2,
+      qtdeFaltaBim3,
+      qtdeFaltaBim4,
+      qtdePresenca
+    }: BoletimResponse
+  ): boolean {
+    const qtdeAulas =
+      qtdeFaltaBim1 +
+      qtdeFaltaBim2 +
+      qtdeFaltaBim3 +
+      qtdeFaltaBim4 +
+      qtdePresenca;
+    const freqEsperada = (qtdeAulas * frequenciaAprovacao) / 100;
+    let status = false;
     if (qtdePresenca < freqEsperada) {
-      status = false
+      status = false;
     }
     if (qtdePresenca > freqEsperada) {
-      status = true
+      status = true;
     }
-    return status
+    return status;
   }
 
   resultadoParcial(b: BoletimResponse, config: ConfigEscola) {
-    if (this.mediaFinal(b) >= config.mediaAprovacao && this.freqAprovacao(config, b)) {
-      return ResultadoBoletim.APROVADO
+    if (
+      this.mediaFinal(b) >= config.mediaAprovacao &&
+      this.freqAprovacao(config, b)
+    ) {
+      return ResultadoBoletim.APROVADO;
     }
-    if (this.mediaFinal(b) >= config.mediaAprovacao && !this.freqAprovacao(config, b)) {
-      return ResultadoBoletim.REPROVADO_POR_FALTAS
+    if (
+      this.mediaFinal(b) >= config.mediaAprovacao &&
+      !this.freqAprovacao(config, b)
+    ) {
+      return ResultadoBoletim.REPROVADO_POR_FALTAS;
     }
-    return ResultadoBoletim.REPROVADO
+    return ResultadoBoletim.REPROVADO;
   }
 
   avFinal(bol: Boletim[]): ResultadoBoletim {
     if (bol.find((b) => b.resultado === ResultadoBoletim.REPROVADO)) {
-      return ResultadoBoletim.REPROVADO
+      return ResultadoBoletim.REPROVADO;
     }
     if (bol.every((b) => b.resultado === ResultadoBoletim.APROVADO)) {
-      return ResultadoBoletim.APROVADO
+      return ResultadoBoletim.APROVADO;
     }
-    if (bol.every((b) => b.resultado === ResultadoBoletim.REPROVADO_POR_FALTAS)) {
-      return ResultadoBoletim.REPROVADO_POR_FALTAS
+    if (
+      bol.every((b) => b.resultado === ResultadoBoletim.REPROVADO_POR_FALTAS)
+    ) {
+      return ResultadoBoletim.REPROVADO_POR_FALTAS;
     }
-    return ResultadoBoletim.INDETERMINADO
+    return ResultadoBoletim.INDETERMINADO;
   }
 }

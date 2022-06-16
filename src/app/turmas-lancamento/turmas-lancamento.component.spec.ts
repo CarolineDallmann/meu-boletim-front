@@ -8,9 +8,8 @@ describe('TurmasLancamentoComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TurmasLancamentoComponent ]
-    })
-    .compileComponents();
+      declarations: [TurmasLancamentoComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {

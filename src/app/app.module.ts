@@ -24,12 +24,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NotasLancamentoComponent } from './notas-lancamento/notas-lancamento.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { FrequenciaComponent } from './frequencia/frequencia.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FrequenciaService } from './services/frequencia.service';
 import { MatRadioModule } from '@angular/material/radio';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { VisulizacaoboletimComponent } from './visulizacaoboletim/visulizacaoboletim.component';
 import { BoletimVisualizacaoService } from './services/boletim-visualizacao.service';
 import { OpcoesComponent } from './opcoes/opcoes.component';
@@ -42,7 +42,6 @@ import { BuscarPessoaComponent } from './buscar-pessoa/buscar-pessoa.component';
 import { EditarPessoaComponent } from './editar-pessoa/editar-pessoa.component';
 import { PessoaService } from './services/pessoa.service';
 import { TurmasLancamentoComponent } from './turmas-lancamento/turmas-lancamento.component';
-
 
 @NgModule({
   declarations: [
@@ -63,7 +62,7 @@ import { TurmasLancamentoComponent } from './turmas-lancamento/turmas-lancamento
     SerieDeParaPipe,
     CheckNotaPipe,
     ResultadoBoletimPipe,
-    TurmasLancamentoComponent,
+    TurmasLancamentoComponent
   ],
   imports: [
     BrowserModule,
@@ -97,8 +96,8 @@ import { TurmasLancamentoComponent } from './turmas-lancamento/turmas-lancamento
     PessoaService,
     BoletimVisualizacaoService,
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
-    LoginService,
+    LoginService
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

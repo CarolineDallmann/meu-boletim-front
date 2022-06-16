@@ -41,11 +41,11 @@ const routes: Routes = [
   { path: 'secretaria/cadastro', component: CadastrarPessoaComponent },
   { path: 'secretaria/editar', component: EditarPessoaComponent },
 
-  { path: 'boletim', component: VisulizacaoboletimComponent },
+  { path: 'boletim', component: VisulizacaoboletimComponent }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

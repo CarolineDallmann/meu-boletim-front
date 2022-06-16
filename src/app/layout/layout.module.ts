@@ -14,7 +14,6 @@ import { RouterModule } from '@angular/router';
 import { FieldsetComponent } from './fieldset/fieldset.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-
 @NgModule({
   declarations: [
     LayoutPrincipalComponent,
@@ -41,6 +40,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     ButtonComponent,
     PgemptyComponent,
     FieldsetComponent
-  ],
+  ]
 })
-export class LayoutModule { }
+export class LayoutModule {}

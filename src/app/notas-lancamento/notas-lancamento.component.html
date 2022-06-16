@@ -1,82 +1,150 @@
 <app-layout-principal>
-    <app-card-filtro>
-        <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="row wrap" fxLayoutAlign="space-around center"
-            fxLayoutAlign.sm="space-around center" fxLayoutAlign.xs="space-between stretch" fxFlex>
+  <app-card-filtro>
+    <div
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayout.sm="row wrap"
+      fxLayoutAlign="space-around center"
+      fxLayoutAlign.sm="space-around center"
+      fxLayoutAlign.xs="space-between stretch"
+      fxFlex
+    >
+      <div fxFlex.sm="50">
+        <mat-form-field
+          appearance="legacy"
+          [ngStyle.xs]="{ width: '100%' }"
+          [ngStyle.sm]="{ width: '80%' }"
+          [ngStyle.md]="{ width: '180px' }"
+        >
+          <mat-label>Turma</mat-label>
+          <mat-select
+            (selectionChange)="onTurmaChange($event.value)"
+            [value]="turmaSelecionada"
+            [disabled]="disabledTurma"
+          >
+            <mat-option *ngFor="let turma of turmas" [value]="turma.id">
+              Série {{ turma.serie | serieDePara }} - Turma
+              {{ turma.nome | titlecase }} - {{ turma.turno | titlecase }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
 
-            <div fxFlex.sm="50">
-                <mat-form-field appearance="legacy" [ngStyle.xs]="{'width': '100%'}" [ngStyle.sm]="{'width': '80%'}"
-                    [ngStyle.md]="{'width': '180px'}">
-                    <mat-label>Turma</mat-label>
-                    <mat-select (selectionChange)="onTurmaChange($event.value)" [value]="turmaSelecionada"
-                        [disabled]="disabledTurma">
-                        <mat-option *ngFor="let turma of turmas" [value]="turma.id">
-                            Série {{turma.serie | serieDePara}} - Turma {{turma.nome | titlecase}} - {{turma.turno |
-                            titlecase}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
+      <div fxFlex.sm="50">
+        <mat-form-field
+          appearance="legacy"
+          [ngStyle.xs]="{ width: '100%' }"
+          [ngStyle.sm]="{ width: '80%' }"
+          [ngStyle.md]="{ width: '180px' }"
+        >
+          <mat-label>Matéria</mat-label>
+          <mat-select
+            (selectionChange)="onMateriaChange($event.value)"
+            [value]="materiaSelecionada"
+          >
+            <mat-option *ngFor="let materia of materias" [value]="materia.id">
+              {{ materia.nome | titlecase }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
 
-            <div fxFlex.sm="50">
-                <mat-form-field appearance="legacy" [ngStyle.xs]="{'width': '100%'}" [ngStyle.sm]="{'width': '80%'}"
-                    [ngStyle.md]="{'width': '180px'}">
-                    <mat-label>Matéria</mat-label>
-                    <mat-select (selectionChange)="onMateriaChange($event.value)" [value]="materiaSelecionada">
-                        <mat-option *ngFor="let materia of materias" [value]="materia.id">
-                            {{materia.nome | titlecase}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
+      <div fxFlex.sm="50">
+        <mat-form-field
+          appearance="legacy"
+          [ngStyle.xs]="{ width: '100%' }"
+          [ngStyle.sm]="{ width: '80%' }"
+          [ngStyle.md]="{ width: '180px' }"
+        >
+          <mat-label>Data</mat-label>
+          <input
+            matInput
+            [max]="maxDate"
+            [matDatepicker]="picker"
+            [value]="dataSelecionada"
+            (dateChange)="onDateChange($event.value)"
+            readonly=""
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
 
-            <div fxFlex.sm="50">
-                <mat-form-field appearance="legacy" [ngStyle.xs]="{'width': '100%'}" [ngStyle.sm]="{'width': '80%'}"
-                    [ngStyle.md]="{'width': '180px'}">
-                    <mat-label>Data</mat-label>
-                    <input matInput [max]="maxDate" [matDatepicker]="picker" [value]="dataSelecionada"
-                        (dateChange)="onDateChange($event.value)" readonly="">
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field>
-            </div>
+      <div fxFlex.sm="50">
+        <mat-form-field
+          appearance="legacy"
+          [ngStyle.xs]="{ width: '100%' }"
+          [ngStyle.sm]="{ width: '80%' }"
+          [ngStyle.md]="{ width: '180px' }"
+        >
+          <mat-label>Tipo da Atividade</mat-label>
+          <mat-select
+            (selectionChange)="onTipoChange($event.value)"
+            [value]="tipoSelecionado"
+          >
+            <mat-option *ngFor="let tipo of tipoAtividades" [value]="tipo">
+              {{ tipo | titlecase }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </app-card-filtro>
 
-            <div fxFlex.sm="50">
-                <mat-form-field appearance="legacy" [ngStyle.xs]="{'width': '100%'}" [ngStyle.sm]="{'width': '80%'}"
-                    [ngStyle.md]="{'width': '180px'}">
-                    <mat-label>Tipo da Atividade</mat-label>
-                    <mat-select (selectionChange)="onTipoChange($event.value)" [value]="tipoSelecionado">
-                        <mat-option *ngFor="let tipo of tipoAtividades" [value]="tipo">
-                            {{tipo | titlecase}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-        </div>
-    </app-card-filtro>
+  <app-card-conteudo [ngClass.xs]="'small'">
+    <div
+      [ngStyle.xs]="{
+        'overflow-x': 'auto',
+        'max-width': '100%',
+        flex: 1,
+        'margin-bottom': '40px'
+      }"
+    >
+      <table
+        *ngIf="turmaSelecionada"
+        mat-table
+        [dataSource]="notas"
+        [ngStyle.xs]="{ 'min-width': '300px' }"
+      >
+        <ng-container matColumnDef="aluno">
+          <th mat-header-cell *matHeaderCellDef>Aluno</th>
+          <td mat-cell *matCellDef="let nota">
+            {{ nota.aluno.nome | titlecase }}
+          </td>
+        </ng-container>
 
-    <app-card-conteudo [ngClass.xs]="'small'">
-        <div [ngStyle.xs]="{'overflow-x': 'auto', 'max-width': '100%', 'flex': 1, 'margin-bottom': '40px'}">
-            <table *ngIf="turmaSelecionada" mat-table [dataSource]="notas" [ngStyle.xs]="{'min-width': '300px'}">
-                <ng-container matColumnDef="aluno">
-                    <th mat-header-cell *matHeaderCellDef> Aluno </th>
-                    <td mat-cell *matCellDef="let nota">{{nota.aluno.nome | titlecase}}</td>
-                </ng-container>
+        <ng-container matColumnDef="nota">
+          <th mat-header-cell *matHeaderCellDef>Nota</th>
+          <td mat-cell *matCellDef="let nota">
+            <mat-form-field
+              appearance="outline"
+              style="margin-bottom: -1.25em; width: 70px"
+            >
+              <input
+                type="number"
+                matInput
+                [value]="nota.nota"
+                (input)="onInputChange($event, nota)"
+                autocomplete="off"
+              />
+            </mat-form-field>
+          </td>
+        </ng-container>
 
-                <ng-container matColumnDef="nota">
-                    <th mat-header-cell *matHeaderCellDef> Nota </th>
-                    <td mat-cell *matCellDef="let nota">
-                        <mat-form-field appearance="outline" style="margin-bottom: -1.25em; width: 70px;">
-                            <input type="number" matInput [value]="nota.nota" (input)="onInputChange($event, nota)" autocomplete="off">
-                        </mat-form-field>
-                    </td>
-                </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
 
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            </table>
-        </div>
-
-        <app-button (click)="salvar()" [disabled]="disableSalvar" [fullSize]="isSmall" class="canto">Salvar</app-button>
-    </app-card-conteudo>
-
+    <app-button
+      (click)="salvar()"
+      [disabled]="disableSalvar"
+      [fullSize]="isSmall"
+      class="canto"
+      >Salvar</app-button
+    >
+  </app-card-conteudo>
 </app-layout-principal>

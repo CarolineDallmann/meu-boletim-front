@@ -8,9 +8,8 @@ describe('FieldsetComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FieldsetComponent ]
-    })
-    .compileComponents();
+      declarations: [FieldsetComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {

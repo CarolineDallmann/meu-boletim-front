@@ -8,9 +8,8 @@ describe('TurmasComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TurmasComponent ]
-    })
-    .compileComponents();
+      declarations: [TurmasComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {

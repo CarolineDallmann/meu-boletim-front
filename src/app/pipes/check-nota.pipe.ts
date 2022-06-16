@@ -6,25 +6,44 @@ import { ConfigEscola } from '../entities/boletim.entity';
   name: 'checkNota'
 })
 export class CheckNotaPipe implements PipeTransform {
-
-  transform(nota: number, configEscola?: ConfigEscola, numBim?: number): 'red' | '' {
-   
-    if(configEscola){
-     const dataAtual = environment.datateste ? new Date(environment.datateste) : new Date()
-     if (numBim === 1 && nota < (configEscola.mediaAprovacao || 0) && dataAtual > configEscola.fimBim1) {
-       return "red"
-     }
-     if (numBim === 2 && nota < (configEscola?.mediaAprovacao || 0) && dataAtual > configEscola.fimBim2) {
-       return "red"
-     }
-     if (numBim === 3 && nota < (configEscola?.mediaAprovacao || 0) && dataAtual > configEscola.fimBim3) {
-       return "red"
-     }
-     if (numBim === 4 && nota < (configEscola?.mediaAprovacao || 0) && dataAtual > configEscola.fimBim4) {
-       return "red"
-     } 
-   }
+  transform(
+    nota: number,
+    configEscola?: ConfigEscola,
+    numBim?: number
+  ): 'red' | '' {
+    if (configEscola) {
+      const dataAtual = environment.datateste
+        ? new Date(environment.datateste)
+        : new Date();
+      if (
+        numBim === 1 &&
+        nota < (configEscola.mediaAprovacao || 0) &&
+        dataAtual > configEscola.fimBim1
+      ) {
+        return 'red';
+      }
+      if (
+        numBim === 2 &&
+        nota < (configEscola?.mediaAprovacao || 0) &&
+        dataAtual > configEscola.fimBim2
+      ) {
+        return 'red';
+      }
+      if (
+        numBim === 3 &&
+        nota < (configEscola?.mediaAprovacao || 0) &&
+        dataAtual > configEscola.fimBim3
+      ) {
+        return 'red';
+      }
+      if (
+        numBim === 4 &&
+        nota < (configEscola?.mediaAprovacao || 0) &&
+        dataAtual > configEscola.fimBim4
+      ) {
+        return 'red';
+      }
+    }
     return '';
   }
-
 }
