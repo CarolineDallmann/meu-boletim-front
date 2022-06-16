@@ -52,7 +52,7 @@ export class LoginComponent {
         next: (res) => {
           this.dataStorage.updateUsuario(res);
         },
-        error: (error) => {
+        error: () => {
           this.erro = 'Usuário ou senha não encontrado';
         }
       });
