@@ -49,7 +49,7 @@
 
     <app-card-conteudo>
 
-        <div [ngStyle.xs]="{'overflow-x': 'auto', 'max-width': '100%', 'min-width': '200px'}">
+        <div [ngStyle.xs]="{'overflow-x': 'auto', 'max-width': '100%'}">
             <table *ngIf="turmaSelecionada && materiaSelecionada" mat-table [dataSource]="listaFrequencia"
                 [ngStyle.xs]="{'min-width': '250px'}">
                 <ng-container matColumnDef="aluno">
@@ -71,7 +71,7 @@
         </div>
 
         <app-button *ngIf="turmaSelecionada && materiaSelecionada" (click)="salvar()" [disabled]="disableSalvar"
-            [fullSize]="isSmall">Salvar
+            [fullSize]="isSmall" class="canto">Salvar
         </app-button>
 
         <app-pgempty *ngIf="!turmaSelecionada || !materiaSelecionada || !listaFrequencia.length">

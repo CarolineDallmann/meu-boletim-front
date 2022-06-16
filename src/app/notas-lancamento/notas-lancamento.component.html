@@ -55,7 +55,7 @@
     </app-card-filtro>
 
     <app-card-conteudo [ngClass.xs]="'small'">
-        <div [ngStyle.xs]="{'overflow-x': 'auto', 'max-width': '100%', 'min-width': '300px', 'flex': 1, 'margin-bottom': '40px'}">
+        <div [ngStyle.xs]="{'overflow-x': 'auto', 'max-width': '100%', 'flex': 1, 'margin-bottom': '40px'}">
             <table *ngIf="turmaSelecionada" mat-table [dataSource]="notas" [ngStyle.xs]="{'min-width': '300px'}">
                 <ng-container matColumnDef="aluno">
                     <th mat-header-cell *matHeaderCellDef> Aluno </th>
@@ -76,7 +76,7 @@
             </table>
         </div>
 
-        <app-button (click)="salvar()" [disabled]="disableSalvar" [fullSize]="isSmall">Salvar</app-button>
+        <app-button (click)="salvar()" [disabled]="disableSalvar" [fullSize]="isSmall" class="canto">Salvar</app-button>
     </app-card-conteudo>
 
 </app-layout-principal>

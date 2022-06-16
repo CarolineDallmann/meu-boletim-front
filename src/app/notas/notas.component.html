@@ -37,7 +37,7 @@
     </app-card-filtro>
 
     <app-card-conteudo>
-        <div [ngStyle.xs]="{'overflow-x': 'auto', 'max-width': '100%', 'min-width': '200px'}">
+        <div [ngStyle.xs]="{'overflow-x': 'auto', 'max-width': '100%'}">
             <table *ngIf="turmaSelecionada && materiaSelecionada && atividades.length" mat-table
                 [dataSource]="atividades" [ngStyle.xs]="{'min-width': '400px'}">
                 <ng-container matColumnDef="atividade">

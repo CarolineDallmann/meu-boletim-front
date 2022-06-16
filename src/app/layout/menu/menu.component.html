@@ -1,7 +1,7 @@
 <mat-selection-list [multiple]="false" [class]="isSmall ? 'small' : ''">
   <mat-list-option *ngFor="let item of itensMenu" [value]="item.path" 
   [ngClass]="{
-      'mat-list-single-selected-option': currentRoute === item.path
+      'selected-option': currentRoute === item.path
       }" 
       (selectedChange)="navegate(item)">
       

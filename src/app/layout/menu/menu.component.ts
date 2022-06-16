@@ -36,7 +36,7 @@ export class MenuComponent implements AfterContentChecked {
       }
     });
 
-    this.dataStorage.isSmall.subscribe((e)=>this.isSmall = e)
+    this.dataStorage.isSmall.subscribe((e) => this.isSmall = e)
 
     this.dataStorage.usuarioConectado.subscribe((usuarioConectado) => {
       if (usuarioConectado?.tipoPessoa === TipoPessoa.PROFESSOR) {

@@ -1,6 +1,9 @@
 <app-layout-principal>
     <app-card-conteudo>
-
+        <mat-grid-list cols="4" rowHeight="20px">
+            <mat-grid-tile colspan="4"></mat-grid-tile>
+        </mat-grid-list>
+        
         <form [formGroup]="form">
             <div >
                 <app-fieldset title="Regras de aprovação">
@@ -26,18 +29,18 @@
                     </div>
                 </app-fieldset>
 
-                <mat-grid-list cols="4" rowHeight="60px">
+                <mat-grid-list cols="4" rowHeight="20px">
                     <mat-grid-tile colspan="4"></mat-grid-tile>
                 </mat-grid-list>
 
-                <app-fieldset title="Inícios e términos dos bimestres" style="margin-top: 100px !important;">
+                <app-fieldset title="Inícios e términos dos bimestres">
 
                     <div fxLayout.xs="column" fxLayout.sm="column wrap" fxLayout.md="column wrap" fxLayout="row wrap"
                         fxLayoutAlign.xs="space-between stretch" fxLayoutAlign.sm="center" fxLayoutAlign.md="center"
                         fxLayoutAlign="space-between center" fxFlex>
 
                         <div fxFlex="25%">
-                            <mat-form-field appearance="legacy" [ngStyle.xs]="{'width': '100%'}">
+                            <mat-form-field appearance="legacy" [ngStyle.xs]="{'width': '100%'}" [ngStyle.sm]="{'width': '150px'}">
                                 <mat-label>Início 1º Bimestre</mat-label>
                                 <input matInput [matDatepicker]="picker1" formControlName="inicioBim1" readonly>
                                 <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
@@ -46,7 +49,7 @@
                         </div>
 
                         <div fxFlex="25%">
-                            <mat-form-field appearance="legacy" [ngStyle.xs]="{'width': '100%'}">
+                            <mat-form-field appearance="legacy" [ngStyle.xs]="{'width': '100%'}" [ngStyle.sm]="{'width': '150px'}">
                                 <mat-label>Fim 1º Bimestre</mat-label>
                                 <input matInput [matDatepicker]="picker2" formControlName="fimBim1" readonly>
                                 <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
@@ -55,7 +58,7 @@
                         </div>
 
                         <div fxFlex="25%">
-                            <mat-form-field appearance="legacy" [ngStyle.xs]="{'width': '100%'}">
+                            <mat-form-field appearance="legacy" [ngStyle.xs]="{'width': '100%'}" [ngStyle.sm]="{'width': '150px'}">
                                 <mat-label>Início 2º Bimestre</mat-label>
                                 <input matInput [matDatepicker]="picker3" formControlName="inicioBim2" readonly>
                                 <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
@@ -64,7 +67,7 @@
                         </div>
 
                         <div fxFlex="25%">
-                            <mat-form-field appearance="legacy" [ngStyle.xs]="{'width': '100%'}">
+                            <mat-form-field appearance="legacy" [ngStyle.xs]="{'width': '100%'}" [ngStyle.sm]="{'width': '150px'}">
                                 <mat-label>Fim 2º Bimestre</mat-label>
                                 <input matInput [matDatepicker]="picker4" formControlName="fimBim2" readonly>
                                 <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
@@ -73,7 +76,7 @@
                         </div>
                      
                         <div fxFlex="25%">
-                            <mat-form-field appearance="legacy" [ngStyle.xs]="{'width': '100%'}">
+                            <mat-form-field appearance="legacy" [ngStyle.xs]="{'width': '100%'}" [ngStyle.sm]="{'width': '150px'}">
                                 <mat-label>Início 3º Bimestre</mat-label>
                                 <input matInput [matDatepicker]="picker5" formControlName="inicioBim3" readonly>
                                 <mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
@@ -82,7 +85,7 @@
                         </div>
 
                         <div fxFlex="25%">
-                            <mat-form-field appearance="legacy" [ngStyle.xs]="{'width': '100%'}">
+                            <mat-form-field appearance="legacy" [ngStyle.xs]="{'width': '100%'}" [ngStyle.sm]="{'width': '150px'}">
                                 <mat-label>Fim 3º Bimestre</mat-label>
                                 <input matInput [matDatepicker]="picker6" formControlName="fimBim3" readonly>
                                 <mat-datepicker-toggle matSuffix [for]="picker6"></mat-datepicker-toggle>
@@ -91,7 +94,7 @@
                         </div>
 
                         <div fxFlex="25%">
-                            <mat-form-field appearance="legacy" [ngStyle.xs]="{'width': '100%'}">
+                            <mat-form-field appearance="legacy" [ngStyle.xs]="{'width': '100%'}" [ngStyle.sm]="{'width': '150px'}">
                                 <mat-label>Início 4º Bimestre</mat-label>
                                 <input matInput [matDatepicker]="picker7" formControlName="inicioBim4" readonly>
                                 <mat-datepicker-toggle matSuffix [for]="picker7"></mat-datepicker-toggle>
@@ -100,7 +103,7 @@
                         </div>
 
                         <div fxFlex="25%">
-                            <mat-form-field appearance="legacy" [ngStyle.xs]="{'width': '100%'}">
+                            <mat-form-field appearance="legacy" [ngStyle.xs]="{'width': '100%'}" [ngStyle.sm]="{'width': '150px'}">
                                 <mat-label>Fim 4º Bimestre</mat-label>
                                 <input matInput [matDatepicker]="picker8" formControlName="fimBim4" readonly>
                                 <mat-datepicker-toggle matSuffix [for]="picker8"></mat-datepicker-toggle>
@@ -111,11 +114,11 @@
                     </div>
                 </app-fieldset>
 
-                <mat-grid-list cols="4" rowHeight="60px">
+                <!-- <mat-grid-list cols="4" rowHeight="60px">
                     <mat-grid-tile colspan="4"></mat-grid-tile>
-                </mat-grid-list>
+                </mat-grid-list> -->
 
-                <app-button (click)="salvar()" [fullSize]="isSmall">Salvar</app-button>
+                <app-button (click)="salvar()" [fullSize]="isSmall" class="canto">Salvar</app-button>
             </div>
         </form>
     </app-card-conteudo>
