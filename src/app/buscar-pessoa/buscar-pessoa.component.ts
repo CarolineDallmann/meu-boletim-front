@@ -38,40 +38,29 @@ export class BuscarPessoaComponent implements OnInit {
 
   ngOnInit(): void {
     this.tipoPessoa = this.route.snapshot.url[0].path;
-    //this.filterTipoPessoa(this.tipoPessoa);
+    this.search();
+  }
+
+  onNomeChange(e: Event) {
+    this.pesquisar = (e.target as HTMLInputElement).value;
+    this.search();
+  }
+
+  search() {
     this.pessoaService
       .getAllPessoas(
         this.pesquisar,
         this.filterTipoPessoa(this.tipoPessoa),
-        false
+        this.checkInitivo
       )
       .subscribe((pessoa) => {
-        this.pessoas = pessoa.sort((a, b) => a.nome.localeCompare(b.nome));
+        this.pessoas = [...pessoa].sort((a, b) => a.nome.localeCompare(b.nome));
       });
   }
 
-  onNomeChange() {
-    this.pessoaService
-      .getAllPessoas(this.pesquisar, this.tipoPessoa, false)
-      .subscribe((pessoa) => {
-        this.pessoas = pessoa.sort((a, b) => a.nome.localeCompare(b.nome));
-      });
-  }
-
-  onInativoChange() {
-    if (this.checkInitivo == true) {
-      this.pessoaService
-        .getAllPessoas('', this.tipoPessoa, true)
-        .subscribe((pessoa) => {
-          this.pessoas = pessoa.sort((a, b) => a.nome.localeCompare(b.nome));
-        });
-    } else {
-      this.pessoaService
-        .getAllPessoas('', this.tipoPessoa, false)
-        .subscribe((pessoa) => {
-          this.pessoas = pessoa.sort((a, b) => a.nome.localeCompare(b.nome));
-        });
-    }
+  onInativoChange(e: boolean) {
+    this.checkInitivo = e;
+    this.search();
   }
 
   filterTipoPessoa(tipo: string): TipoPessoa {
