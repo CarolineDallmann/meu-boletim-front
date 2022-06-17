@@ -6,22 +6,21 @@ import { MsgResponse } from '../entities/msg-response.entity';
 
 @Injectable()
 export class MateriaService {
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
-
-  getAllMaterias(){
-     return this.http.get<Materia[]>(`${environment.api}materias`)
+  getAllMaterias() {
+    return this.http.get<Materia[]>(`${environment.api}materias`);
   }
 
-  getPorIdMateria(materiaId: string){
-    return this.http.get<Materia>(`${environment.api}materias/${materiaId}`)
+  getPorIdMateria(materiaId: string) {
+    return this.http.get<Materia>(`${environment.api}materias/${materiaId}`);
   }
 
-  salvarMateria(body: MateriaPayload){
-    return this.http.post<MsgResponse>(`${environment.api}materias`, body)
+  salvarMateria(body: MateriaPayload) {
+    return this.http.post<MsgResponse>(`${environment.api}materias`, body);
   }
 
-  deleteMateria(id: string){
-    return this.http.delete<MsgResponse>(`${environment.api}materias/${id}`)
+  deleteMateria(id: string) {
+    return this.http.delete<MsgResponse>(`${environment.api}materias/${id}`);
   }
 }

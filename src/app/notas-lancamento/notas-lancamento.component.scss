@@ -6,14 +6,14 @@
   }
 }
 
-::ng-deep app-button .mat-raised-button {
+::ng-deep app-button.canto .mat-raised-button {
   position: absolute;
   right: 12px;
   bottom: 12px;
 }
 
-::ng-deep .small mat-card{
+::ng-deep .small mat-card {
   display: flex;
-    align-items: stretch;
-    flex-direction: column;
+  align-items: stretch;
+  flex-direction: column;
 }

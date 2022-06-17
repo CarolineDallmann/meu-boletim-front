@@ -1,8 +1,14 @@
+import { Serie } from '../enums/serie.enum';
 import { SerieDeParaPipe } from './serie-de-para.pipe';
 
 describe('SerieDeParaPipe', () => {
-  it('create an instance', () => {
-    const pipe = new SerieDeParaPipe();
-    expect(pipe).toBeTruthy();
+  it('traducao pipe', () => {
+    const result = new SerieDeParaPipe().transform(Serie.FUND1);
+    expect(result).toBe('1 - Fundamental');
+  });
+
+  it('valor vazio', () => {
+    const result = new SerieDeParaPipe().transform();
+    expect(result).toBe('');
   });
 });

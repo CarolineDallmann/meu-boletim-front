@@ -15,69 +15,82 @@ import { DataStoreService } from '../data-storage';
   styleUrls: ['./notas.component.scss']
 })
 export class NotasComponent implements OnInit {
-
-  turmaSelecionada = ''
-  materiaSelecionada = ''
-  turmas: Turma[] = []
-  materias: Materia[] = []
-  atividades: Atividade[] = []
+  turmaSelecionada = '';
+  materiaSelecionada = '';
+  turmas: Turma[] = [];
+  materias: Materia[] = [];
+  atividades: Atividade[] = [];
   displayedColumns: string[] = ['atividade', 'data', 'acoes'];
-  isSmall = false
+  isSmall = false;
 
-  constructor(private turmaService: TurmaService, private materiaService: MateriaService,
-    private notaService: NotaService, private snackBar: MatSnackBar, private route: ActivatedRoute,
-    private router: Router, private dataStorage: DataStoreService) {
-    this.dataStorage.isSmall.subscribe((e) => this.isSmall = e)
+  constructor(
+    private turmaService: TurmaService,
+    private materiaService: MateriaService,
+    private notaService: NotaService,
+    private snackBar: MatSnackBar,
+    private route: ActivatedRoute,
+    private router: Router,
+    private dataStorage: DataStoreService
+  ) {
+    this.dataStorage.isSmall.subscribe((e) => (this.isSmall = e));
   }
 
   ngOnInit(): void {
-    this.turmaService.getAllTurmas().subscribe((turmas) => { this.turmas = turmas })
-    this.materiaService.getAllMaterias().subscribe((materias) => { this.materias = materias })
-    const turmaId = this.route.snapshot.queryParamMap.get('turmaId')
-    const materiaId = this.route.snapshot.queryParamMap.get('materiaId')
+    this.turmaService.getAllTurmas().subscribe((turmas) => {
+      this.turmas = turmas;
+    });
+    this.materiaService.getAllMaterias().subscribe((materias) => {
+      this.materias = materias;
+    });
+    const turmaId = this.route.snapshot.queryParamMap.get('turmaId');
+    const materiaId = this.route.snapshot.queryParamMap.get('materiaId');
 
     if (turmaId && materiaId) {
-      this.turmaSelecionada = turmaId
-      this.materiaSelecionada = materiaId
-      this.search()
+      this.turmaSelecionada = turmaId;
+      this.materiaSelecionada = materiaId;
+      this.search();
     }
   }
 
   navegarNovaAtividade() {
     this.router.navigate(['/notas/lancamento'], {
       queryParams: {
-        turmaId: this.turmaSelecionada, materiaId: this.materiaSelecionada
+        turmaId: this.turmaSelecionada,
+        materiaId: this.materiaSelecionada
       }
-    })
+    });
   }
 
   onTurmaChange(event: string) {
-    this.turmaSelecionada = event
-    this.search()
+    this.turmaSelecionada = event;
+    this.search();
   }
 
   onMateriaChange(event: string) {
-    this.materiaSelecionada = event
-    this.search()
+    this.materiaSelecionada = event;
+    this.search();
   }
 
   search() {
     if (this.turmaSelecionada && this.materiaSelecionada) {
-      this.notaService.getListarAtividades(this.turmaSelecionada, this.materiaSelecionada)
-        .subscribe((ativ) => { this.atividades = this.notaService.atividadeResponseToAtividade(ativ) })
+      this.notaService
+        .getListarAtividades(this.turmaSelecionada, this.materiaSelecionada)
+        .subscribe((ativ) => {
+          this.atividades = this.notaService.atividadeResponseToAtividade(ativ);
+        });
     }
   }
 
   editar(atividade: Atividade) {
     this.router.navigate(['/notas/lancamento'], {
       queryParams: { atividadeId: atividade.id }
-    })
+    });
   }
 
   excluir(atividade: Atividade) {
     this.notaService.deleteAtividade(atividade.id).subscribe((res) => {
-      this.snackBar.open(res.msg, undefined, { duration: 5000 })
-      this.search()
-    })
+      this.snackBar.open(res.msg, undefined, { duration: 5000 });
+      this.search();
+    });
   }
 }

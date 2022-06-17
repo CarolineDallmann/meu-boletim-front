@@ -1,122 +1,247 @@
 <app-layout-principal>
-    <app-card-conteudo>
+  <app-card-conteudo>
+    <mat-grid-list cols="4" rowHeight="20px">
+      <mat-grid-tile colspan="4"></mat-grid-tile>
+    </mat-grid-list>
 
-        <form [formGroup]="form">
-            <div >
-                <app-fieldset title="Regras de aprovação">
-                    <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="row" fxLayoutAlign="space-around center"
-                        fxLayoutAlign.sm="space-around center" fxLayoutAlign.xs="space-between stretch" fxFlex>
-
-                        <div fxFlex="flex-start">
-                            <mat-form-field appearance="fill" style="margin-bottom: -1.25em; width: 160px;"
-                                [ngStyle.xs]="{'width': '100%'}">
-                                <mat-label>Média para aprovação</mat-label>
-                                <input matInput formControlName="mediaAprovacao" autocomplete="off">
-                            </mat-form-field>
-                        </div>
-
-                        <div fxFlex="flex-start">
-                            <mat-form-field appearance="fill" style="margin-bottom: -1.25em; width: 150px;"
-                                [ngStyle.xs]="{'width': '100%'}">
-                                <mat-label>% Frequência</mat-label>
-                                <input matInput formControlName="frequenciaAprovacao" autocomplete="off">
-                            </mat-form-field>
-                        </div>
-
-                    </div>
-                </app-fieldset>
-
-                <mat-grid-list cols="4" rowHeight="60px">
-                    <mat-grid-tile colspan="4"></mat-grid-tile>
-                </mat-grid-list>
-
-                <app-fieldset title="Inícios e términos dos bimestres" style="margin-top: 100px !important;">
-
-                    <div fxLayout.xs="column" fxLayout.sm="column wrap" fxLayout.md="column wrap" fxLayout="row wrap"
-                        fxLayoutAlign.xs="space-between stretch" fxLayoutAlign.sm="center" fxLayoutAlign.md="center"
-                        fxLayoutAlign="space-between center" fxFlex>
-
-                        <div fxFlex="25%">
-                            <mat-form-field appearance="legacy" [ngStyle.xs]="{'width': '100%'}">
-                                <mat-label>Início 1º Bimestre</mat-label>
-                                <input matInput [matDatepicker]="picker1" formControlName="inicioBim1" readonly>
-                                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                                <mat-datepicker #picker1></mat-datepicker>
-                            </mat-form-field>
-                        </div>
-
-                        <div fxFlex="25%">
-                            <mat-form-field appearance="legacy" [ngStyle.xs]="{'width': '100%'}">
-                                <mat-label>Fim 1º Bimestre</mat-label>
-                                <input matInput [matDatepicker]="picker2" formControlName="fimBim1" readonly>
-                                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                                <mat-datepicker #picker2></mat-datepicker>
-                            </mat-form-field>
-                        </div>
-
-                        <div fxFlex="25%">
-                            <mat-form-field appearance="legacy" [ngStyle.xs]="{'width': '100%'}">
-                                <mat-label>Início 2º Bimestre</mat-label>
-                                <input matInput [matDatepicker]="picker3" formControlName="inicioBim2" readonly>
-                                <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
-                                <mat-datepicker #picker3></mat-datepicker>
-                            </mat-form-field>
-                        </div>
-
-                        <div fxFlex="25%">
-                            <mat-form-field appearance="legacy" [ngStyle.xs]="{'width': '100%'}">
-                                <mat-label>Fim 2º Bimestre</mat-label>
-                                <input matInput [matDatepicker]="picker4" formControlName="fimBim2" readonly>
-                                <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
-                                <mat-datepicker #picker4></mat-datepicker>
-                            </mat-form-field>
-                        </div>
-                     
-                        <div fxFlex="25%">
-                            <mat-form-field appearance="legacy" [ngStyle.xs]="{'width': '100%'}">
-                                <mat-label>Início 3º Bimestre</mat-label>
-                                <input matInput [matDatepicker]="picker5" formControlName="inicioBim3" readonly>
-                                <mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
-                                <mat-datepicker #picker5></mat-datepicker>
-                            </mat-form-field>
-                        </div>
-
-                        <div fxFlex="25%">
-                            <mat-form-field appearance="legacy" [ngStyle.xs]="{'width': '100%'}">
-                                <mat-label>Fim 3º Bimestre</mat-label>
-                                <input matInput [matDatepicker]="picker6" formControlName="fimBim3" readonly>
-                                <mat-datepicker-toggle matSuffix [for]="picker6"></mat-datepicker-toggle>
-                                <mat-datepicker #picker6></mat-datepicker>
-                            </mat-form-field>
-                        </div>
-
-                        <div fxFlex="25%">
-                            <mat-form-field appearance="legacy" [ngStyle.xs]="{'width': '100%'}">
-                                <mat-label>Início 4º Bimestre</mat-label>
-                                <input matInput [matDatepicker]="picker7" formControlName="inicioBim4" readonly>
-                                <mat-datepicker-toggle matSuffix [for]="picker7"></mat-datepicker-toggle>
-                                <mat-datepicker #picker7></mat-datepicker>
-                            </mat-form-field>
-                        </div>
-
-                        <div fxFlex="25%">
-                            <mat-form-field appearance="legacy" [ngStyle.xs]="{'width': '100%'}">
-                                <mat-label>Fim 4º Bimestre</mat-label>
-                                <input matInput [matDatepicker]="picker8" formControlName="fimBim4" readonly>
-                                <mat-datepicker-toggle matSuffix [for]="picker8"></mat-datepicker-toggle>
-                                <mat-datepicker #picker8></mat-datepicker>
-                            </mat-form-field>
-                        </div>
-                        
-                    </div>
-                </app-fieldset>
-
-                <mat-grid-list cols="4" rowHeight="60px">
-                    <mat-grid-tile colspan="4"></mat-grid-tile>
-                </mat-grid-list>
-
-                <app-button (click)="salvar()" [fullSize]="isSmall">Salvar</app-button>
+    <form [formGroup]="form">
+      <div>
+        <app-fieldset title="Regras de aprovação">
+          <div
+            fxLayout="row"
+            fxLayout.xs="column"
+            fxLayout.sm="row"
+            fxLayoutAlign="space-around center"
+            fxLayoutAlign.sm="space-around center"
+            fxLayoutAlign.xs="space-between stretch"
+            fxFlex
+          >
+            <div fxFlex="flex-start">
+              <mat-form-field
+                appearance="fill"
+                style="margin-bottom: -1.25em; width: 160px"
+                [ngStyle.xs]="{ width: '100%' }"
+              >
+                <mat-label>Média para aprovação</mat-label>
+                <input
+                  matInput
+                  formControlName="mediaAprovacao"
+                  autocomplete="off"
+                />
+              </mat-form-field>
             </div>
-        </form>
-    </app-card-conteudo>
+
+            <div fxFlex="flex-start">
+              <mat-form-field
+                appearance="fill"
+                style="margin-bottom: -1.25em; width: 150px"
+                [ngStyle.xs]="{ width: '100%' }"
+              >
+                <mat-label>% Frequência</mat-label>
+                <input
+                  matInput
+                  formControlName="frequenciaAprovacao"
+                  autocomplete="off"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+        </app-fieldset>
+
+        <mat-grid-list cols="4" rowHeight="20px">
+          <mat-grid-tile colspan="4"></mat-grid-tile>
+        </mat-grid-list>
+
+        <app-fieldset title="Inícios e términos dos bimestres">
+          <div
+            fxLayout.xs="column"
+            fxLayout.sm="column wrap"
+            fxLayout.md="column wrap"
+            fxLayout="row wrap"
+            fxLayoutAlign.xs="space-between stretch"
+            fxLayoutAlign.sm="center"
+            fxLayoutAlign.md="center"
+            fxLayoutAlign="space-between center"
+            fxFlex
+          >
+            <div fxFlex="25%">
+              <mat-form-field
+                appearance="legacy"
+                [ngStyle.xs]="{ width: '100%' }"
+                [ngStyle.sm]="{ width: '150px' }"
+              >
+                <mat-label>Início 1º Bimestre</mat-label>
+                <input
+                  matInput
+                  [matDatepicker]="picker1"
+                  formControlName="inicioBim1"
+                  readonly
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="picker1"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="25%">
+              <mat-form-field
+                appearance="legacy"
+                [ngStyle.xs]="{ width: '100%' }"
+                [ngStyle.sm]="{ width: '150px' }"
+              >
+                <mat-label>Fim 1º Bimestre</mat-label>
+                <input
+                  matInput
+                  [matDatepicker]="picker2"
+                  formControlName="fimBim1"
+                  readonly
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="picker2"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="25%">
+              <mat-form-field
+                appearance="legacy"
+                [ngStyle.xs]="{ width: '100%' }"
+                [ngStyle.sm]="{ width: '150px' }"
+              >
+                <mat-label>Início 2º Bimestre</mat-label>
+                <input
+                  matInput
+                  [matDatepicker]="picker3"
+                  formControlName="inicioBim2"
+                  readonly
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="picker3"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker3></mat-datepicker>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="25%">
+              <mat-form-field
+                appearance="legacy"
+                [ngStyle.xs]="{ width: '100%' }"
+                [ngStyle.sm]="{ width: '150px' }"
+              >
+                <mat-label>Fim 2º Bimestre</mat-label>
+                <input
+                  matInput
+                  [matDatepicker]="picker4"
+                  formControlName="fimBim2"
+                  readonly
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="picker4"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker4></mat-datepicker>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="25%">
+              <mat-form-field
+                appearance="legacy"
+                [ngStyle.xs]="{ width: '100%' }"
+                [ngStyle.sm]="{ width: '150px' }"
+              >
+                <mat-label>Início 3º Bimestre</mat-label>
+                <input
+                  matInput
+                  [matDatepicker]="picker5"
+                  formControlName="inicioBim3"
+                  readonly
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="picker5"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker5></mat-datepicker>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="25%">
+              <mat-form-field
+                appearance="legacy"
+                [ngStyle.xs]="{ width: '100%' }"
+                [ngStyle.sm]="{ width: '150px' }"
+              >
+                <mat-label>Fim 3º Bimestre</mat-label>
+                <input
+                  matInput
+                  [matDatepicker]="picker6"
+                  formControlName="fimBim3"
+                  readonly
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="picker6"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker6></mat-datepicker>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="25%">
+              <mat-form-field
+                appearance="legacy"
+                [ngStyle.xs]="{ width: '100%' }"
+                [ngStyle.sm]="{ width: '150px' }"
+              >
+                <mat-label>Início 4º Bimestre</mat-label>
+                <input
+                  matInput
+                  [matDatepicker]="picker7"
+                  formControlName="inicioBim4"
+                  readonly
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="picker7"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker7></mat-datepicker>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="25%">
+              <mat-form-field
+                appearance="legacy"
+                [ngStyle.xs]="{ width: '100%' }"
+                [ngStyle.sm]="{ width: '150px' }"
+              >
+                <mat-label>Fim 4º Bimestre</mat-label>
+                <input
+                  matInput
+                  [matDatepicker]="picker8"
+                  formControlName="fimBim4"
+                  readonly
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="picker8"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker8></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+        </app-fieldset>
+
+        <!-- <mat-grid-list cols="4" rowHeight="60px">
+                    <mat-grid-tile colspan="4"></mat-grid-tile>
+                </mat-grid-list> -->
+
+        <app-button (click)="salvar()" [fullSize]="isSmall" class="canto"
+          >Salvar</app-button
+        >
+      </div>
+    </form>
+  </app-card-conteudo>
 </app-layout-principal>

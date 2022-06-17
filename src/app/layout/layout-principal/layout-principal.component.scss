@@ -27,6 +27,10 @@ app-menu {
   background-color: #e5e5e5;
   padding: 25px;
   min-height: 100%;
+
+  &.direita-small{
+    width: calc(100% - 110px);
+  }
 }
 
 .normal {
@@ -45,6 +49,10 @@ app-menu {
   .container {
     &.sem-menu {
       width: calc(100% - 50px);
+
+      .direita{
+        width: 100%;
+      }
     }
   }
 }

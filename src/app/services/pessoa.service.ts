@@ -9,11 +9,12 @@ import { Pessoa } from '../entities/pessoa.entity';
   providedIn: 'root'
 })
 export class PessoaService {
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getAllPessoas(nome: string, tipo_pessoa: string, mostrarInativos: boolean) {
-    return this.http.get<Pessoa[]>(`${environment.api}pessoas`, { params: { nome, tipo_pessoa, mostrarInativos } })
+    return this.http.get<Pessoa[]>(`${environment.api}pessoas`, {
+      params: { nome, tipo_pessoa, mostrarInativos }
+    });
   }
 
   savePessoa(pessoa: Pessoa) {
@@ -25,6 +26,9 @@ export class PessoaService {
   }
 
   updatePessoa(pessoa: Pessoa, pessoaId: string) {
-    return this.http.put<MsgResponse>(`${environment.api}pessoas/${pessoaId}`, pessoa);
+    return this.http.put<MsgResponse>(
+      `${environment.api}pessoas/${pessoaId}`,
+      pessoa
+    );
   }
 }

@@ -1,6 +1,7 @@
 name: Deploy
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
@@ -10,6 +11,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: npm ci
+      - run: npm run lint
+      - run: npm test -- --no-watch --no-progress --browsers=ChromeHeadlessCI --code-coverage
+      - run: npm run build
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
