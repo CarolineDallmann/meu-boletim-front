@@ -22,7 +22,7 @@ export class BuscarPessoaComponent implements OnInit {
   pessoas: any = [];
   msg = '';
   tipoPessoa = '';
-  checkInitivo = false;
+  checkInativo = false;
   pesquisar = '';
   tipo = '';
   isSmall = false;
@@ -51,7 +51,7 @@ export class BuscarPessoaComponent implements OnInit {
       .getAllPessoas(
         this.pesquisar,
         this.filterTipoPessoa(this.tipoPessoa),
-        this.checkInitivo
+        this.checkInativo
       )
       .subscribe((pessoa) => {
         this.pessoas = [...pessoa].sort((a, b) => a.nome.localeCompare(b.nome));
@@ -59,7 +59,7 @@ export class BuscarPessoaComponent implements OnInit {
   }
 
   onInativoChange(e: boolean) {
-    this.checkInitivo = e;
+    this.checkInativo = e;
     this.search();
   }
 

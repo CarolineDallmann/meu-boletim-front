@@ -6,6 +6,13 @@
   margin-right: 5%;
 }
 
+.save-button{
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  margin-top: 20px;
+}
+
 :ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-ripple .mat-ripple-element {
   opacity: 0.03 !important;
   background-color: #153A84 !important;
