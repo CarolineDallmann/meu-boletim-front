@@ -2,7 +2,7 @@
 
     <app-card-conteudo>
         <ng-container *ngIf="isLoad">
-        <form [formGroup]="editarPessoa" (ngSubmit)="onSubmit()" class="container">
+        <form [formGroup]="editarPessoa" (ngSubmit)="onSubmit()" class="container" style="margin-bottom:10%">
             <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="row" fxLayoutAlign="space-around center"
             fxLayoutAlign.sm="space-around center" fxLayoutAlign.xs="space-between stretch" style="margin-bottom: 15px;">
                 <app-fieldset title="Atribuições" fxFlex=100>

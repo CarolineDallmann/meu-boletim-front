@@ -147,10 +147,7 @@ export class EditarPessoaComponent implements OnInit {
   }
 
   dataFormat(data: Date) {
-    const dia = data.getDate();
-    const mes = data.getMonth() + 1;
-    const ano = data.getFullYear();
-    return ano + '-' + mes + '-' + dia;
+    return data.getFullYear() + '-' + (data.getMonth() + 1) + '-' + data.getDate();
   }
 
   changeTipoPessoa(event: any) {

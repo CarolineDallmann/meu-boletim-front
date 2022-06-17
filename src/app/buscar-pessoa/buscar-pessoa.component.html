@@ -29,7 +29,7 @@
       </div>
       <div fxFlex.sm="50">
         <mat-checkbox
-          [(ngModel)]="checkInitivo"
+          [(ngModel)]="checkInativo"
           class="widthCheck"
           (change)="onInativoChange($event.checked)"
           >Mostrar Inativos</mat-checkbox
@@ -45,7 +45,7 @@
 
   <app-card-conteudo>
     <div
-      *ngIf="tipoPessoa === 'ALUNO'"
+      *ngIf="tipoPessoa === 'alunos'"
       [ngStyle.sm]="{ 'overflow-x': 'auto', 'max-width': '100%' }"
       [ngStyle.xs]="{ 'overflow-x': 'auto', 'max-width': '100%' }"
     >
@@ -97,7 +97,7 @@
       </table>
     </div>
     <div
-      *ngIf="tipoPessoa !== 'ALUNO'"
+      *ngIf="tipoPessoa !== 'alunos'"
       [ngStyle.xs]="{ 'overflow-x': 'auto', 'max-width': '100%' }"
     >
       <table

@@ -43,6 +43,7 @@ import { EditarPessoaComponent } from './editar-pessoa/editar-pessoa.component';
 import { PessoaService } from './services/pessoa.service';
 import { TurmasLancamentoComponent } from './turmas-lancamento/turmas-lancamento.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
