@@ -8,6 +8,7 @@ import { TurmaService } from '../services/turma.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataStoreService } from '../data-storage';
+import { DialogService } from '../services/dialog.service';
 
 @Component({
   selector: 'app-notas',
@@ -30,7 +31,8 @@ export class NotasComponent implements OnInit {
     private snackBar: MatSnackBar,
     private route: ActivatedRoute,
     private router: Router,
-    private dataStorage: DataStoreService
+    private dataStorage: DataStoreService,
+    private dialogService: DialogService
   ) {
     this.dataStorage.isSmall.subscribe((e) => (this.isSmall = e));
   }
@@ -88,9 +90,21 @@ export class NotasComponent implements OnInit {
   }
 
   excluir(atividade: Atividade) {
-    this.notaService.deleteAtividade(atividade.id).subscribe((res) => {
-      this.snackBar.open(res.msg, undefined, { duration: 5000 });
-      this.search();
-    });
+    this.dialogService
+      .openConfirmDialog()
+      .afterClosed()
+      .subscribe((res1) => {
+        if (res1) {
+          this.notaService.deleteAtividade(atividade.id).subscribe({
+            next: (res) => {
+              this.snackBar.open(res.msg, undefined, { duration: 5000 });
+              this.search();
+            },
+            error: (err) => {
+              this.snackBar.open(err.error.msg, undefined, { duration: 5000 });
+            }
+          });
+        }
+      });
   }
 }

@@ -42,7 +42,9 @@ import { BuscarPessoaComponent } from './buscar-pessoa/buscar-pessoa.component';
 import { EditarPessoaComponent } from './editar-pessoa/editar-pessoa.component';
 import { PessoaService } from './services/pessoa.service';
 import { TurmasLancamentoComponent } from './turmas-lancamento/turmas-lancamento.component';
-
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DialogService } from './services/dialog.service';
 
 @NgModule({
   declarations: [
@@ -63,7 +65,8 @@ import { TurmasLancamentoComponent } from './turmas-lancamento/turmas-lancamento
     SerieDeParaPipe,
     CheckNotaPipe,
     ResultadoBoletimPipe,
-    TurmasLancamentoComponent
+    TurmasLancamentoComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -87,7 +90,8 @@ import { TurmasLancamentoComponent } from './turmas-lancamento/turmas-lancamento
     ReactiveFormsModule,
     MatRadioModule,
     MatAutocompleteModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatDialogModule
   ],
   providers: [
     TurmaService,
@@ -97,8 +101,10 @@ import { TurmasLancamentoComponent } from './turmas-lancamento/turmas-lancamento
     PessoaService,
     BoletimVisualizacaoService,
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
-    LoginService
+    LoginService,
+    DialogService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ConfirmDialogComponent]
 })
 export class AppModule {}
