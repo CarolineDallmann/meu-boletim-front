@@ -141,8 +141,8 @@ export class NotasLancamentoComponent implements OnInit {
       if (this.atividadeId) {
         body.atividadeId = this.atividadeId;
       }
-      this.notaService.salvarAtividade(body).subscribe(
-        (res) => {
+      this.notaService.salvarAtividade(body).subscribe({
+        next: (res) => {
           this.snackBar.open(res.msg, undefined, { duration: 5000 });
           this.router.navigate(['notas'], {
             queryParams: {
@@ -151,10 +151,10 @@ export class NotasLancamentoComponent implements OnInit {
             }
           });
         },
-        ({ error }) => {
-          this.snackBar.open(error.msg, undefined, { duration: 5000 });
+        error: (err) => {
+          this.snackBar.open(err.error.msg, undefined, { duration: 5000 });
         }
-      );
+      });
     }
   }
 
