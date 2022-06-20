@@ -25,7 +25,7 @@
       <div fxLayout="column" style="margin-bottom: 15px">
         <div fxLayout="row" fxLayoutGap="2%" fxLayout.xs="column" fxLayout.sm="row" fxLayoutAlign="space-around center"
         fxLayoutAlign.sm="space-around center" fxLayoutAlign.xs="space-between stretch">
-          <mat-form-field appearance="legacy" fxFlex="60">
+          <mat-form-field appearance="legacy" fxFlex="60" [ngStyle.xs]="{'width': '100%'}">
             <mat-label>Nome</mat-label>
             <input
               matInput
@@ -59,7 +59,7 @@
         </div>
         <div fxFlex="row" fxLayoutGap="2%" fxLayout.xs="column" fxLayout.sm="row" fxLayoutAlign="space-around center"
         fxLayoutAlign.sm="space-around center" fxLayoutAlign.xs="space-between stretch">
-          <mat-form-field appearance="legacy" fxFlex="20">
+          <mat-form-field appearance="legacy" fxFlex="20" [ngStyle.xs]="{'width': '100%'}">
             <mat-label>CEP</mat-label>
             <input
               matInput
@@ -68,7 +68,7 @@
               formControlName="cep"
             />
           </mat-form-field>
-          <mat-form-field appearance="legacy" fxFlex="80">
+          <mat-form-field appearance="legacy" fxFlex="80" [ngStyle.xs]="{'width': '100%'}">
             <mat-label>Rua</mat-label>
             <input
               matInput
@@ -80,7 +80,7 @@
         </div>
         <div fxLayout="row" fxLayoutGap="2%" fxLayout.xs="column" fxLayout.sm="row" fxLayoutAlign="space-around center"
         fxLayoutAlign.sm="space-around center" fxLayoutAlign.xs="space-between stretch">
-          <mat-form-field appearance="legacy" fxFlex="10">
+          <mat-form-field appearance="legacy" fxFlex="10" [ngStyle.xs]="{'width': '100%'}">
             <mat-label>Número</mat-label>
             <input
               matInput
@@ -89,7 +89,7 @@
               formControlName="numero"
             />
           </mat-form-field>
-          <mat-form-field appearance="legacy" fxFlex="35">
+          <mat-form-field appearance="legacy" fxFlex="35" [ngStyle.xs]="{'width': '100%'}">
             <mat-label>Bairro</mat-label>
             <input
               matInput
@@ -98,7 +98,7 @@
               formControlName="bairro"
             />
           </mat-form-field>
-          <mat-form-field appearance="legacy" fxFlex="35">
+          <mat-form-field appearance="legacy" fxFlex="35" [ngStyle.xs]="{'width': '100%'}">
             <mat-label>Cidade</mat-label>
             <input
               matInput
@@ -107,7 +107,7 @@
               formControlName="cidade"
             />
           </mat-form-field>
-          <mat-form-field appearance="legacy" fxFlex="5">
+          <mat-form-field appearance="legacy" fxFlex="5" [ngStyle.xs]="{'width': '100%'}">
             <mat-label>UF</mat-label>
             <input
               matInput
@@ -116,7 +116,7 @@
               formControlName="uf"
             />
           </mat-form-field>
-          <mat-form-field appearance="legacy" fxFlex="15">
+          <mat-form-field appearance="legacy" fxFlex="15" [ngStyle.xs]="{'width': '100%'}">
             <mat-label>Telefone</mat-label>
             <input
               matInput
@@ -129,7 +129,7 @@
         </div>
         <div fxLayout="row" fxLayoutGap="2%" fxLayout.xs="column" fxLayout.sm="row" fxLayoutAlign="space-around center"
         fxLayoutAlign.sm="space-around center" fxLayoutAlign.xs="space-between stretch">
-          <mat-form-field appearance="legacy" fxFlex="40">
+          <mat-form-field appearance="legacy" fxFlex="40" [ngStyle.xs]="{'width': '100%'}">
             <mat-label>Email</mat-label>
             <input
               matInput
@@ -138,11 +138,11 @@
               formControlName="email"
             />
           </mat-form-field>
-          <mat-form-field appearance="legacy" fxFlex="20">
+          <mat-form-field appearance="legacy" fxFlex="20" [ngStyle.xs]="{'width': '100%'}">
             <mat-label>Login</mat-label>
             <input matInput name="login" formControlName="login" />
           </mat-form-field>
-          <mat-form-field appearance="legacy" fxFlex="20">
+          <mat-form-field appearance="legacy" fxFlex="20" [ngStyle.xs]="{'width': '100%'}">
             <mat-label>Senha</mat-label>
             <input
               matInput
@@ -172,7 +172,7 @@
         <app-fieldset title="Aluno" fxFlex="100">
           <div fxLayout="row" fxLayoutGap="2%" fxLayout.xs="column" fxLayout.sm="row" fxLayoutAlign="start center"
           fxLayoutAlign.sm="space-around center" fxLayoutAlign.xs="space-between stretch">
-            <mat-form-field appearance="legacy" fxFlex="25">
+            <mat-form-field appearance="legacy" fxFlex="25" [ngStyle.xs]="{'width': '100%'}">
               <mat-label>Nome da Mãe</mat-label>
               <input
                 matInput
@@ -181,14 +181,14 @@
                 formControlName="nome_mae"
               />
             </mat-form-field>
-            <mat-form-field appearance="legacy" fxFlex="25">
+            <mat-form-field appearance="legacy" fxFlex="25" [ngStyle.xs]="{'width': '100%'}">
               <mat-label>Nome do Pai</mat-label>
               <input matInput name="nome_pai" formControlName="nome_pai" />
             </mat-form-field>
           </div>
           <div fxLayout="row" fxLayoutGap="2%" fxLayout.xs="column" fxLayout.sm="row" fxLayoutAlign="start center"
           fxLayoutAlign.sm="space-around center" fxLayoutAlign.xs="space-between stretch">
-            <mat-form-field appearance="legacy" fxFlex="25">
+            <mat-form-field appearance="legacy" fxFlex="25" [ngStyle.xs]="{'width': '100%'}">
               <mat-label>Responsável</mat-label>
               <input
                 matInput
@@ -213,7 +213,7 @@
           </div>
           <div fxLayout="row" fxLayoutGap="2%" fxLayout.xs="column" fxLayout.sm="row" fxLayoutAlign="start center"
           fxLayoutAlign.sm="space-around center" fxLayoutAlign.xs="space-between stretch">
-            <mat-form-field appearance="legacy" fxFlex="25">
+            <mat-form-field appearance="legacy" fxFlex="25" [ngStyle.xs]="{'width': '100%'}">
               <mat-label>Turma</mat-label>
               <mat-select
                 name="turmaSelecionada"
@@ -234,7 +234,7 @@
         <app-fieldset title="Professor" fxFlex="100">
           <div fxLayout="row" fxLayoutGap="2%" fxLayout.xs="column" fxLayout.sm="row" fxLayoutAlign="start center"
           fxLayoutAlign.sm="space-around center" fxLayoutAlign.xs="space-between stretch">
-            <mat-form-field appearance="legacy" fxFlex="25">
+            <mat-form-field appearance="legacy" fxFlex="25" [ngStyle.xs]="{'width': '100%'}">
               <mat-label>Matéria</mat-label>
               <mat-select name="materia" formControlName="materia" required>
                 <mat-option
