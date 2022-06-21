@@ -4,6 +4,7 @@ import {
   Component,
   Input
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { DataStoreService } from 'src/app/data-storage';
 
 @Component({
@@ -22,7 +23,8 @@ export class LayoutPrincipalComponent implements AfterContentChecked {
 
   constructor(
     private cdref: ChangeDetectorRef,
-    private dataStorage: DataStoreService
+    private dataStorage: DataStoreService,
+    private router: Router
   ) {
     this.dataStorage.isSmall.subscribe((e) => (this.isSmall = e));
   }
@@ -33,5 +35,9 @@ export class LayoutPrincipalComponent implements AfterContentChecked {
 
   setTitle(e: string) {
     this.title = e;
+  }
+
+  navegaHome() {
+    this.router.navigate(['']);
   }
 }
