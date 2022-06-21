@@ -36,7 +36,7 @@ export class TurmasComponent implements OnInit {
 
   search() {
     this.turmaService.getAllTurmas().subscribe((turmas) => {
-      this.turmas = turmas.sort((a, b) => a.serie.localeCompare(b.serie));
+      this.turmas = turmas;
     });
   }
 
