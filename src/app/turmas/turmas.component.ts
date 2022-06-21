@@ -4,6 +4,7 @@ import { Turma } from '../entities/turma.entity';
 import { TurmaService } from '../services/turma.service';
 import { Router } from '@angular/router';
 import { DataStoreService } from '../data-storage';
+import { DialogService } from '../services/dialog.service';
 
 @Component({
   selector: 'app-turmas',
@@ -23,12 +24,17 @@ export class TurmasComponent implements OnInit {
     private turmaService: TurmaService,
     private snackBar: MatSnackBar,
     private router: Router,
-    private dataStorage: DataStoreService
+    private dataStorage: DataStoreService,
+    private dialogService: DialogService
   ) {
     this.dataStorage.isSmall.subscribe((e) => (this.isSmall = e));
   }
 
   ngOnInit(): void {
+    this.search();
+  }
+
+  search() {
     this.turmaService.getAllTurmas().subscribe((turmas) => {
       this.turmas = turmas.sort((a, b) => a.serie.localeCompare(b.serie));
     });
@@ -45,9 +51,21 @@ export class TurmasComponent implements OnInit {
   }
 
   excluir(turma: Turma) {
-    this.turmaService.deleteTurma(turma.id).subscribe((res) => {
-      this.snackBar.open(res.msg, undefined, { duration: 5000 });
-      window.location.reload();
-    });
+    this.dialogService
+      .openConfirmDialog()
+      .afterClosed()
+      .subscribe((res1) => {
+        if (res1) {
+          this.turmaService.deleteTurma(turma.id).subscribe({
+            next: (res) => {
+              this.snackBar.open(res.msg, undefined, { duration: 5000 });
+              this.search();
+            },
+            error: (err) => {
+              this.snackBar.open(err.error.msg, undefined, { duration: 5000 });
+            }
+          });
+        }
+      });
   }
 }

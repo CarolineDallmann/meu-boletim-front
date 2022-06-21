@@ -7,7 +7,7 @@ import { Component, Input } from '@angular/core';
 })
 export class ButtonComponent {
   @Input()
-  type: 'primary' | 'danger' = 'primary';
+  severity: 'primary' | 'danger' = 'primary';
 
   @Input()
   leftSpace = false;
