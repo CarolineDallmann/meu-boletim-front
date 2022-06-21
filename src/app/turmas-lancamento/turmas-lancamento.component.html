@@ -23,7 +23,12 @@
                 [ngStyle.xs]="{ width: '100%' }"
               >
                 <mat-label>Nome</mat-label>
-                <input matInput formControlName="nome" placeholder="Ex: A" />
+                <input
+                  matInput
+                  formControlName="nome"
+                  placeholder="Ex: A"
+                  autocomplete="off"
+                />
               </mat-form-field>
             </div>
 
@@ -38,6 +43,7 @@
                   matInput
                   formControlName="anoLetivo"
                   placeholder="Ex: 2022"
+                  autocomplete="off"
                 />
               </mat-form-field>
             </div>
