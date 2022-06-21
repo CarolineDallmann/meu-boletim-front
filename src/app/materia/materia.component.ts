@@ -51,7 +51,7 @@ export class MateriaComponent implements OnInit {
   }
   search() {
     this.materiaService.getAllMaterias().subscribe((materias) => {
-      this.materias = materias.sort((a, b) => a.nome.localeCompare(b.nome));
+      this.materias = materias;
     });
   }
 

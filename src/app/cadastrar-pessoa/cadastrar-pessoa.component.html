@@ -5,8 +5,16 @@
       (ngSubmit)="onSubmit()"
       class="container"
     >
-      <div fxLayout="row" fxLayout="row" fxLayout.xs="column" fxLayout.sm="row" fxLayoutAlign="space-around center"
-      fxLayoutAlign.sm="space-around center" fxLayoutAlign.xs="space-between stretch" style="margin-bottom: 15px;">
+      <div
+        fxLayout="row"
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxLayout.sm="row"
+        fxLayoutAlign="space-around center"
+        fxLayoutAlign.sm="space-around center"
+        fxLayoutAlign.xs="space-between stretch"
+        style="margin-bottom: 15px"
+      >
         <app-fieldset title="Atribuições" fxFlex="100">
           <mat-radio-group
             formControlName="tipo_pessoa"
@@ -23,8 +31,15 @@
         </app-fieldset>
       </div>
       <div fxLayout="column" style="margin-bottom: 15px">
-        <div fxLayout="row" fxLayoutGap="2%" fxLayout.xs="column" fxLayout.sm="row" fxLayoutAlign="space-around center"
-        fxLayoutAlign.sm="space-around center" fxLayoutAlign.xs="space-between stretch">
+        <div
+          fxLayout="row"
+          fxLayoutGap="2%"
+          fxLayout.xs="column"
+          fxLayout.sm="row"
+          fxLayoutAlign="space-around center"
+          fxLayoutAlign.sm="space-around center"
+          fxLayoutAlign.xs="space-between stretch"
+        >
           <mat-form-field appearance="legacy" fxFlex="60">
             <mat-label>Nome</mat-label>
             <input
@@ -34,7 +49,11 @@
               formControlName="nome"
             />
           </mat-form-field>
-          <mat-form-field appearance="legacy" fxFlex="20" [ngStyle.xs]="{'width': '100%'}">
+          <mat-form-field
+            appearance="legacy"
+            fxFlex="20"
+            [ngStyle.xs]="{ width: '100%' }"
+          >
             <mat-label>Gênero</mat-label>
             <mat-select name="genero" formControlName="genero">
               <mat-option *ngFor="let genero of generos" [value]="genero">
@@ -42,7 +61,11 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <mat-form-field appearance="legacy" fxFlex="20" [ngStyle.xs]="{'width': '100%'}">
+          <mat-form-field
+            appearance="legacy"
+            fxFlex="20"
+            [ngStyle.xs]="{ width: '100%' }"
+          >
             <mat-label>Nascimento</mat-label>
             <input
               matInput
@@ -57,8 +80,15 @@
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
         </div>
-        <div fxFlex="row" fxLayoutGap="2%" fxLayout.xs="column" fxLayout.sm="row" fxLayoutAlign="space-around center"
-        fxLayoutAlign.sm="space-around center" fxLayoutAlign.xs="space-between stretch">
+        <div
+          fxFlex="row"
+          fxLayoutGap="2%"
+          fxLayout.xs="column"
+          fxLayout.sm="row"
+          fxLayoutAlign="space-around center"
+          fxLayoutAlign.sm="space-around center"
+          fxLayoutAlign.xs="space-between stretch"
+        >
           <mat-form-field appearance="legacy" fxFlex="20">
             <mat-label>CEP</mat-label>
             <input
@@ -78,8 +108,15 @@
             />
           </mat-form-field>
         </div>
-        <div fxLayout="row" fxLayoutGap="2%" fxLayout.xs="column" fxLayout.sm="row" fxLayoutAlign="space-around center"
-        fxLayoutAlign.sm="space-around center" fxLayoutAlign.xs="space-between stretch">
+        <div
+          fxLayout="row"
+          fxLayoutGap="2%"
+          fxLayout.xs="column"
+          fxLayout.sm="row"
+          fxLayoutAlign="space-around center"
+          fxLayoutAlign.sm="space-around center"
+          fxLayoutAlign.xs="space-between stretch"
+        >
           <mat-form-field appearance="legacy" fxFlex="10">
             <mat-label>Número</mat-label>
             <input
@@ -127,8 +164,15 @@
             />
           </mat-form-field>
         </div>
-        <div fxLayout="row" fxLayoutGap="2%" fxLayout.xs="column" fxLayout.sm="row" fxLayoutAlign="space-around center"
-        fxLayoutAlign.sm="space-around center" fxLayoutAlign.xs="space-between stretch">
+        <div
+          fxLayout="row"
+          fxLayoutGap="2%"
+          fxLayout.xs="column"
+          fxLayout.sm="row"
+          fxLayoutAlign="space-around center"
+          fxLayoutAlign.sm="space-around center"
+          fxLayoutAlign.xs="space-between stretch"
+        >
           <mat-form-field appearance="legacy" fxFlex="40">
             <mat-label>Email</mat-label>
             <input
@@ -150,7 +194,7 @@
               name="senha"
               formControlName="senha"
             />
-            <mat-hint fxFlex=10 fxLayoutAlign="end center"
+            <mat-hint fxFlex="10" fxLayoutAlign="end center"
               ><i
                 class="material-icons"
                 style="font-size: 15px"
@@ -170,8 +214,15 @@
       </div>
       <div fxLayout="row" *ngIf="condicaoPessoa === 'ALUNO'">
         <app-fieldset title="Aluno" fxFlex="100">
-          <div fxLayout="row" fxLayoutGap="2%" fxLayout.xs="column" fxLayout.sm="row" fxLayoutAlign="start center"
-          fxLayoutAlign.sm="space-around center" fxLayoutAlign.xs="space-between stretch">
+          <div
+            fxLayout="row"
+            fxLayoutGap="2%"
+            fxLayout.xs="column"
+            fxLayout.sm="row"
+            fxLayoutAlign="start center"
+            fxLayoutAlign.sm="space-around center"
+            fxLayoutAlign.xs="space-between stretch"
+          >
             <mat-form-field appearance="legacy" fxFlex="25">
               <mat-label>Nome da Mãe</mat-label>
               <input
@@ -186,8 +237,15 @@
               <input matInput name="nome_pai" formControlName="nome_pai" />
             </mat-form-field>
           </div>
-          <div fxLayout="row" fxLayoutGap="2%" fxLayout.xs="column" fxLayout.sm="row" fxLayoutAlign="start center"
-          fxLayoutAlign.sm="space-around center" fxLayoutAlign.xs="space-between stretch">
+          <div
+            fxLayout="row"
+            fxLayoutGap="2%"
+            fxLayout.xs="column"
+            fxLayout.sm="row"
+            fxLayoutAlign="start center"
+            fxLayoutAlign.sm="space-around center"
+            fxLayoutAlign.xs="space-between stretch"
+          >
             <mat-form-field appearance="legacy" fxFlex="25">
               <mat-label>Responsável</mat-label>
               <input
@@ -211,8 +269,15 @@
               </mat-autocomplete>
             </mat-form-field>
           </div>
-          <div fxLayout="row" fxLayoutGap="2%" fxLayout.xs="column" fxLayout.sm="row" fxLayoutAlign="start center"
-          fxLayoutAlign.sm="space-around center" fxLayoutAlign.xs="space-between stretch">
+          <div
+            fxLayout="row"
+            fxLayoutGap="2%"
+            fxLayout.xs="column"
+            fxLayout.sm="row"
+            fxLayoutAlign="start center"
+            fxLayoutAlign.sm="space-around center"
+            fxLayoutAlign.xs="space-between stretch"
+          >
             <mat-form-field appearance="legacy" fxFlex="25">
               <mat-label>Turma</mat-label>
               <mat-select
@@ -232,8 +297,15 @@
 
       <div fxLayout="row" *ngIf="condicaoPessoa === 'PROFESSOR'">
         <app-fieldset title="Professor" fxFlex="100">
-          <div fxLayout="row" fxLayoutGap="2%" fxLayout.xs="column" fxLayout.sm="row" fxLayoutAlign="start center"
-          fxLayoutAlign.sm="space-around center" fxLayoutAlign.xs="space-between stretch">
+          <div
+            fxLayout="row"
+            fxLayoutGap="2%"
+            fxLayout.xs="column"
+            fxLayout.sm="row"
+            fxLayoutAlign="start center"
+            fxLayoutAlign.sm="space-around center"
+            fxLayoutAlign.xs="space-between stretch"
+          >
             <mat-form-field appearance="legacy" fxFlex="25">
               <mat-label>Matéria</mat-label>
               <mat-select name="materia" formControlName="materia" required>

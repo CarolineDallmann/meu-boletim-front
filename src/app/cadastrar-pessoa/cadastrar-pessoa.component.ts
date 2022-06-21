@@ -19,7 +19,7 @@ export class CadastrarPessoaComponent implements OnInit {
   cadastroPessoa: FormGroup = new FormGroup({});
   generos: string[] = Object.values(Genero);
   generoSelecionado = '';
-  checked = false;
+  checked = true;
   tipoPessoa: Array<any> = [
     { nome: 'Aluno', value: 'ALUNO' },
     { nome: 'Responsável', value: 'RESPONSAVEL' },
@@ -61,7 +61,6 @@ export class CadastrarPessoaComponent implements OnInit {
 
   ngOnInit(): void {
     this.tipo = this.route.snapshot.queryParamMap.get('tipoPessoa');
-    this.checked = true;
     this.turmaService.getAllTurmas().subscribe((turmas) => {
       this.turmas = turmas;
     });
@@ -140,6 +139,26 @@ export class CadastrarPessoaComponent implements OnInit {
 
   changeTipoPessoa(event: any) {
     this.condicaoPessoa = event.value;
+    if (this.condicaoPessoa === 'ALUNO') {
+      this.router.navigate([`alunos/cadastro/`], {
+        queryParams: { tipoPessoa: this.condicaoPessoa }
+      });
+    }
+    if (this.condicaoPessoa === 'RESPONSAVEL') {
+      this.router.navigate([`responsaveis/cadastro/`], {
+        queryParams: { tipoPessoa: this.condicaoPessoa }
+      });
+    }
+    if (this.condicaoPessoa === 'PROFESSOR') {
+      this.router.navigate([`professores/cadastro/`], {
+        queryParams: { tipoPessoa: this.condicaoPessoa }
+      });
+    }
+    if (this.condicaoPessoa === 'SECRETARIA') {
+      this.router.navigate([`secretaria/cadastro/`], {
+        queryParams: { tipoPessoa: this.condicaoPessoa }
+      });
+    }
   }
 
   getNome(responsavelId: string) {

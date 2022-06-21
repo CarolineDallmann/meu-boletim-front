@@ -119,7 +119,6 @@ export class NotasLancamentoComponent implements OnInit {
   search(turmaId: string) {
     this.turmaSelecionada = turmaId;
     this.notaService.getBuscarNota({ turmaId }).subscribe((res) => {
-      res.notas.sort((a, b) => a.aluno.nome.localeCompare(b.aluno.nome));
       this.notas = res.notas;
     });
   }
