@@ -7,8 +7,7 @@ import { MateriaService } from '../services/materia.service';
 
 @Component({
   selector: 'app-materia',
-  templateUrl: './materia.component.html',
-  styleUrls: ['./materia.component.scss']
+  templateUrl: './materia.component.html'
 })
 export class MateriaComponent implements OnInit {
   materias: Materia[] = [];

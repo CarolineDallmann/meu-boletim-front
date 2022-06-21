@@ -8,8 +8,7 @@ import { DialogService } from '../services/dialog.service';
 
 @Component({
   selector: 'app-turmas',
-  templateUrl: './turmas.component.html',
-  styleUrls: ['./turmas.component.scss']
+  templateUrl: './turmas.component.html'
 })
 export class TurmasComponent implements OnInit {
   turmas: Turma[] = [];
