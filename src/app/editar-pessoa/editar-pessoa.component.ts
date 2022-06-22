@@ -68,12 +68,15 @@ export class EditarPessoaComponent implements OnInit {
     this.materiaService.getAllMaterias().subscribe((materia) => {
       this.materias = materia;
     });
-    this.pessoaService
-      .getAllPessoas('', 'RESPONSAVEL', true)
-      .subscribe((pessoa) => {
-        this.listaResponsaveis = pessoa;
-        this.loadPessoa();
-      });
+
+    this.findPessoa('').subscribe((pessoa) => {
+      this.listaResponsaveis = pessoa;
+      this.loadPessoa();
+    });
+  }
+
+  findPessoa(value: string) {
+    return this.pessoaService.getAllPessoas(value, 'RESPONSAVEL', false);
   }
 
   loadPessoa() {
@@ -108,6 +111,13 @@ export class EditarPessoaComponent implements OnInit {
     });
     this.condicaoPessoa = pessoa.tipo_pessoa;
     this.checked = pessoa.ativo;
+    this.editarPessoa
+      .get('responsavel')
+      ?.valueChanges.subscribe((filterValue) =>
+        this.findPessoa(filterValue).subscribe((pessoa) => {
+          this.listaResponsaveis = pessoa;
+        })
+      );
   }
 
   onSubmit() {
