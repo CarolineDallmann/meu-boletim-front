@@ -12,8 +12,7 @@ import { DialogService } from '../services/dialog.service';
 
 @Component({
   selector: 'app-notas',
-  templateUrl: './notas.component.html',
-  styleUrls: ['./notas.component.scss']
+  templateUrl: './notas.component.html'
 })
 export class NotasComponent implements OnInit {
   turmaSelecionada = '';

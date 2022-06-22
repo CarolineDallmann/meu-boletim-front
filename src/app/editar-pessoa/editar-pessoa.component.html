@@ -1,153 +1,354 @@
 <app-layout-principal>
+  <app-card-conteudo>
+    <ng-container *ngIf="isLoad">
+      <form
+        [formGroup]="editarPessoa"
+        (ngSubmit)="onSubmit()"
+        class="container"
+        style="margin-bottom: 10%"
+      >
+        <div
+          fxLayout="row"
+          fxLayout.xs="column"
+          fxLayout.sm="row"
+          fxLayoutAlign="space-around center"
+          fxLayoutAlign.sm="space-around center"
+          fxLayoutAlign.xs="space-between stretch"
+          style="margin-bottom: 15px"
+        >
+          <app-fieldset title="Atribuições" fxFlex="100" *ngIf="!pessoaId">
+            <mat-radio-group
+              formControlName="tipo_pessoa"
+              (change)="changeTipoPessoa($event)"
+            >
+              <mat-radio-button
+                *ngFor="let pessoa of tipoPessoa"
+                [value]="pessoa.value"
+                class="radio-button"
+              >
+                {{ pessoa.nome }}
+              </mat-radio-button>
+            </mat-radio-group>
+          </app-fieldset>
+        </div>
+        <div fxLayout="column" style="margin-bottom: 15px">
+          <div
+            fxLayout="row"
+            fxLayoutGap="2%"
+            fxLayout.xs="column"
+            fxLayout.sm="row"
+            fxLayoutAlign="space-around center"
+            fxLayoutAlign.sm="space-around center"
+            fxLayoutAlign.xs="space-between stretch"
+          >
+            <mat-form-field
+              appearance="legacy"
+              fxFlex="60"
+              [ngStyle.xs]="{ width: '100%' }"
+            >
+              <mat-label>Nome</mat-label>
+              <input
+                matInput
+                placeholder="Ex. Maria da Silva"
+                name="nome"
+                formControlName="nome"
+                autocomplete="off"
+              />
+            </mat-form-field>
+            <mat-form-field appearance="legacy" fxFlex="20">
+              <mat-label>Gênero</mat-label>
+              <mat-select name="genero" formControlName="genero">
+                <mat-option *ngFor="let genero of generos" [value]="genero">
+                  {{ genero | titlecase }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field
+              appearance="legacy"
+              fxFlex="20"
+              [ngStyle.xs]="{ width: '100%' }"
+            >
+              <mat-label>Nascimento</mat-label>
+              <input
+                matInput
+                [matDatepicker]="picker"
+                name="datanasc"
+                formControlName="datanasc"
+                autocomplete="off"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div
+            fxFlex="row"
+            fxLayoutGap="2%"
+            fxLayout.xs="column"
+            fxLayout.sm="row"
+            fxLayoutAlign="space-around center"
+            fxLayoutAlign.sm="space-around center"
+            fxLayoutAlign.xs="space-between stretch"
+          >
+            <mat-form-field appearance="legacy" fxFlex="20">
+              <mat-label>CEP</mat-label>
+              <input
+                matInput
+                placeholder="Ex. 58051-830"
+                name="cep"
+                formControlName="cep"
+                autocomplete="off"
+              />
+            </mat-form-field>
+            <mat-form-field appearance="legacy" fxFlex="80">
+              <mat-label>Rua</mat-label>
+              <input
+                matInput
+                placeholder="Ex. Rua Cecilia"
+                name="rua"
+                formControlName="rua"
+                autocomplete="off"
+              />
+            </mat-form-field>
+          </div>
+          <div
+            fxLayout="row"
+            fxLayoutGap="2%"
+            fxLayout.xs="column"
+            fxLayout.sm="row"
+            fxLayoutAlign="space-around center"
+            fxLayoutAlign.sm="space-around center"
+            fxLayoutAlign.xs="space-between stretch"
+          >
+            <mat-form-field appearance="legacy" fxFlex="10">
+              <mat-label>Número</mat-label>
+              <input
+                matInput
+                placeholder="Ex. 585"
+                name="numero"
+                formControlName="numero"
+                autocomplete="off"
+              />
+            </mat-form-field>
+            <mat-form-field appearance="legacy" fxFlex="35">
+              <mat-label>Bairro</mat-label>
+              <input
+                matInput
+                placeholder="Ex. Cid Universitária"
+                name="bairro"
+                formControlName="bairro"
+                autocomplete="off"
+              />
+            </mat-form-field>
+            <mat-form-field appearance="legacy" fxFlex="35">
+              <mat-label>Cidade</mat-label>
+              <input
+                matInput
+                placeholder="Ex. João Pessoa"
+                name="cidade"
+                formControlName="cidade"
+                autocomplete="off"
+              />
+            </mat-form-field>
+            <mat-form-field appearance="legacy" fxFlex="5">
+              <mat-label>UF</mat-label>
+              <input
+                matInput
+                placeholder="Ex. PB"
+                name="uf"
+                formControlName="uf"
+                autocomplete="off"
+              />
+            </mat-form-field>
+            <mat-form-field appearance="legacy" fxFlex="15">
+              <mat-label>Telefone</mat-label>
+              <input
+                matInput
+                type="tel"
+                placeholder="Ex. (83)999993333"
+                name="telefone"
+                formControlName="telefone"
+                autocomplete="off"
+              />
+            </mat-form-field>
+          </div>
+          <div
+            fxLayout="row"
+            fxLayoutGap="2%"
+            fxLayout.xs="column"
+            fxLayout.sm="row"
+            fxLayoutAlign="space-around center"
+            fxLayoutAlign.sm="space-around center"
+            fxLayoutAlign.xs="space-between stretch"
+          >
+            <mat-form-field
+              appearance="legacy"
+              fxFlex="40"
+              [ngStyle.xs]="{ width: '100%' }"
+            >
+              <mat-label>Email</mat-label>
+              <input
+                matInput
+                placeholder="Ex. maria@gmail.com"
+                name="email"
+                formControlName="email"
+                autocomplete="off"
+              />
+            </mat-form-field>
+            <mat-form-field appearance="legacy" fxFlex="20">
+              <mat-label>Login</mat-label>
+              <input matInput name="login" formControlName="login" />
+            </mat-form-field>
+            <mat-form-field
+              appearance="legacy"
+              fxFlex="20"
+              [ngStyle.xs]="{ width: '100%' }"
+            >
+              <mat-label>Senha</mat-label>
+              <input
+                matInput
+                type="password"
+                formControlName="senha"
+                (change)="changeSenha()"
+                autocomplete="off"
+              />
+              <mat-hint fxFlex="80" fxLayoutAlign="start"
+                ><strong>Clique acima para alterar senha</strong>
+              </mat-hint>
+              <mat-hint fxFlex="10" fxLayoutAlign="end"
+                ><i
+                  class="material-icons"
+                  style="font-size: 15px"
+                  [title]="configSenha"
+                  >info</i
+                ></mat-hint
+              >
+            </mat-form-field>
+            <mat-checkbox
+              name="ativo"
+              formControlName="ativo"
+              (ngModel)="(checked)"
+              fxFlex="10"
+              >Ativo
+            </mat-checkbox>
+          </div>
+        </div>
+        <div fxLayout="row" *ngIf="condicaoPessoa === 'ALUNO'">
+          <app-fieldset title="Aluno" fxFlex="100">
+            <div
+              fxLayout="row"
+              fxLayoutGap="2%"
+              fxLayout.xs="column"
+              fxLayout.sm="row"
+              fxLayoutAlign="start center"
+              fxLayoutAlign.sm="space-around center"
+              fxLayoutAlign.xs="space-between stretch"
+            >
+              <mat-form-field appearance="legacy" fxFlex="25">
+                <mat-label>Nome da Mãe</mat-label>
+                <input
+                  matInput
+                  placeholder="Ex. Maria Jose"
+                  name="nome_mae"
+                  formControlName="nome_mae"
+                  autocomplete="off"
+                />
+              </mat-form-field>
+              <mat-form-field appearance="legacy" fxFlex="25">
+                <mat-label>Nome do Pai</mat-label>
+                <input matInput name="nome_pai" formControlName="nome_pai" autocomplete="off"/>
+              </mat-form-field>
+            </div>
+            <div
+              fxLayout="row"
+              fxLayout.xs="column"
+              fxLayout.sm="row"
+              fxLayoutAlign="start center"
+              fxLayoutAlign.sm="start center"
+              fxLayoutAlign.xs="space-between stretch"
+            >
+              <mat-form-field appearance="legacy" fxFlex="25">
+                <mat-label>Responsável</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  name="responsavel"
+                  formControlName="responsavel"
+                  [matAutocomplete]="autoResp"
+                  required
+                />
+                <mat-autocomplete
+                  #autoResp="matAutocomplete"
+                  [displayWith]="getNome.bind(this)"
+                >
+                  <mat-option
+                    *ngFor="let resp of listaResponsaveis"
+                    [value]="resp.id"
+                  >
+                    {{ resp.nome }}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+            <div
+              fxLayout="row"
+              fxLayout.xs="column"
+              fxLayout.sm="row"
+              fxLayoutAlign="start center"
+              fxLayoutAlign.sm="start center"
+              fxLayoutAlign.xs="space-between stretch"
+            >
+              <mat-form-field appearance="legacy" fxFlex="25">
+                <mat-label>Turma</mat-label>
+                <mat-select
+                  name="turmaSelecionada"
+                  formControlName="turmaSelecionada"
+                  required
+                >
+                  <mat-option *ngFor="let turma of turmas" [value]="turma.id">
+                    Série {{ turma.serie | serieDePara }} - Turma
+                    {{ turma.nome | titlecase }} - {{ turma.turno | titlecase }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </app-fieldset>
+        </div>
 
-    <app-card-conteudo>
-        <ng-container *ngIf="isLoad">
-        <form [formGroup]="editarPessoa" (ngSubmit)="onSubmit()" class="container" style="margin-bottom:10%">
-            <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="row" fxLayoutAlign="space-around center"
-            fxLayoutAlign.sm="space-around center" fxLayoutAlign.xs="space-between stretch" style="margin-bottom: 15px;">
-                <app-fieldset title="Atribuições" fxFlex=100>
-                    <mat-radio-group formControlName="tipo_pessoa" (change)="changeTipoPessoa($event)">
-                        <mat-radio-button *ngFor="let pessoa of tipoPessoa" [value]="pessoa.value" class="radio-button">
-                            {{ pessoa.nome }}
-                        </mat-radio-button>
-                    </mat-radio-group>
-                </app-fieldset>
+        <div fxLayout="row" *ngIf="condicaoPessoa === 'PROFESSOR'">
+          <app-fieldset title="Professor" fxFlex="100">
+            <div
+              fxLayout="row"
+              fxLayout.xs="column"
+              fxLayout.sm="row"
+              fxLayoutAlign="start center"
+              fxLayoutAlign.sm="start center"
+              fxLayoutAlign.xs="space-between stretch"
+            >
+              <mat-form-field
+                appearance="legacy"
+                fxFlex="25"
+                [ngStyle.xs]="{ width: '100%' }"
+              >
+                <mat-label>Matéria</mat-label>
+                <mat-select name="materia" formControlName="materia">
+                  <mat-option
+                    *ngFor="let materia of materias"
+                    [value]="materia.id"
+                  >
+                    {{ materia.nome | titlecase }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
             </div>
-            <div fxLayout="column" style="margin-bottom: 15px;">
-                <div fxLayout="row" fxLayoutGap="2%" fxLayout.xs="column" fxLayout.sm="row" fxLayoutAlign="space-around center"
-                fxLayoutAlign.sm="start center" fxLayoutAlign.xs="space-between stretch">
-                    <mat-form-field appearance="legacy" fxFlex=60 [ngStyle.xs]="{'width': '100%'}">
-                        <mat-label>Nome</mat-label>
-                        <input matInput placeholder="Ex.: Maria da Silva" name="nome" formControlName="nome" autocomplete="off" />
-                    </mat-form-field>
-                    <mat-form-field appearance="legacy" fxFlex=20>
-                        <mat-label>Gênero</mat-label>
-                        <mat-select name="genero" formControlName="genero">
-                            <mat-option *ngFor="let genero of generos" [value]="genero">
-                                {{genero | titlecase}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                    <mat-form-field appearance="legacy" fxFlex=20 [ngStyle.xs]="{'width': '100%'}">
-                        <mat-label>Nascimento</mat-label>
-                        <input matInput [matDatepicker]="picker" name="datanasc" formControlName="datanasc" autocomplete="off"/>
-                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker #picker></mat-datepicker>
-                    </mat-form-field>
-                </div>
-                <div fxFlex="row" fxLayoutGap="2%" fxLayout.xs="column" fxLayout.sm="row" fxLayoutAlign="space-around center"
-                fxLayoutAlign.sm="start center" fxLayoutAlign.xs="space-between stretch">
-                    <mat-form-field appearance="legacy" fxFlex=20>
-                        <mat-label>CEP</mat-label>
-                        <input matInput placeholder="Ex.: 40260485" name="cep" formControlName="cep" autocomplete="off"/>
-                    </mat-form-field>
-                    <mat-form-field appearance="legacy" fxFlex=80>
-                        <mat-label>Rua</mat-label>
-                        <input matInput placeholder="Ex.: Av. Antônio Carlos Magalhães" name="rua" formControlName="rua" autocomplete="off"/>
-                    </mat-form-field>
-                </div>
-                <div fxLayout="row" fxLayoutGap="2%" fxLayout.xs="column" fxLayout.sm="row" fxLayoutAlign="space-around center"
-                fxLayoutAlign.sm="start center" fxLayoutAlign.xs="space-between stretch">
-                    <mat-form-field appearance="legacy" fxFlex=10>
-                        <mat-label>Número</mat-label>
-                        <input matInput placeholder="Ex.: 3148" name="numero" formControlName="numero" autocomplete="off"/>
-                    </mat-form-field>
-                    <mat-form-field appearance="legacy" fxFlex=35>
-                        <mat-label>Bairro</mat-label>
-                        <input matInput placeholder="Ex.: Caminho das Árvores" name="bairro" formControlName="bairro" autocomplete="off"/>
-                    </mat-form-field>
-                    <mat-form-field appearance="legacy" fxFlex=35>
-                        <mat-label>Cidade</mat-label>
-                        <input matInput placeholder="Ex.: Salvador" name="cidade" formControlName="cidade" autocomplete="off"/>
-                    </mat-form-field>
-                    <mat-form-field appearance="legacy" fxFlex=5>
-                        <mat-label>UF</mat-label>
-                        <input matInput placeholder="Ex.: BA" name="uf" formControlName="uf" autocomplete="off"/>
-                    </mat-form-field>
-                    <mat-form-field appearance="legacy" fxFlex=15 fxFlex.sm=10>
-                        <mat-label>Telefone</mat-label>
-                        <input matInput type="tel" placeholder="Ex.: (71)999993333" name="telefone"
-                            formControlName="telefone" />
-                    </mat-form-field>
-                </div>
-                <div fxLayout="row" fxLayoutGap="2%" fxLayout.xs="column" fxLayout.sm="row" fxLayoutAlign="space-around center"
-                fxLayoutAlign.sm="start center" fxLayoutAlign.xs="space-between stretch">
-                    <mat-form-field appearance="legacy" fxFlex=40 [ngStyle.xs]="{'width': '100%'}">
-                        <mat-label>Email</mat-label>
-                        <input matInput placeholder="Ex.: maria@gmail.com" name="email" formControlName="email" autocomplete="off"/>
-                    </mat-form-field>
-                    <mat-form-field appearance="legacy" fxFlex=20 >
-                        <mat-label>Login</mat-label>
-                        <input matInput name="login" formControlName="login"autocomplete="off" />
-                    </mat-form-field>
-                    <mat-form-field appearance="legacy" fxFlex=20 [ngStyle.xs]="{'width': '100%'}">
-                        <mat-label>Senha</mat-label>
-                        <input matInput type="password" formControlName="senha" (change)="changeSenha()" autocomplete="off"/>
-                        <mat-hint fxFlex=80><strong>Clique acima para alterar senha</strong> </mat-hint>
-                        <mat-hint fxFlex=20 fxLayoutAlign="end"><em class="material-icons" style="font-size:15px;" [title]="configSenha">info</em></mat-hint>
-                    </mat-form-field>
-                    <mat-checkbox name="ativo" formControlName="ativo" (ngModel)="checked" fxFlex=10 >Ativo
-                    </mat-checkbox>
-                </div>
-            </div>
-            <div fxLayout="row" *ngIf="condicaoPessoa==='ALUNO'">
-                <app-fieldset title="Aluno" fxFlex=100>
-                    <div fxLayout="row" fxLayoutGap="2%" fxLayout.xs="column" fxLayout.sm="row" fxLayoutAlign="start center"
-                    fxLayoutAlign.sm="start center" fxLayoutAlign.xs="space-between stretch">
-                        <mat-form-field appearance="legacy" fxFlex=25>
-                            <mat-label>Nome da Mãe</mat-label>
-                            <input matInput placeholder="Ex.: Maria Jose" name="nome_mae" formControlName="nome_mae" autocomplete="off"/>
-                        </mat-form-field>
-                        <mat-form-field appearance="legacy" fxFlex=25>
-                            <mat-label>Nome do Pai</mat-label>
-                            <input matInput name="nome_pai" formControlName="nome_pai" autocomplete="off" />
-                        </mat-form-field>
-                    </div>
-                    <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="row" fxLayoutAlign="start center"
-                    fxLayoutAlign.sm="start center" fxLayoutAlign.xs="space-between stretch">
-                        <mat-form-field appearance="legacy" fxFlex=25>
-                            <mat-label>Responsável</mat-label>
-                            <input matInput type="text" name="responsavel" formControlName="responsavel"
-                                [matAutocomplete]="autoResp" required>
-                            <mat-autocomplete #autoResp="matAutocomplete" [displayWith]="getNome.bind(this)">
-                                <mat-option *ngFor="let resp of listaResponsaveis" [value]="resp.id">
-                                    {{resp.nome | titlecase}}
-                                </mat-option>
-                            </mat-autocomplete>
-                        </mat-form-field>
-                    </div>
-                    <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="row" fxLayoutAlign="start center"
-                    fxLayoutAlign.sm="start center" fxLayoutAlign.xs="space-between stretch">
-                        <mat-form-field appearance="legacy" fxFlex=25>
-                            <mat-label>Turma</mat-label>
-                            <mat-select name="turmaSelecionada" formControlName="turmaSelecionada" required>
-                                <mat-option *ngFor="let turma of turmas" [value]="turma.id">
-                                    Série {{turma.serie | serieDePara}} - Turma {{turma.nome | titlecase}} - {{turma.turno | titlecase}}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
-
-                </app-fieldset>
-            </div>
-
-            <div fxLayout="row" *ngIf="condicaoPessoa==='PROFESSOR'" >
-                <app-fieldset title="Professor" fxFlex=100>
-                    <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="row" fxLayoutAlign="start center"
-                    fxLayoutAlign.sm="start center" fxLayoutAlign.xs="space-between stretch">
-                        <mat-form-field appearance="legacy" fxFlex=25 [ngStyle.xs]="{'width': '100%'}">
-                            <mat-label>Matéria</mat-label>
-                            <mat-select name="materia" formControlName="materia">
-                                <mat-option *ngFor="let materia of materias" [value]="materia.id">
-                                    {{materia.nome | titlecase}}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
-                </app-fieldset>
-            </div>
-            <app-button class="save-button" [disabled]="editarPessoa.invalid">Alterar</app-button>
-        </form>
+          </app-fieldset>
+        </div>
+        <app-button class="save-button" [disabled]="editarPessoa.invalid"
+          >Alterar</app-button
+        >
+      </form>
     </ng-container>
-    </app-card-conteudo>
+  </app-card-conteudo>
 </app-layout-principal>
