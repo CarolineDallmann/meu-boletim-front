@@ -69,10 +69,17 @@ export class CadastrarPessoaComponent implements OnInit {
     });
     this.createForm();
     this.condicaoPessoa = this.cadastroPessoa.value.tipo_pessoa;
+    this.findPessoa('');
+    this.cadastroPessoa
+      .get('responsavel')
+      ?.valueChanges.subscribe((filterValue) => this.findPessoa(filterValue));
+  }
+
+  findPessoa(value: string) {
     this.pessoaService
-      .getAllPessoas('', 'RESPONSAVEL', true)
-      .subscribe((pessoa) => {
-        this.listaResponsaveis = pessoa;
+      .getAllPessoas(value, 'RESPONSAVEL', false)
+      .subscribe((pessoas) => {
+        this.listaResponsaveis = pessoas;
       });
   }
 
