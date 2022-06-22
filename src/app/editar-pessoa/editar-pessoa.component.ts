@@ -68,12 +68,15 @@ export class EditarPessoaComponent implements OnInit {
     this.materiaService.getAllMaterias().subscribe((materia) => {
       this.materias = materia;
     });
-    this.pessoaService
-      .getAllPessoas('', 'RESPONSAVEL', true)
-      .subscribe((pessoa) => {
-        this.listaResponsaveis = pessoa;
-        this.loadPessoa();
-      });
+
+    this.findPessoa('').subscribe((pessoa) => {
+      this.listaResponsaveis = pessoa;
+      this.loadPessoa();
+    });
+  }
+
+  findPessoa(value: string) {
+    return this.pessoaService.getAllPessoas(value, 'RESPONSAVEL', false);
   }
 
   loadPessoa() {
@@ -108,13 +111,16 @@ export class EditarPessoaComponent implements OnInit {
     });
     this.condicaoPessoa = pessoa.tipo_pessoa;
     this.checked = pessoa.ativo;
-    // this.captureNomeResponsavel(this.editarPessoa.value.responsavel);
+    this.editarPessoa
+      .get('responsavel')
+      ?.valueChanges.subscribe((filterValue) =>
+        this.findPessoa(filterValue).subscribe((pessoa) => {
+          this.listaResponsaveis = pessoa;
+        })
+      );
   }
 
   onSubmit() {
-    // this.editarPessoa.value.datanasc = this.dataFormat(this.editarPessoa.value.datanasc);
-    // this.captureIdResponsavel(this.editarPessoa.value.responsavel);
-
     if (this.editarPessoa.valid) {
       this.pessoaService
         .updatePessoa(
@@ -145,7 +151,7 @@ export class EditarPessoaComponent implements OnInit {
   }
 
   dataFormat(data: Date) {
-    return data.getFullYear() + '-' + (data.getMonth() + 1) + '-' + data.getDate();
+    return `${data.getFullYear()}-${data.getMonth() + 1}-${data.getDate()}`;
   }
 
   changeTipoPessoa(event: any) {
@@ -162,24 +168,4 @@ export class EditarPessoaComponent implements OnInit {
       this.listaResponsaveis.find((r) => r.id === responsavelId)?.nome || ''
     );
   }
-
-  // captureIdResponsavel(nomeResp: string) {
-  //   this.pessoaService.getAllPessoas('', 'RESPONSAVEL', true).subscribe(pessoa => {
-  //     for (let i = 0; i < pessoa.length; i++) {
-  //       if (pessoa[i].nome == nomeResp) {
-  //         this.editarPessoa.value.responsavel = pessoa[i].id;
-  //       }
-  //     }
-  //   })
-  // }
-
-  // captureNomeResponsavel(event: any) {
-  //   this.pessoaService.getAllPessoas('', 'RESPONSAVEL', true).subscribe(pessoa => {
-  //     for (let i = 0; i < pessoa.length; i++) {
-  //       if (pessoa[i].id == event) {
-  //         this.editarPessoa.controls['responsavel'].setValue(pessoa[i].nome);
-  //       }
-  //     }
-  //   })
-  // }
 }

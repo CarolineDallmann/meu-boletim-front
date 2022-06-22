@@ -12,6 +12,7 @@
       [class]="isSmall ? 'small' : 'normal'"
       src="../../../assets/logo.svg"
       alt=""
+      (click)="navegaHome()"
     />
     <app-menu (navegateEvent)="setTitle($event)"></app-menu>
   </div>

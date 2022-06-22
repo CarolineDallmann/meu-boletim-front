@@ -102,14 +102,10 @@ export class BoletimVisualizacaoService {
       qtdeFaltaBim4 +
       qtdePresenca;
     const freqEsperada = (qtdeAulas * frequenciaAprovacao) / 100;
-    let status = false;
     if (qtdePresenca < freqEsperada) {
-      status = false;
+      return false;
     }
-    if (qtdePresenca > freqEsperada) {
-      status = true;
-    }
-    return status;
+    return true;
   }
 
   resultadoParcial(b: BoletimResponse, config: ConfigEscola) {
