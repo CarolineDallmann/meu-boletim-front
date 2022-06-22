@@ -120,9 +120,7 @@ export class CadastrarPessoaComponent implements OnInit {
             this.snackBar.open(res.msg, undefined, { duration: 4000 });
             if (this.cadastroPessoa.value.tipo_pessoa === 'ALUNO') {
               this.router.navigate(['/alunos']);
-            } else if (
-              this.cadastroPessoa.value.tipo_pessoa === 'RESPONSAVEL'
-            ) {
+            } else if (this.cadastroPessoa.value.tipo_pessoa === 'RESPONSAVEL') {
               this.router.navigate(['/responsaveis']);
             } else if (this.cadastroPessoa.value.tipo_pessoa === 'PROFESSOR') {
               this.router.navigate(['/professores']);
@@ -138,14 +136,13 @@ export class CadastrarPessoaComponent implements OnInit {
   }
 
   dataFormat(data: Date) {
-    const dia = data.getDate();
-    const mes = data.getMonth() + 1;
-    const ano = data.getFullYear();
-    return ano + '-' + mes + '-' + dia;
+    return data.getFullYear() + '-' + (data.getMonth() + 1) + '-' + data.getDate();
   }
 
   changeTipoPessoa(event: any) {
     this.condicaoPessoa = event.value;
+    this.cadastroPessoa.value.tipo_pessoa = this.condicaoPessoa;
+    
     if (this.condicaoPessoa === 'ALUNO') {
       this.router.navigate([`alunos/cadastro/`], {
         queryParams: { tipoPessoa: this.condicaoPessoa }

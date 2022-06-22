@@ -6,7 +6,7 @@
       fxLayout.sm="row wrap"
       fxLayout.md="row wrap"
       fxLayoutAlign="space-around center"
-      fxLayoutAlign.sm="space-around center"
+      fxLayoutAlign.sm="start center"
       fxLayoutAlign.xs="space-between stretch"
     >
       <div fxFlex.sm="50">
@@ -30,7 +30,6 @@
       <div fxFlex.sm="50">
         <mat-checkbox
           [(ngModel)]="checkInativo"
-          class="widthCheck"
           (change)="onInativoChange($event.checked)"
           >Mostrar Inativos</mat-checkbox
         >

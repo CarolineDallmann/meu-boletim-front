@@ -156,6 +156,7 @@ export class EditarPessoaComponent implements OnInit {
 
   changeTipoPessoa(event: any) {
     this.condicaoPessoa = event.value;
+    this.editarPessoa.value.tipo_pessoa = event.value;
   }
 
   changeSenha() {

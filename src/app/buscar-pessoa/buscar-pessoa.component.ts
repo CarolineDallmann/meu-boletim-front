@@ -64,13 +64,13 @@ export class BuscarPessoaComponent implements OnInit {
   }
 
   filterTipoPessoa(tipo: string): TipoPessoa {
-    if (tipo == 'alunos') {
+    if (tipo === 'alunos') {
       return TipoPessoa.ALUNO;
     }
-    if (tipo == 'responsaveis') {
+    if (tipo === 'responsaveis') {
       return TipoPessoa.RESPONSAVEL;
     }
-    if (tipo == 'professores') {
+    if (tipo === 'professores') {
       return TipoPessoa.PROFESSOR;
     }
 
