@@ -84,8 +84,6 @@ export class EditarPessoaComponent implements OnInit {
   }
 
   createForm(pessoa: any) {
-    console.log(pessoa);
-
     this.editarPessoa = this.fb.group({
       tipo_pessoa: [pessoa.tipo_pessoa, [Validators.required]],
       nome: [pessoa.nome, [Validators.required]],
@@ -152,6 +150,7 @@ export class EditarPessoaComponent implements OnInit {
 
   changeTipoPessoa(event: any) {
     this.condicaoPessoa = event.value;
+    this.editarPessoa.value.tipo_pessoa = event.value;
   }
 
   changeSenha() {

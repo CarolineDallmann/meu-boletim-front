@@ -32,6 +32,7 @@
               placeholder="Ex.: Maria da Silva"
               name="nome"
               formControlName="nome"
+              autocomplete="off"
             />
           </mat-form-field>
           <mat-form-field appearance="legacy" fxFlex="20" [ngStyle.xs]="{'width': '100%'}">
@@ -49,6 +50,7 @@
               [matDatepicker]="picker"
               name="datanasc"
               formControlName="datanasc"
+              autocomplete="off"
             />
             <mat-datepicker-toggle
               matSuffix
@@ -66,6 +68,7 @@
               placeholder="Ex.: 40260485"
               name="cep"
               formControlName="cep"
+              autocomplete="off"
             />
           </mat-form-field>
           <mat-form-field appearance="legacy" fxFlex="80" [ngStyle.xs]="{'width': '100%'}">
@@ -75,6 +78,7 @@
               placeholder="Ex.: Av. Antônio Carlos Magalhães"
               name="rua"
               formControlName="rua"
+              autocomplete="off"
             />
           </mat-form-field>
         </div>
@@ -87,6 +91,7 @@
               placeholder="Ex.: 3148"
               name="numero"
               formControlName="numero"
+              autocomplete="off"
             />
           </mat-form-field>
           <mat-form-field appearance="legacy" fxFlex="35" [ngStyle.xs]="{'width': '100%'}">
@@ -96,6 +101,7 @@
               placeholder="Ex.: Caminho das Árvores"
               name="bairro"
               formControlName="bairro"
+              autocomplete="off"
             />
           </mat-form-field>
           <mat-form-field appearance="legacy" fxFlex="35" [ngStyle.xs]="{'width': '100%'}">
@@ -105,6 +111,7 @@
               placeholder="Ex.: Salvador"
               name="cidade"
               formControlName="cidade"
+              autocomplete="off"
             />
           </mat-form-field>
           <mat-form-field appearance="legacy" fxFlex="5" [ngStyle.xs]="{'width': '100%'}">
@@ -114,6 +121,7 @@
               placeholder="Ex.: BA"
               name="uf"
               formControlName="uf"
+              autocomplete="off"
             />
           </mat-form-field>
           <mat-form-field appearance="legacy" fxFlex="15" fxFlex.sm=10 [ngStyle.xs]="{'width': '100%'}">
@@ -124,6 +132,7 @@
               placeholder="Ex.: (71)999993333"
               name="telefone"
               formControlName="telefone"
+              autocomplete="off"
             />
           </mat-form-field>
         </div>
@@ -136,6 +145,7 @@
               placeholder="Ex.: maria@gmail.com"
               name="email"
               formControlName="email"
+              autocomplete="off"
             />
           </mat-form-field>
           <mat-form-field appearance="legacy" fxFlex="20" [ngStyle.xs]="{'width': '100%'}">
@@ -149,6 +159,7 @@
               type="password"
               name="senha"
               formControlName="senha"
+              autocomplete="off"
             />
             <mat-hint fxFlex=100 fxLayoutAlign="end center"
               ><i
@@ -183,7 +194,7 @@
             </mat-form-field>
             <mat-form-field appearance="legacy" fxFlex="25" [ngStyle.xs]="{'width': '100%'}">
               <mat-label>Nome do Pai</mat-label>
-              <input matInput name="nome_pai" formControlName="nome_pai" />
+              <input matInput name="nome_pai" formControlName="nome_pai" autocomplete="off"/>
             </mat-form-field>
           </div>
           <div fxLayout="row" fxLayoutGap="2%" fxLayout.xs="column" fxLayout.sm="row" fxLayoutAlign="start center"
