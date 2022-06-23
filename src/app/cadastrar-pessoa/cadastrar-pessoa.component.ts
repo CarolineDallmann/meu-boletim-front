@@ -45,7 +45,7 @@ export class CadastrarPessoaComponent implements OnInit {
     Validators.required
   ];
   senhaValidador = [
-    Validators.pattern('^[0-9a-zA-Z!@#$]{8,}$'),
+    Validators.pattern('^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$])[0-9a-zA-Z!@#$]{8,}$'),
     Validators.required
   ];
 
@@ -120,7 +120,9 @@ export class CadastrarPessoaComponent implements OnInit {
             this.snackBar.open(res.msg, undefined, { duration: 4000 });
             if (this.cadastroPessoa.value.tipo_pessoa === 'ALUNO') {
               this.router.navigate(['/alunos']);
-            } else if (this.cadastroPessoa.value.tipo_pessoa === 'RESPONSAVEL') {
+            } else if (
+              this.cadastroPessoa.value.tipo_pessoa === 'RESPONSAVEL'
+            ) {
               this.router.navigate(['/responsaveis']);
             } else if (this.cadastroPessoa.value.tipo_pessoa === 'PROFESSOR') {
               this.router.navigate(['/professores']);
@@ -136,7 +138,7 @@ export class CadastrarPessoaComponent implements OnInit {
   }
 
   dataFormat(data: Date) {
-    return data.getFullYear() + '-' + (data.getMonth() + 1) + '-' + data.getDate();
+    return `${data.getFullYear()}-${data.getMonth() + 1}-${data.getDate()}`;
   }
 
   changeTipoPessoa(event: any) {
