@@ -18,7 +18,7 @@ export class BoletimVisualizacaoService {
 
   getBuscarFilhos(id: string) {
     return this.http.get<BuscaFilhoResponse[]>(
-      `${environment.api}consultar-filhos`,
+      `${environment.api}pessoas/consultar-filhos`,
       { params: { id } }
     );
   }
