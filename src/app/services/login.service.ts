@@ -8,9 +8,6 @@ export class LoginService {
   constructor(private http: HttpClient) {}
 
   postLogin(body: { login: string; senha: string }) {
-    return this.http.post<PessoaLocalStorage>(
-      `${environment.api}pessoas/login`,
-      body
-    );
+    return this.http.post<PessoaLocalStorage>(`${environment.api}login`, body);
   }
 }

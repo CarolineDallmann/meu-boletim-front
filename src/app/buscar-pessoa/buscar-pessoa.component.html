@@ -31,6 +31,7 @@
         <mat-checkbox
           [(ngModel)]="checkInativo"
           (change)="onInativoChange($event.checked)"
+          [ngStyle.xs]="{ 'margin-bottom': '8px' }"
           >Mostrar Inativos</mat-checkbox
         >
       </div>

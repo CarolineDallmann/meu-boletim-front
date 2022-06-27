@@ -45,6 +45,7 @@ import { TurmasLancamentoComponent } from './turmas-lancamento/turmas-lancamento
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DialogService } from './services/dialog.service';
+import { InterceptorModule } from './interceptor/interceptor.module';
 
 @NgModule({
   declarations: [
@@ -91,7 +92,9 @@ import { DialogService } from './services/dialog.service';
     MatRadioModule,
     MatAutocompleteModule,
     FlexLayoutModule,
-    MatDialogModule
+    MatDialogModule,
+    HttpClientModule,
+    InterceptorModule
   ],
   providers: [
     TurmaService,
