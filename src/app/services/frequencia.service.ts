@@ -13,14 +13,14 @@ export class FrequenciaService {
 
   getBuscarFrequencia(turmaId: string, materiaId: string, data: string) {
     return this.http.get<FrequenciaResponse[]>(
-      `${environment.api}buscar-frequencia`,
+      `${environment.api}frequencia/buscar-frequencia`,
       { params: { turmaId, materiaId, data } }
     );
   }
 
   salvarFrequencia(body: FrequenciaPayload) {
     return this.http.post<MsgResponse>(
-      `${environment.api}salvar-frequencia`,
+      `${environment.api}frequencia/salvar-frequencia`,
       body
     );
   }

@@ -21,6 +21,9 @@
     class="direita"
     [ngClass.xs]="'direita-small'"
     [ngStyle.sm]="{ width: 'calc(100% - 181px)' }"
+    [ngStyle.sm]="
+      !hiddenMenu ? { width: 'calc(100% - 181px)' } : { width: '100% ' }
+    "
   >
     <ng-content></ng-content>
     <!--ng-content entende que é para trocar o conteúdo aqui-->

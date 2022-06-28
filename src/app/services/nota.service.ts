@@ -17,7 +17,7 @@ export class NotaService {
 
   getListarAtividades(turmaId: string, materiaId: string) {
     return this.http.get<AtividadeResponse[]>(
-      `${environment.api}listar-atividades`,
+      `${environment.api}atividade/listar-atividades`,
       { params: { turmaId, materiaId } }
     );
   }
@@ -33,15 +33,18 @@ export class NotaService {
   }
 
   deleteAtividade(atividadeId: string) {
-    return this.http.delete<MsgResponse>(`${environment.api}atividade`, {
+    return this.http.delete<MsgResponse>(`${environment.api}atividade/delete`, {
       params: { atividadeId }
     });
   }
 
   getBuscarNota(params: { atividadeId?: string; turmaId?: string }) {
-    return this.http.get<BuscaNotaResponse>(`${environment.api}buscar-nota`, {
-      params
-    });
+    return this.http.get<BuscaNotaResponse>(
+      `${environment.api}atividade/buscar-nota`,
+      {
+        params
+      }
+    );
   }
 
   buscaNotaResponseToBuscaNota(
@@ -59,7 +62,7 @@ export class NotaService {
 
   salvarAtividade(body: SalvarAtividadePayload) {
     return this.http.post<MsgResponse>(
-      `${environment.api}salvar-atividade`,
+      `${environment.api}atividade/salvar-atividade`,
       body
     );
   }
