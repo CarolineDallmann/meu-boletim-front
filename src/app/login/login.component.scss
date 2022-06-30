@@ -69,6 +69,20 @@ span {
     height: 600px;
   }
 }
+@media screen and (max-width: 1300px) and (min-height:500px){
+  .fundo{
+    height: 600px;
+    bottom: 0;
+  }
+  .boxExternaLogin{
+    top: 200px;
+    right: 150px;
+  }
+  .logoPrincipal{
+    top: 70px;
+    right: 150px;
+  }
+}
 
 @media screen and (max-width: 1200px){
   .fundo{

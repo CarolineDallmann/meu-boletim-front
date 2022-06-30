@@ -16,9 +16,8 @@ import { TurmaService } from '../services/turma.service';
   styleUrls: ['./cadastrar-pessoa.component.scss']
 })
 export class CadastrarPessoaComponent implements OnInit {
-
   formPessoa: FormGroup = new FormGroup({});
-  
+
   generos: string[] = Object.values(Genero);
   generoSelecionado = '';
   checked = true;
@@ -35,7 +34,7 @@ export class CadastrarPessoaComponent implements OnInit {
   tipo: any;
   pessoaId: any;
   acao: string | null = '';
-  isLoad: boolean = false;
+  isLoad = false;
 
   configSenha = `A senha deve conter, no mínino, 8 caracteres da seguinte forma:
     - Pelo menos 1 letra MAIÚSCULA;
@@ -50,7 +49,9 @@ export class CadastrarPessoaComponent implements OnInit {
     Validators.required
   ];
   senhaValidador = [
-    Validators.pattern('^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$])[0-9a-zA-Z!@#$]{8,}$'),
+    Validators.pattern(
+      '^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$])[0-9a-zA-Z!@#$]{8,}$'
+    ),
     Validators.required
   ];
 
@@ -62,13 +63,13 @@ export class CadastrarPessoaComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private snackBar: MatSnackBar
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.tipo = this.route.snapshot.queryParamMap.get('tipoPessoa');
     this.pessoaId = this.route.snapshot.queryParamMap.get('pessoaId');
 
-    this.acao = (this.pessoaId !== null) ? 'EDITAR' : 'CADASTRAR';
+    this.acao = this.pessoaId !== null ? 'EDITAR' : 'CADASTRAR';
 
     this.turmaService.getAllTurmas().subscribe((turmas) => {
       this.turmas = turmas;
@@ -85,14 +86,12 @@ export class CadastrarPessoaComponent implements OnInit {
       this.formPessoa
         .get('responsavel')
         ?.valueChanges.subscribe((filterValue) => this.findPessoa(filterValue));
-
     } else if (this.acao === 'EDITAR') {
       this.findPessoaEdit('').subscribe((pessoa) => {
         this.listaResponsaveis = pessoa;
         this.loadPessoa();
       });
     }
-
   }
 
   findPessoa(value: string) {
@@ -164,68 +163,64 @@ export class CadastrarPessoaComponent implements OnInit {
     });
     this.condicaoPessoa = pessoa.tipo_pessoa;
     this.checked = pessoa.ativo;
-    this.formPessoa
-      .get('responsavel')
-      ?.valueChanges.subscribe((filterValue) =>
-        this.findPessoaEdit(filterValue).subscribe((pessoa) => {
-          this.listaResponsaveis = pessoa;
-        })
-      );
+    this.formPessoa.get('responsavel')?.valueChanges.subscribe((filterValue) =>
+      this.findPessoaEdit(filterValue).subscribe((pessoa) => {
+        this.listaResponsaveis = pessoa;
+      })
+    );
   }
 
   onSubmit() {
     if (this.formPessoa.valid) {
-      if(this.acao === 'EDITAR') {
+      if (this.acao === 'EDITAR') {
         this.pessoaService
-        .updatePessoa(
-          {
+          .updatePessoa(
+            {
+              ...this.formPessoa.value,
+              datanasc: this.dataFormat(this.formPessoa.value.datanasc)
+            },
+            this.pessoaId
+          )
+          .subscribe({
+            next: (res) => {
+              this.snackBar.open(res.msg, undefined, { duration: 4000 });
+              if (this.formPessoa.value.tipo_pessoa === 'ALUNO') {
+                this.router.navigate(['/alunos']);
+              } else if (this.formPessoa.value.tipo_pessoa === 'RESPONSAVEL') {
+                this.router.navigate(['/responsaveis']);
+              } else if (this.formPessoa.value.tipo_pessoa === 'PROFESSOR') {
+                this.router.navigate(['/professores']);
+              } else if (this.formPessoa.value.tipo_pessoa === 'SECRETARIA') {
+                this.router.navigate(['/secretaria']);
+              }
+            },
+            error: (err) => {
+              this.snackBar.open(err.error.msg, undefined, { duration: 5000 });
+            }
+          });
+      } else if (this.acao === 'CADASTRAR') {
+        this.pessoaService
+          .savePessoa({
             ...this.formPessoa.value,
             datanasc: this.dataFormat(this.formPessoa.value.datanasc)
-          },
-          this.pessoaId
-        )
-        .subscribe({
-          next: (res) => {
-            this.snackBar.open(res.msg, undefined, { duration: 4000 });
-            if (this.formPessoa.value.tipo_pessoa === 'ALUNO') {
-              this.router.navigate(['/alunos']);
-            } else if (this.formPessoa.value.tipo_pessoa === 'RESPONSAVEL') {
-              this.router.navigate(['/responsaveis']);
-            } else if (this.formPessoa.value.tipo_pessoa === 'PROFESSOR') {
-              this.router.navigate(['/professores']);
-            } else if (this.formPessoa.value.tipo_pessoa === 'SECRETARIA') {
-              this.router.navigate(['/secretaria']);
+          })
+          .subscribe({
+            next: (res) => {
+              this.snackBar.open(res.msg, undefined, { duration: 4000 });
+              if (this.formPessoa.value.tipo_pessoa === 'ALUNO') {
+                this.router.navigate(['/alunos']);
+              } else if (this.formPessoa.value.tipo_pessoa === 'RESPONSAVEL') {
+                this.router.navigate(['/responsaveis']);
+              } else if (this.formPessoa.value.tipo_pessoa === 'PROFESSOR') {
+                this.router.navigate(['/professores']);
+              } else if (this.formPessoa.value.tipo_pessoa === 'SECRETARIA') {
+                this.router.navigate(['/secretaria']);
+              }
+            },
+            error: (err) => {
+              this.snackBar.open(err.error.msg, undefined, { duration: 5000 });
             }
-          },
-          error: (err) => {
-            this.snackBar.open(err.error.msg, undefined, { duration: 5000 });
-          }
-        });
-      } else if(this.acao === 'CADASTRAR') {
-        this.pessoaService
-        .savePessoa({
-          ...this.formPessoa.value,
-          datanasc: this.dataFormat(this.formPessoa.value.datanasc)
-        })
-        .subscribe({
-          next: (res) => {
-            this.snackBar.open(res.msg, undefined, { duration: 4000 });
-            if (this.formPessoa.value.tipo_pessoa === 'ALUNO') {
-              this.router.navigate(['/alunos']);
-            } else if (
-              this.formPessoa.value.tipo_pessoa === 'RESPONSAVEL'
-            ) {
-              this.router.navigate(['/responsaveis']);
-            } else if (this.formPessoa.value.tipo_pessoa === 'PROFESSOR') {
-              this.router.navigate(['/professores']);
-            } else if (this.formPessoa.value.tipo_pessoa === 'SECRETARIA') {
-              this.router.navigate(['/secretaria']);
-            }
-          },
-          error: (err) => {
-            this.snackBar.open(err.error.msg, undefined, { duration: 5000 });
-          }
-        });
+          });
       }
     }
   }
