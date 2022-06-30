@@ -73,7 +73,6 @@ export class BuscarPessoaComponent implements OnInit {
     if (tipo === 'professores') {
       return TipoPessoa.PROFESSOR;
     }
-
     return TipoPessoa.SECRETARIA;
   }
 

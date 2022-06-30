@@ -211,8 +211,7 @@
                 matInput
                 type="password"
                 formControlName="senha"
-                (change)="changeSenha()"
-                autocomplete="off"
+                (click)="changeSenha()"
               />
               <mat-hint fxFlex="80" fxLayoutAlign="start"
                 ><strong>Clique acima para alterar senha</strong>
@@ -243,7 +242,7 @@
               fxLayout.xs="column"
               fxLayout.sm="row"
               fxLayoutAlign="start center"
-              fxLayoutAlign.sm="space-around center"
+              fxLayoutAlign.sm="start center"
               fxLayoutAlign.xs="space-between stretch"
             >
               <mat-form-field appearance="legacy" fxFlex="25">

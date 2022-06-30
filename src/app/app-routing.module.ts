@@ -27,19 +27,19 @@ const routes: Routes = [
 
   { path: 'alunos', component: BuscarPessoaComponent },
   { path: 'alunos/cadastro', component: CadastrarPessoaComponent },
-  { path: 'alunos/editar', component: EditarPessoaComponent },
+  { path: 'alunos/editar', component: CadastrarPessoaComponent },
 
   { path: 'responsaveis', component: BuscarPessoaComponent },
   { path: 'responsaveis/cadastro', component: CadastrarPessoaComponent },
-  { path: 'responsaveis/editar', component: EditarPessoaComponent },
+  { path: 'responsaveis/editar', component: CadastrarPessoaComponent },
 
   { path: 'professores', component: BuscarPessoaComponent },
   { path: 'professores/cadastro', component: CadastrarPessoaComponent },
-  { path: 'professores/editar', component: EditarPessoaComponent },
+  { path: 'professores/editar', component: CadastrarPessoaComponent },
 
   { path: 'secretaria', component: BuscarPessoaComponent },
   { path: 'secretaria/cadastro', component: CadastrarPessoaComponent },
-  { path: 'secretaria/editar', component: EditarPessoaComponent },
+  { path: 'secretaria/editar', component: CadastrarPessoaComponent },
 
   { path: 'boletim', component: VisulizacaoboletimComponent }
 ];

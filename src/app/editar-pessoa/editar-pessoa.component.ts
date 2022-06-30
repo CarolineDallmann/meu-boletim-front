@@ -25,7 +25,7 @@ export class EditarPessoaComponent implements OnInit {
     Validators.required
   ];
   senhaValidador = [
-    Validators.pattern('^[0-9a-zA-Z!@#$]{8,}$'),
+    Validators.pattern('^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$])[0-9a-zA-Z!@#$]{8,}$'),
     Validators.required
   ];
 
