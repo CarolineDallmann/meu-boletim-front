@@ -16,7 +16,9 @@ import { TurmaService } from '../services/turma.service';
   styleUrls: ['./cadastrar-pessoa.component.scss']
 })
 export class CadastrarPessoaComponent implements OnInit {
-  cadastroPessoa: FormGroup = new FormGroup({});
+
+  formPessoa: FormGroup = new FormGroup({});
+  
   generos: string[] = Object.values(Genero);
   generoSelecionado = '';
   checked = true;
@@ -31,6 +33,9 @@ export class CadastrarPessoaComponent implements OnInit {
   condicaoPessoa = '';
   listaResponsaveis: Pessoa[] = [];
   tipo: any;
+  pessoaId: any;
+  acao: string | null = '';
+  isLoad: boolean = false;
 
   configSenha = `A senha deve conter, no mínino, 8 caracteres da seguinte forma:
     - Pelo menos 1 letra MAIÚSCULA;
@@ -57,22 +62,37 @@ export class CadastrarPessoaComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private snackBar: MatSnackBar
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.tipo = this.route.snapshot.queryParamMap.get('tipoPessoa');
+    this.pessoaId = this.route.snapshot.queryParamMap.get('pessoaId');
+
+    this.acao = (this.pessoaId !== null) ? 'EDITAR' : 'CADASTRAR';
+
     this.turmaService.getAllTurmas().subscribe((turmas) => {
       this.turmas = turmas;
     });
     this.materiaService.getAllMaterias().subscribe((materia) => {
       this.materias = materia;
     });
-    this.createForm();
-    this.condicaoPessoa = this.cadastroPessoa.value.tipo_pessoa;
-    this.findPessoa('');
-    this.cadastroPessoa
-      .get('responsavel')
-      ?.valueChanges.subscribe((filterValue) => this.findPessoa(filterValue));
+
+    if (this.acao === 'CADASTRAR') {
+      this.isLoad = true;
+      this.createFormCadastrar();
+      this.condicaoPessoa = this.formPessoa.value.tipo_pessoa;
+      this.findPessoa('');
+      this.formPessoa
+        .get('responsavel')
+        ?.valueChanges.subscribe((filterValue) => this.findPessoa(filterValue));
+
+    } else if (this.acao === 'EDITAR') {
+      this.findPessoaEdit('').subscribe((pessoa) => {
+        this.listaResponsaveis = pessoa;
+        this.loadPessoa();
+      });
+    }
+
   }
 
   findPessoa(value: string) {
@@ -83,8 +103,19 @@ export class CadastrarPessoaComponent implements OnInit {
       });
   }
 
-  createForm() {
-    this.cadastroPessoa = this.fb.group({
+  findPessoaEdit(value: string) {
+    return this.pessoaService.getAllPessoas(value, 'RESPONSAVEL', false);
+  }
+
+  loadPessoa() {
+    this.pessoaService.getPessoaById(this.pessoaId).subscribe((pessoa) => {
+      this.isLoad = true;
+      this.createFormEditar(pessoa);
+    });
+  }
+
+  createFormCadastrar() {
+    this.formPessoa = this.fb.group({
       nome: ['', [Validators.required]],
       genero: ['', [Validators.required]],
       datanasc: ['', [Validators.required]],
@@ -108,25 +139,61 @@ export class CadastrarPessoaComponent implements OnInit {
     });
   }
 
-  onSubmit() {
-    if (this.cadastroPessoa.valid) {
-      this.pessoaService
-        .savePessoa({
-          ...this.cadastroPessoa.value,
-          datanasc: this.dataFormat(this.cadastroPessoa.value.datanasc)
+  createFormEditar(pessoa: any) {
+    this.formPessoa = this.fb.group({
+      tipo_pessoa: [pessoa.tipo_pessoa, [Validators.required]],
+      nome: [pessoa.nome, [Validators.required]],
+      genero: [pessoa.genero, [Validators.required]],
+      datanasc: [new Date(pessoa.datanasc), [Validators.required]],
+      cep: [pessoa.cep, [Validators.required]],
+      rua: [pessoa.rua, [Validators.required]],
+      numero: [pessoa.numero, [Validators.required]],
+      cidade: [pessoa.cidade, [Validators.required]],
+      bairro: [pessoa.bairro, [Validators.required]],
+      uf: [pessoa.uf, [Validators.required]],
+      telefone: [pessoa.telefone, [Validators.required]],
+      email: [pessoa.email, this.emailValidator],
+      login: [pessoa.login, [Validators.required]],
+      senha: [''],
+      ativo: [pessoa.ativo],
+      nome_mae: [pessoa.nome_mae],
+      nome_pai: [pessoa.nome_pai],
+      responsavel: [pessoa.responsavel],
+      turmaSelecionada: [pessoa.turma],
+      materia: [pessoa.materia]
+    });
+    this.condicaoPessoa = pessoa.tipo_pessoa;
+    this.checked = pessoa.ativo;
+    this.formPessoa
+      .get('responsavel')
+      ?.valueChanges.subscribe((filterValue) =>
+        this.findPessoaEdit(filterValue).subscribe((pessoa) => {
+          this.listaResponsaveis = pessoa;
         })
+      );
+  }
+
+  onSubmit() {
+    if (this.formPessoa.valid) {
+      if(this.acao === 'EDITAR') {
+        this.pessoaService
+        .updatePessoa(
+          {
+            ...this.formPessoa.value,
+            datanasc: this.dataFormat(this.formPessoa.value.datanasc)
+          },
+          this.pessoaId
+        )
         .subscribe({
           next: (res) => {
             this.snackBar.open(res.msg, undefined, { duration: 4000 });
-            if (this.cadastroPessoa.value.tipo_pessoa === 'ALUNO') {
+            if (this.formPessoa.value.tipo_pessoa === 'ALUNO') {
               this.router.navigate(['/alunos']);
-            } else if (
-              this.cadastroPessoa.value.tipo_pessoa === 'RESPONSAVEL'
-            ) {
+            } else if (this.formPessoa.value.tipo_pessoa === 'RESPONSAVEL') {
               this.router.navigate(['/responsaveis']);
-            } else if (this.cadastroPessoa.value.tipo_pessoa === 'PROFESSOR') {
+            } else if (this.formPessoa.value.tipo_pessoa === 'PROFESSOR') {
               this.router.navigate(['/professores']);
-            } else if (this.cadastroPessoa.value.tipo_pessoa === 'SECRETARIA') {
+            } else if (this.formPessoa.value.tipo_pessoa === 'SECRETARIA') {
               this.router.navigate(['/secretaria']);
             }
           },
@@ -134,6 +201,32 @@ export class CadastrarPessoaComponent implements OnInit {
             this.snackBar.open(err.error.msg, undefined, { duration: 5000 });
           }
         });
+      } else if(this.acao === 'CADASTRAR') {
+        this.pessoaService
+        .savePessoa({
+          ...this.formPessoa.value,
+          datanasc: this.dataFormat(this.formPessoa.value.datanasc)
+        })
+        .subscribe({
+          next: (res) => {
+            this.snackBar.open(res.msg, undefined, { duration: 4000 });
+            if (this.formPessoa.value.tipo_pessoa === 'ALUNO') {
+              this.router.navigate(['/alunos']);
+            } else if (
+              this.formPessoa.value.tipo_pessoa === 'RESPONSAVEL'
+            ) {
+              this.router.navigate(['/responsaveis']);
+            } else if (this.formPessoa.value.tipo_pessoa === 'PROFESSOR') {
+              this.router.navigate(['/professores']);
+            } else if (this.formPessoa.value.tipo_pessoa === 'SECRETARIA') {
+              this.router.navigate(['/secretaria']);
+            }
+          },
+          error: (err) => {
+            this.snackBar.open(err.error.msg, undefined, { duration: 5000 });
+          }
+        });
+      }
     }
   }
 
@@ -143,8 +236,8 @@ export class CadastrarPessoaComponent implements OnInit {
 
   changeTipoPessoa(event: any) {
     this.condicaoPessoa = event.value;
-    this.cadastroPessoa.value.tipo_pessoa = this.condicaoPessoa;
-    
+    this.formPessoa.value.tipo_pessoa = this.condicaoPessoa;
+
     if (this.condicaoPessoa === 'ALUNO') {
       this.router.navigate([`alunos/cadastro/`], {
         queryParams: { tipoPessoa: this.condicaoPessoa }
@@ -171,5 +264,9 @@ export class CadastrarPessoaComponent implements OnInit {
     return (
       this.listaResponsaveis.find((r) => r.id === responsavelId)?.nome || ''
     );
+  }
+
+  changeSenha() {
+    this.formPessoa.controls['senha'].setValidators(this.senhaValidador);
   }
 }

@@ -1,7 +1,8 @@
 <app-layout-principal>
   <app-card-conteudo>
+    <ng-container *ngIf="isLoad">
     <form
-      [formGroup]="cadastroPessoa"
+      [formGroup]="formPessoa"
       (ngSubmit)="onSubmit()"
       class="container"
     >
@@ -204,15 +205,28 @@
               name="senha"
               formControlName="senha"
               autocomplete="off"
+              (click)="changeSenha()"
             />
-            <mat-hint fxFlex=100 fxLayoutAlign="end center"
-              ><i
-                class="material-icons"
-                style="font-size: 15px"
-                [title]="configSenha"
-                >info</i
-              ></mat-hint
-            >
+              <mat-hint fxFlex="80" fxLayoutAlign="start" *ngIf="acao == 'EDITAR'"
+                ><strong>Clique acima para alterar senha</strong>
+              </mat-hint>
+              <mat-hint fxFlex="10" fxLayoutAlign="end" *ngIf="acao == 'EDITAR'"
+                ><i
+                  class="material-icons"
+                  style="font-size: 15px"
+                  [title]="configSenha"
+                  >info</i
+                ></mat-hint
+              >
+
+              <mat-hint fxFlex=100 fxLayoutAlign="end center" *ngIf="acao == 'CADASTRAR'"
+                ><i
+                  class="material-icons"
+                  style="font-size: 15px"
+                  [title]="configSenha"
+                  >info</i
+                ></mat-hint
+              >
           </mat-form-field>
           <mat-checkbox
             name="ativo"
@@ -331,8 +345,9 @@
           </div>
         </app-fieldset>
       </div>
-      <app-button class="save-button" [disabled]="cadastroPessoa.invalid"
+      <app-button class="save-button" [disabled]="formPessoa.invalid"
         >Salvar</app-button>
     </form>
+  </ng-container>
   </app-card-conteudo>
 </app-layout-principal>
